@@ -8,6 +8,8 @@ using OgainShop.Models.Authentication;
 namespace OgainShop.Controllers
 {
    
+
+
     public class AdminController : Controller
     {
         // GET: /<controller>/

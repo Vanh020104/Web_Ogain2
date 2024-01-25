@@ -1,0 +1,925 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\OgainShop.bundle.scp.css",
+      "PackagePath": "staticwebassets\\OgainShop.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\css\\main.css",
+      "PackagePath": "staticwebassets\\Admin\\css\\main.css"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\img\\.DS_Store",
+      "PackagePath": "staticwebassets\\Admin\\img\\.DS_Store"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\img\\images\\customerApp.png",
+      "PackagePath": "staticwebassets\\Admin\\img\\images\\customerApp.png"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\img\\images\\fg-img.png",
+      "PackagePath": "staticwebassets\\Admin\\img\\images\\fg-img.png"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\img\\images\\hay.jpg",
+      "PackagePath": "staticwebassets\\Admin\\img\\images\\hay.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\img\\images\\team.jpg",
+      "PackagePath": "staticwebassets\\Admin\\img\\images\\team.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\img\\img-anhthe\\1.jfif",
+      "PackagePath": "staticwebassets\\Admin\\img\\img-anhthe\\1.jfif"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\img\\img-anhthe\\1.jpg",
+      "PackagePath": "staticwebassets\\Admin\\img\\img-anhthe\\1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\img\\img-anhthe\\2.jpg",
+      "PackagePath": "staticwebassets\\Admin\\img\\img-anhthe\\2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\img\\img-anhthe\\3.jpg",
+      "PackagePath": "staticwebassets\\Admin\\img\\img-anhthe\\3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\img\\img-anhthe\\4.jpg",
+      "PackagePath": "staticwebassets\\Admin\\img\\img-anhthe\\4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\img\\img-anhthe\\5.jpg",
+      "PackagePath": "staticwebassets\\Admin\\img\\img-anhthe\\5.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\img\\img-anhthe\\6.jpg",
+      "PackagePath": "staticwebassets\\Admin\\img\\img-anhthe\\6.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\img\\img-sanpham\\banan.jpg",
+      "PackagePath": "staticwebassets\\Admin\\img\\img-sanpham\\banan.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\img\\img-sanpham\\cera.jpg",
+      "PackagePath": "staticwebassets\\Admin\\img\\img-sanpham\\cera.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\img\\img-sanpham\\dolas.jpg",
+      "PackagePath": "staticwebassets\\Admin\\img\\img-sanpham\\dolas.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\img\\img-sanpham\\ghethera.jpg",
+      "PackagePath": "staticwebassets\\Admin\\img\\img-sanpham\\ghethera.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\img\\img-sanpham\\jimmy.jpg",
+      "PackagePath": "staticwebassets\\Admin\\img\\img-sanpham\\jimmy.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\img\\img-sanpham\\kara.jpg",
+      "PackagePath": "staticwebassets\\Admin\\img\\img-sanpham\\kara.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\img\\img-sanpham\\lucy.jpg",
+      "PackagePath": "staticwebassets\\Admin\\img\\img-sanpham\\lucy.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\img\\img-sanpham\\matda.jpg",
+      "PackagePath": "staticwebassets\\Admin\\img\\img-sanpham\\matda.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\img\\img-sanpham\\reno.jpg",
+      "PackagePath": "staticwebassets\\Admin\\img\\img-sanpham\\reno.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\img\\img-sanpham\\tare.jpg",
+      "PackagePath": "staticwebassets\\Admin\\img\\img-sanpham\\tare.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\img\\img-sanpham\\theresa.jpg",
+      "PackagePath": "staticwebassets\\Admin\\img\\img-sanpham\\theresa.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\img\\img-sanpham\\thomas.jpg",
+      "PackagePath": "staticwebassets\\Admin\\img\\img-sanpham\\thomas.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\img\\img-sanpham\\tu.jpg",
+      "PackagePath": "staticwebassets\\Admin\\img\\img-sanpham\\tu.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\img\\img-sanpham\\vegas.jpg",
+      "PackagePath": "staticwebassets\\Admin\\img\\img-sanpham\\vegas.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\img\\img-sanpham\\vita.jpg",
+      "PackagePath": "staticwebassets\\Admin\\img\\img-sanpham\\vita.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\img\\img-sanpham\\zuno.jpg",
+      "PackagePath": "staticwebassets\\Admin\\img\\img-sanpham\\zuno.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\js\\.DS_Store",
+      "PackagePath": "staticwebassets\\Admin\\js\\.DS_Store"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\Admin\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\js\\jquery-3.2.1.min.js",
+      "PackagePath": "staticwebassets\\Admin\\js\\jquery-3.2.1.min.js"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\js\\main.js",
+      "PackagePath": "staticwebassets\\Admin\\js\\main.js"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\js\\plugins\\bootstrap-datepicker.min.js",
+      "PackagePath": "staticwebassets\\Admin\\js\\plugins\\bootstrap-datepicker.min.js"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\js\\plugins\\bootstrap-notify.min.js",
+      "PackagePath": "staticwebassets\\Admin\\js\\plugins\\bootstrap-notify.min.js"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\js\\plugins\\chart.js",
+      "PackagePath": "staticwebassets\\Admin\\js\\plugins\\chart.js"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\js\\plugins\\dataTables.bootstrap.min.js",
+      "PackagePath": "staticwebassets\\Admin\\js\\plugins\\dataTables.bootstrap.min.js"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\js\\plugins\\fullcalendar.min.js",
+      "PackagePath": "staticwebassets\\Admin\\js\\plugins\\fullcalendar.min.js"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\js\\plugins\\jquery-ui.custom.min.js",
+      "PackagePath": "staticwebassets\\Admin\\js\\plugins\\jquery-ui.custom.min.js"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\js\\plugins\\jquery.dataTables.min.js",
+      "PackagePath": "staticwebassets\\Admin\\js\\plugins\\jquery.dataTables.min.js"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\js\\plugins\\jquery.vmap.min.js",
+      "PackagePath": "staticwebassets\\Admin\\js\\plugins\\jquery.vmap.min.js"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\js\\plugins\\jquery.vmap.sampledata.js",
+      "PackagePath": "staticwebassets\\Admin\\js\\plugins\\jquery.vmap.sampledata.js"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\js\\plugins\\jquery.vmap.world.js",
+      "PackagePath": "staticwebassets\\Admin\\js\\plugins\\jquery.vmap.world.js"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\js\\plugins\\moment.min.js",
+      "PackagePath": "staticwebassets\\Admin\\js\\plugins\\moment.min.js"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\js\\plugins\\pace.min.js",
+      "PackagePath": "staticwebassets\\Admin\\js\\plugins\\pace.min.js"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\js\\plugins\\select2.min.js",
+      "PackagePath": "staticwebassets\\Admin\\js\\plugins\\select2.min.js"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\js\\plugins\\sweetalert.min.js",
+      "PackagePath": "staticwebassets\\Admin\\js\\plugins\\sweetalert.min.js"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Admin\\js\\popper.min.js",
+      "PackagePath": "staticwebassets\\Admin\\js\\popper.min.js"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Source\\OwlCarousel2-2.3.4.zip",
+      "PackagePath": "staticwebassets\\Source\\OwlCarousel2-2.3.4.zip"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Source\\SlickNav-master.zip",
+      "PackagePath": "staticwebassets\\Source\\SlickNav-master.zip"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Source\\bootstrap-4.4.1-dist.zip",
+      "PackagePath": "staticwebassets\\Source\\bootstrap-4.4.1-dist.zip"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Source\\font-awesome-4.7.0.zip",
+      "PackagePath": "staticwebassets\\Source\\font-awesome-4.7.0.zip"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Source\\jquery-nice-select-1.1.0.zip",
+      "PackagePath": "staticwebassets\\Source\\jquery-nice-select-1.1.0.zip"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Source\\jquery-ui-1.12.1.zip",
+      "PackagePath": "staticwebassets\\Source\\jquery-ui-1.12.1.zip"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\Source\\sass.zip",
+      "PackagePath": "staticwebassets\\Source\\sass.zip"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\css\\elegant-icons.css",
+      "PackagePath": "staticwebassets\\css\\elegant-icons.css"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\css\\font-awesome.min.css",
+      "PackagePath": "staticwebassets\\css\\font-awesome.min.css"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\css\\jquery-ui.min.css",
+      "PackagePath": "staticwebassets\\css\\jquery-ui.min.css"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\css\\nice-select.css",
+      "PackagePath": "staticwebassets\\css\\nice-select.css"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\css\\owl.carousel.min.css",
+      "PackagePath": "staticwebassets\\css\\owl.carousel.min.css"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\css\\slicknav.min.css",
+      "PackagePath": "staticwebassets\\css\\slicknav.min.css"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\css\\style.css",
+      "PackagePath": "staticwebassets\\css\\style.css"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\fonts\\ElegantIcons.eot",
+      "PackagePath": "staticwebassets\\fonts\\ElegantIcons.eot"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\fonts\\ElegantIcons.svg",
+      "PackagePath": "staticwebassets\\fonts\\ElegantIcons.svg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\fonts\\ElegantIcons.ttf",
+      "PackagePath": "staticwebassets\\fonts\\ElegantIcons.ttf"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\fonts\\ElegantIcons.woff",
+      "PackagePath": "staticwebassets\\fonts\\ElegantIcons.woff"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\fonts\\FontAwesome.otf",
+      "PackagePath": "staticwebassets\\fonts\\FontAwesome.otf"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\fonts\\fontawesome-webfont.eot",
+      "PackagePath": "staticwebassets\\fonts\\fontawesome-webfont.eot"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\fonts\\fontawesome-webfont.svg",
+      "PackagePath": "staticwebassets\\fonts\\fontawesome-webfont.svg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\fonts\\fontawesome-webfont.ttf",
+      "PackagePath": "staticwebassets\\fonts\\fontawesome-webfont.ttf"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\fonts\\fontawesome-webfont.woff",
+      "PackagePath": "staticwebassets\\fonts\\fontawesome-webfont.woff"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\fonts\\fontawesome-webfont.woff2",
+      "PackagePath": "staticwebassets\\fonts\\fontawesome-webfont.woff2"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\banner\\banner-1.jpg",
+      "PackagePath": "staticwebassets\\img\\banner\\banner-1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\banner\\banner-2.jpg",
+      "PackagePath": "staticwebassets\\img\\banner\\banner-2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\blog\\blog-1.jpg",
+      "PackagePath": "staticwebassets\\img\\blog\\blog-1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\blog\\blog-2.jpg",
+      "PackagePath": "staticwebassets\\img\\blog\\blog-2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\blog\\blog-3.jpg",
+      "PackagePath": "staticwebassets\\img\\blog\\blog-3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\blog\\blog-4.jpg",
+      "PackagePath": "staticwebassets\\img\\blog\\blog-4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\blog\\blog-5.jpg",
+      "PackagePath": "staticwebassets\\img\\blog\\blog-5.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\blog\\blog-6.jpg",
+      "PackagePath": "staticwebassets\\img\\blog\\blog-6.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\blog\\details\\details-author.jpg",
+      "PackagePath": "staticwebassets\\img\\blog\\details\\details-author.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\blog\\details\\details-hero.jpg",
+      "PackagePath": "staticwebassets\\img\\blog\\details\\details-hero.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\blog\\details\\details-pic.jpg",
+      "PackagePath": "staticwebassets\\img\\blog\\details\\details-pic.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\blog\\sidebar\\sr-1.jpg",
+      "PackagePath": "staticwebassets\\img\\blog\\sidebar\\sr-1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\blog\\sidebar\\sr-2.jpg",
+      "PackagePath": "staticwebassets\\img\\blog\\sidebar\\sr-2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\blog\\sidebar\\sr-3.jpg",
+      "PackagePath": "staticwebassets\\img\\blog\\sidebar\\sr-3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\breadcrumb.jpg",
+      "PackagePath": "staticwebassets\\img\\breadcrumb.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\cart\\cart-1.jpg",
+      "PackagePath": "staticwebassets\\img\\cart\\cart-1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\cart\\cart-2.jpg",
+      "PackagePath": "staticwebassets\\img\\cart\\cart-2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\cart\\cart-3.jpg",
+      "PackagePath": "staticwebassets\\img\\cart\\cart-3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\categories\\cat-1.jpg",
+      "PackagePath": "staticwebassets\\img\\categories\\cat-1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\categories\\cat-2.jpg",
+      "PackagePath": "staticwebassets\\img\\categories\\cat-2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\categories\\cat-3.jpg",
+      "PackagePath": "staticwebassets\\img\\categories\\cat-3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\categories\\cat-4.jpg",
+      "PackagePath": "staticwebassets\\img\\categories\\cat-4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\categories\\cat-5.jpg",
+      "PackagePath": "staticwebassets\\img\\categories\\cat-5.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\featured\\feature-1.jpg",
+      "PackagePath": "staticwebassets\\img\\featured\\feature-1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\featured\\feature-2.jpg",
+      "PackagePath": "staticwebassets\\img\\featured\\feature-2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\featured\\feature-3.jpg",
+      "PackagePath": "staticwebassets\\img\\featured\\feature-3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\featured\\feature-4.jpg",
+      "PackagePath": "staticwebassets\\img\\featured\\feature-4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\featured\\feature-5.jpg",
+      "PackagePath": "staticwebassets\\img\\featured\\feature-5.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\featured\\feature-6.jpg",
+      "PackagePath": "staticwebassets\\img\\featured\\feature-6.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\featured\\feature-7.jpg",
+      "PackagePath": "staticwebassets\\img\\featured\\feature-7.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\featured\\feature-8.jpg",
+      "PackagePath": "staticwebassets\\img\\featured\\feature-8.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\hero\\banner.jpg",
+      "PackagePath": "staticwebassets\\img\\hero\\banner.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\language.png",
+      "PackagePath": "staticwebassets\\img\\language.png"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\latest-product\\lp-1.jpg",
+      "PackagePath": "staticwebassets\\img\\latest-product\\lp-1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\latest-product\\lp-2.jpg",
+      "PackagePath": "staticwebassets\\img\\latest-product\\lp-2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\latest-product\\lp-3.jpg",
+      "PackagePath": "staticwebassets\\img\\latest-product\\lp-3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\logo.png",
+      "PackagePath": "staticwebassets\\img\\logo.png"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\payment-item.png",
+      "PackagePath": "staticwebassets\\img\\payment-item.png"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\product\\details\\product-details-1.jpg",
+      "PackagePath": "staticwebassets\\img\\product\\details\\product-details-1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\product\\details\\product-details-2.jpg",
+      "PackagePath": "staticwebassets\\img\\product\\details\\product-details-2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\product\\details\\product-details-3.jpg",
+      "PackagePath": "staticwebassets\\img\\product\\details\\product-details-3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\product\\details\\product-details-4.jpg",
+      "PackagePath": "staticwebassets\\img\\product\\details\\product-details-4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\product\\details\\product-details-5.jpg",
+      "PackagePath": "staticwebassets\\img\\product\\details\\product-details-5.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\product\\details\\thumb-1.jpg",
+      "PackagePath": "staticwebassets\\img\\product\\details\\thumb-1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\product\\details\\thumb-2.jpg",
+      "PackagePath": "staticwebassets\\img\\product\\details\\thumb-2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\product\\details\\thumb-3.jpg",
+      "PackagePath": "staticwebassets\\img\\product\\details\\thumb-3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\product\\details\\thumb-4.jpg",
+      "PackagePath": "staticwebassets\\img\\product\\details\\thumb-4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\product\\discount\\pd-1.jpg",
+      "PackagePath": "staticwebassets\\img\\product\\discount\\pd-1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\product\\discount\\pd-2.jpg",
+      "PackagePath": "staticwebassets\\img\\product\\discount\\pd-2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\product\\discount\\pd-3.jpg",
+      "PackagePath": "staticwebassets\\img\\product\\discount\\pd-3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\product\\discount\\pd-4.jpg",
+      "PackagePath": "staticwebassets\\img\\product\\discount\\pd-4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\product\\discount\\pd-5.jpg",
+      "PackagePath": "staticwebassets\\img\\product\\discount\\pd-5.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\product\\discount\\pd-6.jpg",
+      "PackagePath": "staticwebassets\\img\\product\\discount\\pd-6.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\product\\product-1.jpg",
+      "PackagePath": "staticwebassets\\img\\product\\product-1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\product\\product-10.jpg",
+      "PackagePath": "staticwebassets\\img\\product\\product-10.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\product\\product-11.jpg",
+      "PackagePath": "staticwebassets\\img\\product\\product-11.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\product\\product-12.jpg",
+      "PackagePath": "staticwebassets\\img\\product\\product-12.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\product\\product-2.jpg",
+      "PackagePath": "staticwebassets\\img\\product\\product-2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\product\\product-3.jpg",
+      "PackagePath": "staticwebassets\\img\\product\\product-3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\product\\product-4.jpg",
+      "PackagePath": "staticwebassets\\img\\product\\product-4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\product\\product-5.jpg",
+      "PackagePath": "staticwebassets\\img\\product\\product-5.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\product\\product-6.jpg",
+      "PackagePath": "staticwebassets\\img\\product\\product-6.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\product\\product-7.jpg",
+      "PackagePath": "staticwebassets\\img\\product\\product-7.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\product\\product-8.jpg",
+      "PackagePath": "staticwebassets\\img\\product\\product-8.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\img\\product\\product-9.jpg",
+      "PackagePath": "staticwebassets\\img\\product\\product-9.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\js\\jquery-3.3.1.min.js",
+      "PackagePath": "staticwebassets\\js\\jquery-3.3.1.min.js"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\js\\jquery-ui.min.js",
+      "PackagePath": "staticwebassets\\js\\jquery-ui.min.js"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\js\\jquery.nice-select.min.js",
+      "PackagePath": "staticwebassets\\js\\jquery.nice-select.min.js"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\js\\jquery.slicknav.js",
+      "PackagePath": "staticwebassets\\js\\jquery.slicknav.js"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\js\\main.js",
+      "PackagePath": "staticwebassets\\js\\main.js"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\js\\mixitup.min.js",
+      "PackagePath": "staticwebassets\\js\\mixitup.min.js"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\js\\owl.carousel.min.js",
+      "PackagePath": "staticwebassets\\js\\owl.carousel.min.js"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "PackagePath": "staticwebassets\\lib\\bootstrap"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\sass\\_base.scss",
+      "PackagePath": "staticwebassets\\sass\\_base.scss"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\sass\\_blog-details.scss",
+      "PackagePath": "staticwebassets\\sass\\_blog-details.scss"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\sass\\_blog-sidebar.scss",
+      "PackagePath": "staticwebassets\\sass\\_blog-sidebar.scss"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\sass\\_blog.scss",
+      "PackagePath": "staticwebassets\\sass\\_blog.scss"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\sass\\_breadcrumb.scss",
+      "PackagePath": "staticwebassets\\sass\\_breadcrumb.scss"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\sass\\_checkout.scss",
+      "PackagePath": "staticwebassets\\sass\\_checkout.scss"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\sass\\_contact.scss",
+      "PackagePath": "staticwebassets\\sass\\_contact.scss"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\sass\\_footer.scss",
+      "PackagePath": "staticwebassets\\sass\\_footer.scss"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\sass\\_header.scss",
+      "PackagePath": "staticwebassets\\sass\\_header.scss"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\sass\\_hero.scss",
+      "PackagePath": "staticwebassets\\sass\\_hero.scss"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\sass\\_home-page.scss",
+      "PackagePath": "staticwebassets\\sass\\_home-page.scss"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\sass\\_mixins.scss",
+      "PackagePath": "staticwebassets\\sass\\_mixins.scss"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\sass\\_responsive.scss",
+      "PackagePath": "staticwebassets\\sass\\_responsive.scss"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\sass\\_shop-details.scss",
+      "PackagePath": "staticwebassets\\sass\\_shop-details.scss"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\sass\\_shop-grid.scss",
+      "PackagePath": "staticwebassets\\sass\\_shop-grid.scss"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\sass\\_shoping-cart.scss",
+      "PackagePath": "staticwebassets\\sass\\_shoping-cart.scss"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\sass\\_sidebar.scss",
+      "PackagePath": "staticwebassets\\sass\\_sidebar.scss"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\sass\\_variable.scss",
+      "PackagePath": "staticwebassets\\sass\\_variable.scss"
+    },
+    {
+      "Id": "C:\\Users\\vietanh\\source\\repos\\OgainShop\\OgainShop\\wwwroot\\sass\\style.scss",
+      "PackagePath": "staticwebassets\\sass\\style.scss"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.OgainShop.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.OgainShop.props",
+      "PackagePath": "build\\OgainShop.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.OgainShop.props",
+      "PackagePath": "buildMultiTargeting\\OgainShop.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.OgainShop.props",
+      "PackagePath": "buildTransitive\\OgainShop.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
