@@ -1,85 +1,38 @@
 ﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutLoginRegister.cshtml";
     ViewData["Title"] = "Register";
 }
-<!DOCTYPE html>
-<html lang="zxx">
+@model User
+    <div class="register-section">
+        <div class="form-box register">
+            <form asp-action="Register" method="post">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Ogani Template">
-    <meta name="keywords" content="Ogani, unica, creative, html">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <base href="/" />
-</head>
+                <h2 style="color: white;">Sign Up</h2>
 
-<body>
-
-    <!-- Breadcrumb Section Begin -->
-    <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="breadcrumb__text">
-                        <h2>Register</h2>
-
-                    </div>
+                <div class="input-box">
+                    <span class="icon"><i class='bx bxs-user'></i></span>
+                    <input type="text" class="form-control" id="username" name="Username" >
+                    <label for="username">Username:</label>
                 </div>
-            </div>
-        </div>
-    </section>
-    <!-- Breadcrumb Section End -->
-    <!-- Login Section Begin -->
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card mt-5">
-                    <div class="card-header">
-                        <h4>Register</h4>
-                    </div>
-                    <div class="card-body">
-                        <!-- Form đăng ký -->
-                        <form asp-action="Register" method="post">
-                            @*<div class="form-group">
-            <label for="fullname">Full Name:</label>
-            <input type="text" class="form-control" id="fullname" name="FullName" placeholder="Enter your full name">
-        </div>*@
-                            <div class="form-group">
-                                <label for="username">Username:</label>
-                                <input type="text" class="form-control" id="username" name="Username" placeholder="Choose a username">
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email:</label>
-                                <input type="email" class="form-control" id="email" name="Email" placeholder="Enter your email">
-                            </div>
+                <div class="input-box">
+                    <span class="icon"><i class='bx bxs-envelope'></i></span>
 
-                            <div class="form-group">
-                                <label for="password">Password:</label>
-                                <input type="password" class="form-control" id="password" name="Password" placeholder="Choose a password">
-                            </div>
-                            <button type="submit" class="btn btn-primary">Register</button>
-                        </form>
-                        <!-- Hiển thị thông báo lỗi -->
-                        @if (!ViewData.ModelState.IsValid)
-                        {
-                            <div class="alert alert-danger mt-3" role="alert">
-                                <ul>
-                                    @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
-                                    {
-                                        <li>@error.ErrorMessage</li>
-                                    }
-                                </ul>
-                            </div>
-                        }
-                        <p class="mt-3">Already have an account? <a href="/Page/Login">Login here</a></p>
-                    </div>
+                    <input type="email" class="form-control" id="email" name="Email">
+                    <label for="email">Email:</label>
                 </div>
-            </div>
+                <div class="input-box">
+                    <span class="icon"><i class='bx bxs-lock-alt'></i></span>
+
+                    <input type="password" class="form-control" id="password" name="Password">
+                    <label for="password">Password:</label>
+                </div>
+                <div class="remember-password">
+                    <label for=""><input type="checkbox">I agree with this statment</label>
+                </div>
+                <button class="btn">Login In</button>
+                <div class="create-account">
+                    <p>Already Have An Account? <a style="color: blue;" href="/Page/login">Sign In</a></p>
+                </div>
+            </form>
         </div>
-    </div>
-    <!-- Login Section End -->
-
-</body>
-
-</html>
+     </div>

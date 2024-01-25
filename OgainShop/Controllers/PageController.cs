@@ -3,6 +3,7 @@ using OgainShop.Models;
 using OgainShop.Data;
 using Microsoft.AspNetCore.Http;
 using OgainShop.Models.Authentication;
+using BCrypt.Net;
 
 namespace OgainShop.Controllers
 {
@@ -80,17 +81,15 @@ namespace OgainShop.Controllers
             if (HttpContext.Session.GetString("Username") == null)
             {
                 User u = db.User.FirstOrDefault(
-                    x => x.Username.Equals(user.Username) &&
-                         x.Password.Equals(user.Password));
+                    x => x.Email.Equals(user.Email)); 
 
-                if (u != null)
+                if (u != null && BCrypt.Net.BCrypt.Verify(user.Password, u.Password)) 
                 {
-                    HttpContext.Session.SetString("Username", user.Username.ToString());
+                    HttpContext.Session.SetString("Username", u.Username.ToString());
                     HttpContext.Session.SetString("Role", u.Role);
 
                     if (u.Role == "Admin")
                     {
-           
                         return RedirectToAction("Home", "Page");
                     }
                     else if (u.Role == "User")
@@ -121,7 +120,7 @@ namespace OgainShop.Controllers
                     ModelState.AddModelError("Username", "Tên đăng nhập đã tồn tại");
                     return View(user);
                 }
-
+                user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
                 // Thiết lập vai trò mặc định là "User"
                 user.Role = "User";
 

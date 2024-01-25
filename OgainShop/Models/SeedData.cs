@@ -3,6 +3,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using OgainShop.Models;
+using BCrypt.Net;
 
 namespace OgainShop.Data
 {
@@ -49,9 +50,9 @@ new Product { ProductName = "Product 2", Description = "Description 2", Price = 
                 // Seed data for User
                 var users = new User[]
                 {
-                    new User { Username = "admin", Password = "admin123", Email = "admin@example.com", Role = "Admin" },
-                    new User { Username = "user1", Password = "123456789", Email = "user1@example.com", Role = "User" },
-                    new User { Username = "user2", Password = "123456789", Email = "user2@example.com", Role = "User" }
+                    new User { Username = "admin", Password = BCrypt.Net.BCrypt.HashPassword("admin123"), Email = "admin@example.com", Role = "Admin" },
+                    new User { Username = "user1", Password = BCrypt.Net.BCrypt.HashPassword("123456789"), Email = "user1@example.com", Role = "User" },
+                    new User { Username = "user2", Password = BCrypt.Net.BCrypt.HashPassword("123456789"), Email = "user2@example.com", Role = "User" }
                     // Add more users as needed
                 };
                 foreach (var user in users)
