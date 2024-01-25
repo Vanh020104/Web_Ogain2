@@ -1,0 +1,97 @@
+﻿@{
+    ViewData["Title"] = "Order";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<main class="app-content">
+    <div class="app-title">
+        <ul class="app-breadcrumb breadcrumb">
+            <li class="breadcrumb-item">Danh sách đơn hàng</li>
+            <li class="breadcrumb-item"><a href="#">Chi tiết đơn hàng</a></li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tile">
+                <h3 class="tile-title">Order Details</h3>
+                <div class="tile-body">
+                    <div class="container">
+                        <div class="row order_d_inner">
+                            <div class="col-lg-4">
+                                <div class="details_item">
+                                    <h4>Order Info</h4>
+                                    <ul class="list">
+                                        <li><a href="#"><span>Order number</span>: MD0837</a></li>
+                                        <li><a href="#"><span>Date</span>: 10/01/2024</a></li>
+                                        <li><a href="#"><span>grand_total</span>: $9,400,000</a></li>
+                                        <li><a href="#"><span>Payment method</span>: Credit Card</a></li>
+                                        <li><a href="#"><span>Status</span>: <span class="badge bg-success">Hoàn thành</span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="details_item">
+                                    <h4>Customer Information</h4>
+                                    <ul class="list">
+                                        <li><a href="#"><span>Full Name</span>: Triệu Thanh Phú</a></li>
+                                        <li><a href="#"><span>Telephone</span>: 0123456789</a></li>
+                                        <li><a href="#"><span>Email</span>: phu@example.com</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="details_item">
+                                    <h4>Shipping</h4>
+                                    <ul class="list">
+                                        <li><a href="#"><span>Shipping method</span>: Express</a></li>
+                                        <li><a href="#"><span>Address</span>: 123 Main Street, City</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="order_details_table">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Price</th>
+                                            <th scope="col">Qty</th>
+                                            <th scope="col">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Ghế làm việc Zuno, Bàn ăn gỗ Theresa</td>
+                                            <td>$4,700,000</td>
+                                            <td>2</td>
+                                            <td>$9,400,000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Ghế ăn gỗ Lucy màu trắng</td>
+                                            <td>$2,500,000</td>
+                                            <td>1</td>
+                                            <td>$2,500,000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Giường ngủ Jimmy, Bàn ăn mở rộng cao cấp Dolas, Ghế làm việc Zuno</td>
+                                            <td>$1,800,000</td>
+                                            <td>3</td>
+                                            <td>$5,400,000</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-warning">Back</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>

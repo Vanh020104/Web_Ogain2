@@ -1,0 +1,102 @@
+﻿@{
+    ViewData["Title"] = "Thank You Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <base href="/">
+</head>
+
+<body>
+
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Thank You</h2>
+                        <div class="breadcrumb__option">
+                            <a href="./index.html">Home</a>
+                            <span>Thank You</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+    <!-- Thank You Section Begin -->
+    <section class="thank-you spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h1 class="text-center">Thank you</h1>
+                    <h3 class="text-center mb-3">Your order #12345 has been placed</h3>
+                    <h3 class ="product-list-heading">Product List:</h3>
+                    <table class="table mt-3">
+                        <thead>
+                        <th>ID</th>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Qty</th>
+                        <th>Total</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td><img src="img/cart/cart-1.jpg" width="120" alt=""></td>
+                                <td>Vegetable’s Package</td>
+                                <td>$55.00</td>
+                                <td>1</td>
+                                <td>$55.00</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td><img src="img/cart/cart-2.jpg" width="120" alt=""></td>
+                                <td>Fresh Garden Vegetable</td>
+                                <td>$39.00</td>
+                                <td>1</td>
+                                <td>$39.99</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td><img src="img/cart/cart-3.jpg" width="120" alt=""></td>
+                                <td>Organic Bananas</td>
+                                <td>$69.00</td>
+                                <td>1</td>
+                                <td>$69.99</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="total-amount">Total Amount: $164.98</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Thank You Section End -->
+
+</body>
+<style>
+    .product-list-heading {
+        text-align: left;
+    }
+
+    .total-amount {
+        font-size: 18px;
+        font-weight: bold;
+       text-align:right;
+    }
+</style>
+
+
+</html>
