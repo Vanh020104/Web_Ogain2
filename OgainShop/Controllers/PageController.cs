@@ -3,6 +3,8 @@ using OgainShop.Models;
 using OgainShop.Data;
 using Microsoft.AspNetCore.Http;
 using OgainShop.Models.Authentication;
+using Microsoft.EntityFrameworkCore;
+
 using BCrypt.Net;
 
 namespace OgainShop.Controllers
@@ -16,10 +18,25 @@ namespace OgainShop.Controllers
             db = context;
         }
         [Authentication]
-        public IActionResult Home()
+        public async Task<IActionResult> Home()
         {
+            // Retrieve distinct categories from the database
+            var distinctCategories = await db.Category.ToListAsync();
+
+            // Pass the distinct categories to the view
+            ViewBag.Categories = distinctCategories;
+
+            // Retrieve only the top 8 products with their categories
+            var productsWithCategories = await db.Product.Include(p => p.Category)
+                                                        .Take(8) // Take only 8 products
+                                                        .ToListAsync();
+
+            // Pass the products to the view
+            ViewBag.Products = productsWithCategories;
+
             return View();
         }
+
         [Authentication]
         public IActionResult Details()
 
