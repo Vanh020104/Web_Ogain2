@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using OgainShop.Data;
 using OgainShop.Models;
 using OgainShop.Models.Authentication;
+using OgainShop.ViewModels;
 
 namespace OgainShop.Controllers
 {
@@ -48,10 +49,46 @@ namespace OgainShop.Controllers
 
             return View("OrderManagement/detailOrder", order);
         }
-        public IActionResult successOrder()
+
+        public IActionResult SuccessOrder(int? id)
         {
-            return View("CustomerManagement/successOrder");
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var user = _context.User.Include(u => u.Orders)
+                                    .FirstOrDefault(u => u.UserId == id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var order = user.Orders.FirstOrDefault(); // Assuming you want to display the first order associated with the user
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            var product = _context.Product.FirstOrDefault(p => p.OrderProducts.Any(op => op.OrderId == order.OrderId));
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new SuccessOrderViewModel
+            {
+                User = user,
+                Order = order,
+                Product = product
+            };
+
+            return View("CustomerManagement/SuccessOrder", viewModel);
         }
+
         public IActionResult detailsUser(int? id)
         {
             if (id == null)
@@ -67,6 +104,9 @@ namespace OgainShop.Controllers
 
             return View("CustomerManagement/detailsUser", user);
         }
+
+
+
         [Authentication]
         // Customer Management
         public async Task<IActionResult> Customer()
