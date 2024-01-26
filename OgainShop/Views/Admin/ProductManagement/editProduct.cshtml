@@ -21,19 +21,19 @@
                         <input type="hidden" asp-for="ProductId" />
 
                         <div class="form-group col-md-3">
-                            <label class="control-label">Mã sản phẩm </label>
+                            <label class="control-label">Product ID </label>
                             <input class="form-control" asp-for="ProductId" />
                         </div>
 
                         <div class="form-group col-md-3">
-                            <label class="control-label">Tên sản phẩm</label>
+                            <label class="control-label">Product Name</label>
                             <input class="form-control" asp-for="ProductName" />
                         </div>
 
                         <!-- Các trường khác của sản phẩm -->
 
                         <div class="form-group col-md-3">
-                            <label for="CategoryId" class="control-label">Danh mục</label>
+                            <label for="CategoryId" class="control-label">Category</label>
                             <select class="form-control" asp-for="CategoryId" asp-items="@ViewBag.Categories">
                                 <option value="">-- Chọn danh mục --</option>
                             </select>
@@ -41,8 +41,13 @@
 
                
                         <div class="form-group col-md-3">
-                            <label class="control-label">Giá bán</label>
+                            <label class="control-label">Price</label>
                             <input class="form-control" asp-for="Price" />
+                        </div>
+                        
+                        <div class="form-group col-md-3">
+                            <label class="control-label">Quantity</label>
+                            <input class="form-control" asp-for="Qty" />
                         </div>
 
 
@@ -59,13 +64,13 @@
 </div
 
                         <div class="form-group col-md-12">
-                            <label class="control-label">Mô tả sản phẩm</label>
+                            <label class="control-label">Description</label>
                             <textarea class="form-control" asp-for="Description"></textarea>
                             <script>CKEDITOR.replace('Description');</script>
                         </div>
 
-                        <button class="btn btn-save" type="submit">Lưu lại</button>
-                        <a class="btn btn-cancel" href="table-data-product.html">Hủy bỏ</a>
+                        <button class="btn btn-save" type="submit">Save</button>
+                        <a class="btn btn-cancel" href="table-data-product.html">Cancel</a>
                     </form>
                 </div>
             </div>
