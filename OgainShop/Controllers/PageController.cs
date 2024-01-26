@@ -4,7 +4,6 @@ using OgainShop.Data;
 using Microsoft.AspNetCore.Http;
 using OgainShop.Models.Authentication;
 using Microsoft.EntityFrameworkCore;
-
 using BCrypt.Net;
 using System;
 using System.Text;
@@ -40,11 +39,30 @@ namespace OgainShop.Controllers
         }
 
         [Authentication]
-        public IActionResult Details()
-
+        public async Task<IActionResult> Details(int id)
         {
-            return View();
+            // Retrieve the product details from the database based on the provided ID
+            var product = await db.Product.Include(p => p.Category)
+                                          .FirstOrDefaultAsync(p => p.ProductId == id);
+
+            if (product == null)
+            {
+                // Handle the case where the product with the specified ID is not found
+                return NotFound();
+            }
+
+            // Pass the product data to the view
+            ViewBag.ProductThumbnail = product.Thumbnail;  // Đường dẫn ảnh sản phẩm
+            ViewBag.ProductName = product.ProductName; // Tên sản phẩm
+            ViewBag.ProductPrice = product.Price;      // Giá sản phẩm
+            ViewBag.ProductDescription = product.Description; // Mô tả sản phẩm
+            ViewBag.ProductCategory = product.Category?.CategoryName;
+
+
+            return View(product);
         }
+
+
         [Authentication]
         public IActionResult Cart()
         {
@@ -71,10 +89,14 @@ namespace OgainShop.Controllers
             return View();
         }
         [Authentication]
-        public IActionResult Category()
+        public async Task<IActionResult> Category()
         {
-            return View();
+            var productList = await db.Product.ToListAsync();
+
+            return View(productList);
         }
+
+
         [Authentication]
         public IActionResult Thankyou()
         {
