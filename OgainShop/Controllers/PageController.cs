@@ -6,6 +6,8 @@ using OgainShop.Models.Authentication;
 using Microsoft.EntityFrameworkCore;
 
 using BCrypt.Net;
+using System;
+using System.Text;
 
 namespace OgainShop.Controllers
 {
@@ -164,6 +166,6 @@ namespace OgainShop.Controllers
             return RedirectToAction("login", "Page");
         }
 
-
+       
     }
 }
