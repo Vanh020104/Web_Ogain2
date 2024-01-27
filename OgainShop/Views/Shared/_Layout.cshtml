@@ -36,7 +36,7 @@
         <div class="humberger__menu__cart">
             <ul>
                 <li><a href="/Page/Favourite"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                <li><a href="/Page/Cart"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                <li> <a href="/Cart/Index"><i class="fa fa-shopping-bag"></i> <span>@ViewData["CartItemCount"]</span></a></li>
             </ul>
             <div class="header__cart__price">item: <span>$150.00</span></div>
         </div>
@@ -61,7 +61,7 @@
                     <a href="#">Pages</a>
                     <ul class="header__menu__dropdown">
                         <li><a href="/Page/Details">Shop Details</a></li>
-                        <li><a href="/Page/Cart">Shoping Cart</a></li>
+                        <li><a href="/Cart/Index">Shoping Cart</a></li>
                         <li><a href="/Page/CheckOut">Check Out</a></li>
                         <li><a href="/Page/Thankyou">Thank you</a></li>
 
@@ -151,7 +151,7 @@
                                 <a href="#">Pages</a>
                                 <ul class="header__menu__dropdown">
                                     <li><a href="/Page/Details">Shop Details</a></li>
-                                    <li><a href="/Page/Cart">Shoping Cart</a></li>
+                                    <li><a href="/Cart/Index">Shoping Cart</a></li>
                                     <li><a href="/Page/CheckOut">Check Out</a></li>
                                     <li><a href="/Page/Thankyou">Thank you</a></li>
 
@@ -166,7 +166,9 @@
                     <div class="header__cart">
                         <ul>
                             <li><a href="/Page/Favourite"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li> <a href="/Page/Cart"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                          @*  <li> <a href="/Cart/Index"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>*@
+                            <li> <a href="/Cart/Index"><i class="fa fa-shopping-bag"></i> <span>@ViewData["CartItemCount"]</span></a></li>
+
                         </ul>
                         <div class="header__cart__price">item: <span>$150.00</span></div>
                     </div>

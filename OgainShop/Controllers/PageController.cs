@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using BCrypt.Net;
 using System;
 using System.Text;
+using OgainShop.Heplers;
 
 namespace OgainShop.Controllers
 {
@@ -41,6 +42,11 @@ namespace OgainShop.Controllers
         [Authentication]
         public async Task<IActionResult> Details(int id)
         {
+
+       
+            var cartItems = HttpContext.Session.Get<List<CartItem>>("cart");
+            ViewData["CartItemCount"] = cartItems != null ? cartItems.Count : 0;
+           
             // Retrieve the product details from the database based on the provided ID
             var product = await db.Product.Include(p => p.Category)
                                           .FirstOrDefaultAsync(p => p.ProductId == id);
@@ -52,6 +58,7 @@ namespace OgainShop.Controllers
             }
 
             // Pass the product data to the view
+            ViewBag.ProductId = product.ProductId;
             ViewBag.ProductThumbnail = product.Thumbnail;  // Đường dẫn ảnh sản phẩm
             ViewBag.ProductName = product.ProductName; // Tên sản phẩm
             ViewBag.ProductPrice = product.Price;      // Giá sản phẩm
