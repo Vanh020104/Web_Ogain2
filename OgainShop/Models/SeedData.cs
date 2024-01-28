@@ -78,22 +78,51 @@ namespace OgainShop.Data
                 // Seed data for Order
                 var orderStatuses = new string[] { "Chờ xác nhận", "Đã xác nhận", "Đang giao hàng", "Đã giao hàng", "Hoàn thành", "Huỷ" };
                 var isPaidOptions = new string[] { "Chưa thanh toán", "Đã thanh toán" };
+          
 
+                var provinces = new string[] { "Hồ Chí Minh", "Hà Nội", "Đà Nẵng", "Cần Thơ", "Hải Phòng", "An Giang" };
+                var districts = new string[] { "Quận 1", "Quận 2", "Quận 3", "Quận 4", "Quận 5", "Quận 6" };
+                var wards = new string[] { "Phường 1", "Phường 2", "Phường 3", "Phường 4", "Phường 5", "Phường 6" };
+                var AddressDetails = new string[] { "nhà 999 đường 99" , "nhà 88 đường 2"};
+
+                var FullNames = new string[] { "Tien Dung", "Quang Long" };
+                var Emails = new string[] { "dung@gmail.com", "long@gmail.com" };
+                var Telephones = new string[] { "09828781262", "09275741287" };
+
+                var paymentMethods = new string[] { "COD", "Paypal" };
+                var shippingMethods = new string[] { "FreeShipping", "Express" };
                 // Seed data for Order
+
                 for (int i = 1; i <= 10; i++)
                 {
                     var order = new Order
                     {
                         UserId = random.Next(1, users.Length + 1),
-                        // Làm tròn giây cho thời gian đơn hàng
                         OrderDate = DateTime.Now.AddSeconds(-i).AddMilliseconds(-DateTime.Now.Millisecond),
                         TotalAmount = random.Next(1, 101),
                         Status = orderStatuses[random.Next(orderStatuses.Length)],
-                        IsPaid = isPaidOptions[random.Next(isPaidOptions.Length)]
+                        IsPaid = isPaidOptions[random.Next(isPaidOptions.Length)],
+
+       
+                        // Thêm thông tin địa chỉ
+                        Province = provinces[random.Next(provinces.Length)],
+                        District = districts[random.Next(districts.Length)],
+                        Ward = wards[random.Next(wards.Length)],
+                        AddressDetail = AddressDetails[random.Next(AddressDetails.Length)],
+
+                        // Random thông tin người dùng
+                        FullName = FullNames[random.Next(FullNames.Length)],
+                        Email = Emails[random.Next(Emails.Length)],
+                        Telephone = Telephones[random.Next(Telephones.Length)],
+                        // Random phương thức thanh toán và vận chuyển
+                        PaymentMethod = paymentMethods[random.Next(paymentMethods.Length)],
+                        ShippingMethod = shippingMethods[random.Next(shippingMethods.Length)]
                     };
                     context.Order.Add(order);
                 }
                 context.SaveChanges();
+
+
 
 
                 // Seed data for OrderProduct
@@ -103,12 +132,13 @@ namespace OgainShop.Data
                     {
                         OrderId = random.Next(1, 10),
                         ProductId = random.Next(1, 10),
-                        Quantity = random.Next(1, 5),
-                        UnitPrice = random.Next(1, 101)
+                        Qty = random.Next(1, 5),
+                        Price = random.Next(1, 101)
                     };
                     context.OrderProduct.Add(orderProduct);
                 }
                 context.SaveChanges();
+
             }
         }
     }

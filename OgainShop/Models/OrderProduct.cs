@@ -1,15 +1,17 @@
-﻿namespace OgainShop.Models
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace OgainShop.Models
 {
+    [Keyless]
     public class OrderProduct
     {
-        public int OrderProductId { get; set; }
         public int OrderId { get; set; }
         public int ProductId { get; set; }
-        public int Quantity { get; set; }
-        public decimal UnitPrice { get; set; }
+        public int Qty { get; set; }
+        public decimal Price { get; set; }
 
-        // Navigation properties
-        public Order Order { get; set; }
-        public Product Product { get; set; }
+        // Composite primary key
+        public  Order Order { get; set; }
+        public  Product Product { get; set; }
     }
 }

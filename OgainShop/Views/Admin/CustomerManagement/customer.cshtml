@@ -7,7 +7,7 @@
   <main class="app-content">
     <div class="app-title">
       <ul class="app-breadcrumb breadcrumb side">
-        <li class="breadcrumb-item active"><a href="#"><b>Danh sách khách hàng</b></a></li>
+        <li class="breadcrumb-item active"><a href="#"><b>List of customers</b></a></li>
       </ul>
       <div id="clock"></div>
     </div>
@@ -84,8 +84,9 @@
                                     </td>
                                     <td>
 
-                                        <a asp-action="OrderUser" asp-route-id="@item.UserId">Order</a>
-
+                                        <a asp-action="OrderUser" class="btn btn-primary" style="background-color:green; color:white;" asp-route-id="@item.UserId">
+                                             Order
+                                        </a>
                                     </td>
                                 </tr>
                             }
