@@ -1,0 +1,104 @@
+﻿@model OgainShop.Models.User
+
+@{
+    ViewData["Title"] = "Customer";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+}
+<!DOCTYPE html>
+<html lang="en">
+<body onload="time()" class="app sidebar-mini rtl">
+    <!-- Navbar-->
+    <header class="app-header">
+        <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar"
+                                        aria-label="Hide Sidebar"></a>
+        <!-- Navbar Right Menu-->
+        <ul class="app-nav">
+
+
+            <!-- User Menu-->
+            <li>
+                <a class="app-nav__item" href="/index.html"><i class='bx bx-log-out bx-rotate-180'></i> </a>
+
+            </li>
+        </ul>
+    </header>
+    <!-- Sidebar menu-->
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+
+    <main class="app-content">
+        <div class="app-title">
+            <ul class="app-breadcrumb breadcrumb side">
+                <li class="breadcrumb-item active"><a href="#"><b>List of orders</b></a></li>
+            </ul>
+            <div id="clock"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tile">
+                    <div class="tile-body">
+
+                        <h2 style="text-align:center; margin: 20px 0">Purchased order</h2>
+                        <table class="table table-hover table-bordered" id="sampleTable">
+                            <thead>
+                                <tr>
+                                    <th width="10"><input type="checkbox" id="all"></th>
+                                    <th>Order Id</th>
+                                    <th>Customer Name</th>
+                                    <th>Total amount</th>
+                                    <th>Status</th>
+                                    <th>IsPaid</th>
+                                    <th>Order date</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var order in Model.Orders)
+                                {
+                                    <tr>
+                                        <td width="10"><input type="checkbox" name="check1" value="1"></td>
+                                        <td>@order.OrderId</td>
+
+                                        <td>@Model.Username</td>
+                                        @*<td>
+                                                @foreach (var orderProduct in order.OrderProducts)
+                                                {
+                                                    <div>
+                                                        Product: @orderProduct.Product.ProductName <br />
+                                                        Price: @orderProduct.Product.Price <br />
+                                                        Quantity: @orderProduct.Quantity
+                                                    </div>
+                                                }
+                                            </td>*@
+                                        <td>@order.TotalAmount $</td>
+
+                                        <td><span class="badge bg-success">@order.Status</span></td>
+                                        <td><span>@order.IsPaid</span></td>
+                                        <td>@order.OrderDate</td>
+                                        <td>
+
+                                            <a asp-action="OrderDetailsUser" asp-route-id="@order.OrderId">OrderDetails</a>
+
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+
+
+
+
+                        </table>
+                        <div class="edit-back-links">
+
+                            <a class="btn btn-secondary" asp-action="customer">Back to List</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+</body>
+
+</html>

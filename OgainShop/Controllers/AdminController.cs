@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using OgainShop.Data;
 using OgainShop.Models;
 using OgainShop.Models.Authentication;
-using OgainShop.ViewModels;
+
 
 namespace OgainShop.Controllers
 {
@@ -50,61 +50,6 @@ namespace OgainShop.Controllers
             return View("OrderManagement/detailOrder", order);
         }
 
-        public IActionResult SuccessOrder(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var user = _context.User.Include(u => u.Orders)
-                                    .FirstOrDefault(u => u.UserId == id);
-
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            var order = user.Orders.FirstOrDefault(); // Assuming you want to display the first order associated with the user
-
-            if (order == null)
-            {
-                return NotFound();
-            }
-
-            var product = _context.Product.FirstOrDefault(p => p.OrderProducts.Any(op => op.OrderId == order.OrderId));
-
-            if (product == null)
-            {
-                return NotFound();
-            }
-
-            var viewModel = new SuccessOrderViewModel
-            {
-                User = user,
-                Order = order,
-                Product = product
-            };
-
-            return View("CustomerManagement/SuccessOrder", viewModel);
-        }
-
-        public IActionResult detailsUser(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var user = _context.User.FirstOrDefault(m => m.UserId == id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            return View("CustomerManagement/detailsUser", user);
-        }
-
 
 
         [Authentication]
@@ -121,6 +66,52 @@ namespace OgainShop.Controllers
                 return Problem("Entity set 'OgainShopContext.User' is null.");
             }
         }
+        [Authentication]
+        public IActionResult OrderUser(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound(); // Trả về lỗi 404 nếu không có ID người dùng
+            }
+
+            // Lấy thông tin người dùng từ cơ sở dữ liệu dựa trên id
+            var user = _context.User.Include(u => u.Orders).FirstOrDefault(u => u.UserId == id);
+
+            if (user == null)
+            {
+                return NotFound(); // Trả về lỗi 404 nếu không tìm thấy người dùng
+            }
+
+            return View("CustomerManagement/OrderUser", user);
+        }
+        [Authentication]
+        public IActionResult OrderDetailsUser(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound(); // Trả về lỗi 404 nếu không có ID đơn hàng
+            }
+
+            // Lấy thông tin đơn hàng từ cơ sở dữ liệu dựa trên id và nạp thông tin User và OrderProducts
+            var order = _context.Order
+                .Include(o => o.User)
+                .Include(o => o.OrderProducts)
+                    .ThenInclude(op => op.Product) // Nạp thông tin sản phẩm cho từng OrderProduct
+                .FirstOrDefault(o => o.OrderId == id);
+
+            if (order == null)
+            {
+                return NotFound(); // Trả về lỗi 404 nếu không tìm thấy đơn hàng
+            }
+
+            return View("CustomerManagement/OrderDetailsUser", order);
+        }
+
+
+
+
+
+
 
         [Authentication]
         // Product Management
@@ -263,12 +254,17 @@ namespace OgainShop.Controllers
 
 
 
+
         [Authentication]
         // Dashboard
         public IActionResult dashboard()
         {
             return View("DashboardAdmin/dashboard");
         }
+
+
+
+
 
         [Authentication]
         // Revenue

@@ -52,39 +52,40 @@
             <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0"
               id="sampleTable">
               <thead>
-                            <tr>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.UserId)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Username)
-                                </th>
-                              
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Email)
-                                </th>
-                                <th></th>
-                            </tr>
+                  <tr>
+                      <th width="10"><input type="checkbox" id="all"></th>
+                      <th>
+                          @Html.DisplayNameFor(model => model.UserId)
+                      </th>
+                      <th>
+                          @Html.DisplayNameFor(model => model.Username)
+                      </th>
+
+                      <th>
+                          @Html.DisplayNameFor(model => model.Email)
+                      </th>
+                      <th></th>
+                  </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Model)
                             {
                                 <tr>
+                                    <td width="10"><input type="checkbox" name="check1" value="1"></td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.UserId)
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Username)
                                     </td>
-                                  
+
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Email)
                                     </td>
                                     <td>
-                                        
-                                        <a asp-action="detailsUser" asp-route-id="@item.UserId">Details</a> |
-                                        <a asp-action="successOrder" asp-route-id="@item.UserId">Order</a> 
-                                      
+
+                                        <a asp-action="OrderUser" asp-route-id="@item.UserId">Order</a>
+
                                     </td>
                                 </tr>
                             }
@@ -99,58 +100,5 @@
     </div>
   </main>
 
-  <!--
-  MODAL
--->
-  <div class="modal fade" id="ModalUP" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
-    data-keyboard="false">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
 
-        <div class="modal-body">
-          <div class="row">
-            <div class="form-group  col-md-12">
-              <span class="thong-tin-thanh-toan">
-                <h5>Chỉnh sửa thông tin khách hàng cơ bản</h5>
-              </span>
-            </div>
-          </div>
-          <div class="row">
-            <div class="form-group col-md-6">
-              <label class="control-label">ID khách hàng</label>
-              <input class="form-control" type="text" required value="#CD2187" disabled>
-            </div>
-            <div class="form-group col-md-6">
-              <label class="control-label">Họ và tên</label>
-              <input class="form-control" type="text" required value="Võ Trường">
-            </div>
-            <div class="form-group  col-md-6">
-              <label class="control-label">Số điện thoại</label>
-              <input class="form-control" type="number" required value="09267312388">
-            </div>
-            <div class="form-group col-md-6">
-              <label class="control-label">Địa chỉ email</label>
-              <input class="form-control" type="text" required value="truong.vd2000@gmail.com">
-            </div>
-            <div class="form-group col-md-6">
-              <label class="control-label">Ngày sinh</label>
-              <input class="form-control" type="date" value="15/03/2000">
-            </div>
-          
-          </div>
-          <BR>
-          <a href="#" style="    float: right;
-        font-weight: 600;
-        color: #ea0000;">Chỉnh sửa nâng cao</a>
-          <BR>
-          <BR>
-          <button class="btn btn-save" type="button">Lưu lại</button>
-          <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
-          <BR>
-        </div>
-        <div class="modal-footer">
-        </div>
-      </div>
-    </div>
-  </div>
 
