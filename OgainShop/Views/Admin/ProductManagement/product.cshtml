@@ -75,6 +75,9 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.Qty)
                                 </th>
+                                <th class="status-column">
+                                    @Html.DisplayNameFor(model => model.Status)
+                                </th>
                                 <th>
 
                                     @Html.DisplayNameFor(model => model.Category)
@@ -104,6 +107,9 @@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Qty)
                                     </td>
+                                    <td class="status-column @(item.Status == "Hết hàng" ? "HetHang" : "ConHang")">
+                                        @Html.DisplayFor(modelItem => item.Status)
+                                    </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Category.CategoryId)
                                 </td>
@@ -127,3 +133,19 @@
         </div>
     </div>
 </main>
+<style>
+    /* Định dạng chung cho cột Status */
+    .status-column {
+        font-weight: bold; /* Chữ đậm */
+    }
+
+        /* Màu đỏ cho trạng thái Hết hàng */
+        .status-column.HetHang {
+            color: red;
+        }
+
+        /* Màu xanh cho trạng thái Còn hàng */
+        .status-column.ConHang {
+            color: green;
+        }
+</style>

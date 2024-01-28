@@ -209,6 +209,14 @@ namespace OgainShop.Controllers
                     // Lưu đường dẫn vào trường Thumbnail của mô hình
                     model.Thumbnail = "/img/product/" + Path.GetFileName(imagePath);
                 }
+                else
+                {
+                    var existingProduct = _context.Product.AsNoTracking().FirstOrDefault(p => p.ProductId == model.ProductId);
+                    if (existingProduct != null)
+                    {
+                        model.Thumbnail = existingProduct.Thumbnail;
+                    }
+                }    
 
                 _context.Update(model);
                 await _context.SaveChangesAsync();
