@@ -69,50 +69,39 @@ namespace OgainShop.Controllers
             return View(product);
         }
 
-        public ActionResult Shop(int? id, string searchString, int page = 1, int pageSize = 9)
+        public ActionResult Shop(int? id, string searchTerm)
         {
             if (id == null)
             {
+                // If categoryId is not provided, you can handle it as per your requirement.
+                // For example, you can redirect to the home page or display a default category.
+                return View();
+
+            }
+
+            // Lấy thông tin của category được chọn
+            var selectedCategory = db.Category.Include(c => c.Products).FirstOrDefault(c => c.CategoryId == id);
+
+            if (selectedCategory == null)
+            {
+                // Xử lý khi không tìm thấy category
                 return NotFound();
             }
 
-            var category = db.Category.Find(id);
-
-            if (category == null)
-            {
-                return NotFound();
-            }
-
-
-            ViewBag.SearchString = searchString;
-
-            var productsInCategory = db.Product
-                .Include(p => p.Category)
-                .Where(p => p.CategoryId == id);
-
-            if (!string.IsNullOrEmpty(searchString))
-            {
-                productsInCategory = productsInCategory.Where(p => p.ProductName.Contains(searchString));
-            }
-
-            // Tính toán và chuyển thông tin phân trang vào ViewBag hoặc ViewModel
-            ViewBag.CategoryId = id;
-            ViewBag.TotalProductCount = productsInCategory.Count(); // Đếm số lượng sản phẩm sau khi áp dụng tìm kiếm
-            ViewBag.TotalPages = (int)Math.Ceiling((double)ViewBag.TotalProductCount / pageSize);
-            ViewBag.CurrentPage = page;
-
-            // Lấy danh sách sản phẩm với phân trang
-            var paginatedProducts = productsInCategory
-                .OrderBy(p => p.ProductId)
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize)
-                .ToList();
-
-            ViewBag.ProductsInCategory = paginatedProducts;
+            // Truyền danh sách sản phẩm của category đó vào ViewBag
             ViewBag.Categories = db.Category.ToList();
+            ViewBag.SelectedCategory = selectedCategory;
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                // Lọc danh sách sản phẩm theo ký tự tìm kiếm
+                selectedCategory.Products = selectedCategory.Products
+                    .Where(p => p.ProductName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+            }
 
-            return View(paginatedProducts);
+            return View();
         }
+
         [Authentication]
         public IActionResult Cart()
         {
