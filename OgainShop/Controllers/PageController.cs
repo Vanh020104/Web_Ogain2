@@ -69,6 +69,38 @@ namespace OgainShop.Controllers
             return View(product);
         }
 
+        public ActionResult Shop(int? id, string searchTerm)
+        {
+            if (id == null)
+            {
+                // If categoryId is not provided, you can handle it as per your requirement.
+                // For example, you can redirect to the home page or display a default category.
+                return View();
+
+            }
+
+            // Lấy thông tin của category được chọn
+            var selectedCategory = db.Category.Include(c => c.Products).FirstOrDefault(c => c.CategoryId == id);
+
+            if (selectedCategory == null)
+            {
+                // Xử lý khi không tìm thấy category
+                return NotFound();
+            }
+
+            // Truyền danh sách sản phẩm của category đó vào ViewBag
+            ViewBag.Categories = db.Category.ToList();
+            ViewBag.SelectedCategory = selectedCategory;
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                // Lọc danh sách sản phẩm theo ký tự tìm kiếm
+                selectedCategory.Products = selectedCategory.Products
+                    .Where(p => p.ProductName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+            }
+
+            return View();
+        }
 
         [Authentication]
         public IActionResult Cart()

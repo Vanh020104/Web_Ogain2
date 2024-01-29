@@ -28,7 +28,7 @@
                         <ul>
                             @foreach (var category in ViewBag.Categories)
                             {
-                                <li><a asp-controller="Page" asp-action="Category" asp-route-categoryId="@category.CategoryId">@category.CategoryName</a></li>
+                                <li><a asp-controller="Page" asp-action="Shop" asp-route-id="@category.CategoryId">@category.CategoryName</a></li>
                             }
                         </ul>
 
