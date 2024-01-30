@@ -13,9 +13,21 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <base href="/" />
 </head>
+<style> 
+    .alert {
+        text-align: center;
+        margin: 20px auto;
+        width: 100%; /* Điều chỉnh độ rộng của thông báo tùy theo nhu cầu */
+    }
+</style>
 
 <body>
-
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            @TempData["Message"]
+        </div>
+    }
     <!-- Hero Section Begin -->
     <section class="hero hero-normal">
         <div class="container">

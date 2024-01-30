@@ -88,7 +88,7 @@ namespace OgainShop.Controllers
                     });
 
                     // Thêm thông báo vào TempData
-                    TempData["Message"] = "The product has been added to your cart!";
+                    TempData["Message"] = "Thêm sản phẩm thành công!";
                 }
             }
             else
@@ -98,9 +98,10 @@ namespace OgainShop.Controllers
 
             HttpContext.Session.Set("cart", Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(myCart)));
 
-            // Chuyển hướng về trang chủ
-            return RedirectToAction("home", "Page");
+            // Chuyển hướng về trang chi tiết sản phẩm
+            return RedirectToAction("Details", "Page", new { id = id });
         }
+
 
 
         public IActionResult RemoveFromCart(int id)
