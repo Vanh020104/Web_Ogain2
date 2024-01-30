@@ -14,8 +14,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 </head>
+<style>
+    .alert {
+        text-align: center;
+        margin: 20px auto;
+        width: 100%; /* Điều chỉnh độ rộng của thông báo tùy theo nhu cầu */
+    }
+</style>
 <body>
-
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            @TempData["Message"]
+        </div>
+    }
     <section class="hero">
         <div class="container">
             <div class="row">

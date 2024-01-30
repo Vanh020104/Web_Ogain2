@@ -59,26 +59,21 @@ namespace OgainShop.Controllers
         //}
         public IActionResult AddToCart(int id)
         {
-
             List<CartItem> myCart;
 
-            // Kiểm tra nếu Session chứa giỏ hàng
             if (HttpContext.Session.TryGetValue("cart", out byte[] cartBytes))
             {
                 myCart = JsonConvert.DeserializeObject<List<CartItem>>(Encoding.UTF8.GetString(cartBytes));
             }
             else
             {
-                // Nếu không, tạo một giỏ hàng mới
                 myCart = new List<CartItem>();
             }
 
-            // Tìm sản phẩm trong giỏ hàng
             var item = myCart.SingleOrDefault(p => p.ProductId == id);
 
             if (item == null)
             {
-                // Nếu sản phẩm không có trong giỏ hàng, thêm sản phẩm mới vào giỏ hàng
                 var product = _context.Product.SingleOrDefault(p => p.ProductId == id);
 
                 if (product != null)
@@ -87,23 +82,26 @@ namespace OgainShop.Controllers
                     {
                         ProductId = id,
                         ProductName = product.ProductName,
-                        Qty = 1, // Bạn có thể cần cập nhật số lượng một cách thích hợp
+                        Qty = 1,
                         Thumbnail = product.Thumbnail,
                         Price = product.Price
                     });
+
+                    // Thêm thông báo vào TempData
+                    TempData["Message"] = "The product has been added to your cart!";
                 }
             }
             else
             {
-                // Nếu sản phẩm đã có trong giỏ hàng, tăng số lượng lên
                 item.Qty++;
             }
 
-            // Cập nhật giỏ hàng trong Session
             HttpContext.Session.Set("cart", Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(myCart)));
 
-            return RedirectToAction("Index");
+            // Chuyển hướng về trang chủ
+            return RedirectToAction("home", "Page");
         }
+
 
         public IActionResult RemoveFromCart(int id)
         {
@@ -136,6 +134,33 @@ namespace OgainShop.Controllers
 
             return View(cartItems);
         }
+
+        [HttpPost]
+        public IActionResult UpdateQuantity(int productId, int quantity)
+        {
+            List<CartItem> myCart = HttpContext.Session.Get<List<CartItem>>("cart");
+            CartItem item = myCart.FirstOrDefault(p => p.ProductId == productId);
+
+            if (item != null)
+            {
+                item.Qty = quantity;
+            }
+
+            HttpContext.Session.Set("cart", myCart);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [HttpPost]
+        public IActionResult ClearCart()
+        {
+            HttpContext.Session.Remove("cart"); // Xóa giỏ hàng từ Session
+
+            return RedirectToAction("Index");
+        }
+
+
 
     }
 }
