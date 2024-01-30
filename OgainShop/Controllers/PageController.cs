@@ -169,12 +169,15 @@ namespace OgainShop.Controllers
                 .OrderBy(p => p.ProductId)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
+                .Include(p => p.Category) // Include the Category information
+
                 .ToListAsync();
 
             // Tính toán và chuyển thông tin phân trang vào ViewBag hoặc ViewModel
             ViewBag.TotalProductCount = await db.Product.CountAsync(); // Tổng số sản phẩm
             ViewBag.TotalPages = (int)Math.Ceiling((double)ViewBag.TotalProductCount / pageSize);
             ViewBag.CurrentPage = page;
+            ViewBag.Categories = await db.Category.ToListAsync();
 
             return View(productList);
         }
