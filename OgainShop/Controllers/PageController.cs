@@ -20,6 +20,7 @@ namespace OgainShop.Controllers
         {
             db = context;
         }
+        //Home
         [Authentication]
         public async Task<IActionResult> Home()
         {
@@ -41,6 +42,8 @@ namespace OgainShop.Controllers
 
             return View();
         }
+
+        //Search
         public async Task<IActionResult> Search(string searchString)
         {
             // Query all products
@@ -68,17 +71,13 @@ namespace OgainShop.Controllers
             return View(filteredProducts);
         }
 
-
-
-
+        // Details product
         [Authentication]
         public async Task<IActionResult> Details(int id)
         {
-
-       
             var cartItems = HttpContext.Session.Get<List<CartItem>>("cart");
             ViewData["CartItemCount"] = cartItems != null ? cartItems.Count : 0;
-           
+
             // Retrieve the product details from the database based on the provided ID
             var product = await db.Product.Include(p => p.Category)
                                           .FirstOrDefaultAsync(p => p.ProductId == id);
@@ -89,7 +88,14 @@ namespace OgainShop.Controllers
                 return NotFound();
             }
 
-            // Pass the product data to the view
+            var relatedProducts = await db.Product
+                .Where(p => p.CategoryId == product.CategoryId && p.ProductId != id)
+                .Take(4) // Số lượng sản phẩm liên quan bạn muốn hiển thị
+                .ToListAsync();
+
+            ViewBag.RelatedProducts = relatedProducts;
+
+            // Set ViewBag properties for product details
             ViewBag.ProductId = product.ProductId;
             ViewBag.ProductThumbnail = product.Thumbnail;  // Đường dẫn ảnh sản phẩm
             ViewBag.ProductName = product.ProductName; // Tên sản phẩm
@@ -97,10 +103,15 @@ namespace OgainShop.Controllers
             ViewBag.ProductDescription = product.Description; // Mô tả sản phẩm
             ViewBag.ProductCategory = product.Category?.CategoryName;
 
+            // Set ViewBag properties for product availability
+            ViewBag.ProductAvailability = product.Qty;
 
             return View(product);
         }
 
+
+        // Shop 
+        [Authentication]
         public ActionResult Shop(int? id, string searchString, int page = 1, int pageSize = 9)
         {
             var cartItems = HttpContext.Session.Get<List<CartItem>>("cart");
@@ -147,12 +158,35 @@ namespace OgainShop.Controllers
 
             return View(paginatedProducts);
         }
+        [Authentication]
+        public async Task<IActionResult> Category(int page = 1, int pageSize = 9)
+        {
+            var cartItems = HttpContext.Session.Get<List<CartItem>>("cart");
+            ViewData["CartItemCount"] = cartItems != null ? cartItems.Count : 0;
+
+            // Lấy danh sách sản phẩm với phân trang
+            var productList = await db.Product
+                .OrderBy(p => p.ProductId)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            // Tính toán và chuyển thông tin phân trang vào ViewBag hoặc ViewModel
+            ViewBag.TotalProductCount = await db.Product.CountAsync(); // Tổng số sản phẩm
+            ViewBag.TotalPages = (int)Math.Ceiling((double)ViewBag.TotalProductCount / pageSize);
+            ViewBag.CurrentPage = page;
+
+            return View(productList);
+        }
+
 
         [Authentication]
         public IActionResult Cart()
         {
             return View();
         }
+
+        // checkout
         [Authentication]
         public IActionResult Checkout()
 
@@ -161,6 +195,8 @@ namespace OgainShop.Controllers
             ViewData["CartItemCount"] = cartItems != null ? cartItems.Count : 0;
             return View();
         }
+
+        // contact
         [Authentication]
         public IActionResult Contact()
         {
@@ -168,6 +204,8 @@ namespace OgainShop.Controllers
             ViewData["CartItemCount"] = cartItems != null ? cartItems.Count : 0;
             return View();
         }
+
+
         [Authentication]
         public IActionResult Blog()
         {
@@ -175,6 +213,8 @@ namespace OgainShop.Controllers
             ViewData["CartItemCount"] = cartItems != null ? cartItems.Count : 0;
             return View();
         }
+
+        // favourite
         [Authentication]
         public IActionResult Favourite()
         {
@@ -182,17 +222,8 @@ namespace OgainShop.Controllers
             ViewData["CartItemCount"] = cartItems != null ? cartItems.Count : 0;
             return View();
         }
-        [Authentication]
-        public async Task<IActionResult> Category()
-        {
-            var cartItems = HttpContext.Session.Get<List<CartItem>>("cart");
-            ViewData["CartItemCount"] = cartItems != null ? cartItems.Count : 0;
-            var productList = await db.Product.ToListAsync();
 
-            return View(productList);
-        }
-
-
+        // thank you
         [Authentication]
         public IActionResult Thankyou()
         {
@@ -201,6 +232,9 @@ namespace OgainShop.Controllers
             return View();
         }
 
+
+
+        // login , logout , Register
         [HttpGet]
         public IActionResult Login()
         {
