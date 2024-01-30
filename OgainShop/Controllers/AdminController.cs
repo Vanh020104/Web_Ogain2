@@ -33,18 +33,19 @@ namespace OgainShop.Controllers
         [Authentication]
         public async Task<IActionResult> detailOrder(int? id)
         {
-            if (id == null || _context.Order == null)
+            if (id == null)
             {
-                return NotFound();
+                return NotFound(); 
             }
-
-            var order = await _context.Order
+            var order = _context.Order
                 .Include(o => o.User)
-                .FirstOrDefaultAsync(m => m.OrderId == id);
+                .Include(o => o.OrderProducts)
+                    .ThenInclude(op => op.Product) 
+                .FirstOrDefault(o => o.OrderId == id);
 
             if (order == null)
             {
-                return NotFound();
+                return NotFound(); 
             }
 
             return View("OrderManagement/detailOrder", order);
