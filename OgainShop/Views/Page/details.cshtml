@@ -22,12 +22,7 @@
 </style>
 
 <body>
-    @if (TempData["Message"] != null)
-    {
-        <div class="alert alert-success" role="alert">
-            @TempData["Message"]
-        </div>
-    }
+ 
     <!-- Hero Section Begin -->
     <section class="hero hero-normal">
         <div class="container">
@@ -99,6 +94,12 @@
     </section>
     <!-- Breadcrumb Section End -->
     <!-- Product Details Section Begin -->
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            @TempData["Message"]
+        </div>
+    }
     <section class="product-details spad">
         <div class="container">
             <div class="row">

@@ -88,7 +88,7 @@ namespace OgainShop.Controllers
                     });
 
                     // Thêm thông báo vào TempData
-                    TempData["Message"] = "Thêm sản phẩm thành công!";
+                    TempData["Message"] = "Your product has been added to the cart!!";
                 }
             }
             else
