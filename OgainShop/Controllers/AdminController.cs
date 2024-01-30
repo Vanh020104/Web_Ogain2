@@ -50,7 +50,26 @@ namespace OgainShop.Controllers
 
             return View("OrderManagement/detailOrder", order);
         }
+        [Authentication]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdateStatus(int id, string status, string returnUrl)
+        {
+            var order = await _context.Order.FindAsync(id);
 
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            // Cập nhật trạng thái cho đơn hàng
+            order.Status = status;
+            _context.Update(order);
+            await _context.SaveChangesAsync();
+
+            // Chuyển hướng đến returnUrl
+            return Redirect(returnUrl);
+        }
 
 
         [Authentication]
