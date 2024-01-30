@@ -23,6 +23,7 @@ namespace OgainShop.Data
         public DbSet<OgainShop.Models.Product> Product { get; set; } = default!;
 
         public DbSet<OgainShop.Models.User> User { get; set; } = default!;
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<OrderProduct>().HasKey(op => new { op.OrderId, op.ProductId });
@@ -37,7 +38,7 @@ namespace OgainShop.Data
                 .WithOne(op => op.Product)
                 .HasForeignKey(op => op.ProductId);
 
-            // Các cấu hình khác...
+           
         }
 
 

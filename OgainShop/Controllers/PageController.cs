@@ -8,6 +8,7 @@ using BCrypt.Net;
 using System;
 using System.Text;
 using OgainShop.Heplers;
+using System.Threading.Tasks;
 
 namespace OgainShop.Controllers
 {
@@ -24,6 +25,8 @@ namespace OgainShop.Controllers
         {
             // Retrieve distinct categories from the database
             var distinctCategories = await db.Category.ToListAsync();
+            var cartItems = HttpContext.Session.Get<List<CartItem>>("cart");
+            ViewData["CartItemCount"] = cartItems != null ? cartItems.Count : 0;
 
             // Pass the distinct categories to the view
             ViewBag.Categories = distinctCategories;
@@ -38,6 +41,35 @@ namespace OgainShop.Controllers
 
             return View();
         }
+        public async Task<IActionResult> Search(string searchString)
+        {
+            // Query all products
+            var productsQuery = db.Product.Include(p => p.Category).AsQueryable();
+            var distinctCategories = await db.Category.ToListAsync();
+            var cartItems = HttpContext.Session.Get<List<CartItem>>("cart");
+            ViewData["CartItemCount"] = cartItems != null ? cartItems.Count : 0;
+
+            // Filter by category, price, and product name
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                productsQuery = productsQuery.Where(p =>
+                    p.Category.CategoryName.Contains(searchString) ||
+                    p.ProductName.Contains(searchString) ||
+                    p.Price.ToString().Contains(searchString)
+                );
+            }
+
+            // Retrieve the filtered products
+            var filteredProducts = await productsQuery.ToListAsync();
+
+            // Pass the filtered products to the view
+            ViewBag.SearchResults = filteredProducts;
+
+            return View(filteredProducts);
+        }
+
+
+
 
         [Authentication]
         public async Task<IActionResult> Details(int id)
@@ -71,6 +103,8 @@ namespace OgainShop.Controllers
 
         public ActionResult Shop(int? id, string searchString, int page = 1, int pageSize = 9)
         {
+            var cartItems = HttpContext.Session.Get<List<CartItem>>("cart");
+            ViewData["CartItemCount"] = cartItems != null ? cartItems.Count : 0;
             if (id == null)
             {
                 return NotFound();
@@ -121,27 +155,38 @@ namespace OgainShop.Controllers
         }
         [Authentication]
         public IActionResult Checkout()
+
         {
+            var cartItems = HttpContext.Session.Get<List<CartItem>>("cart");
+            ViewData["CartItemCount"] = cartItems != null ? cartItems.Count : 0;
             return View();
         }
         [Authentication]
         public IActionResult Contact()
         {
+            var cartItems = HttpContext.Session.Get<List<CartItem>>("cart");
+            ViewData["CartItemCount"] = cartItems != null ? cartItems.Count : 0;
             return View();
         }
         [Authentication]
         public IActionResult Blog()
         {
+            var cartItems = HttpContext.Session.Get<List<CartItem>>("cart");
+            ViewData["CartItemCount"] = cartItems != null ? cartItems.Count : 0;
             return View();
         }
         [Authentication]
         public IActionResult Favourite()
         {
+            var cartItems = HttpContext.Session.Get<List<CartItem>>("cart");
+            ViewData["CartItemCount"] = cartItems != null ? cartItems.Count : 0;
             return View();
         }
         [Authentication]
         public async Task<IActionResult> Category()
         {
+            var cartItems = HttpContext.Session.Get<List<CartItem>>("cart");
+            ViewData["CartItemCount"] = cartItems != null ? cartItems.Count : 0;
             var productList = await db.Product.ToListAsync();
 
             return View(productList);
@@ -151,6 +196,8 @@ namespace OgainShop.Controllers
         [Authentication]
         public IActionResult Thankyou()
         {
+            var cartItems = HttpContext.Session.Get<List<CartItem>>("cart");
+            ViewData["CartItemCount"] = cartItems != null ? cartItems.Count : 0;
             return View();
         }
 

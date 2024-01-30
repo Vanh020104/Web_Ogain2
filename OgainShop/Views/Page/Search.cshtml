@@ -1,0 +1,56 @@
+﻿@model List<Product>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Search Product";
+}
+<div class="search-results-container">
+    <h3 class="search-results">@Model.Count Search Results</h3>
+</div>
+
+@if (Model != null && Model.Any())
+{
+    <div class="product-grid">
+        <div class="row">
+            @foreach (var product in Model)
+            {
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="product__item">
+                        <div class="product__item__pic set-bg" data-setbg="@product.Thumbnail">
+                            <ul class="product__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="product__item__text">
+                            <h6><a href="@Url.Action("Details", "Page", new { id = product.ProductId })">@product.ProductName</a></h6>
+                            <h5>@String.Format("${0:0.00}", product.Price)</h5>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+else
+{
+    <p>No results found.</p>
+}
+<style>
+    .search-results-container {
+        text-align: center; /* Căn giữa nội dung */
+        margin-bottom: 20px; /* Khoảng cách dưới tiêu đề */
+    }
+
+    .search-results {
+        display: inline-block; /* Để margin có hiệu lực */
+    }
+
+    .product-grid {
+        margin-top: 20px; /* Khoảng cách trên sản phẩm */
+    }
+
+    .product-item {
+        margin-bottom: 20px; /* Khoảng cách dưới mỗi sản phẩm */
+    }
+</style>
