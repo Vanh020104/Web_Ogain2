@@ -182,13 +182,6 @@ namespace OgainShop.Controllers
             return View(productList);
         }
 
-
-        [Authentication]
-        public IActionResult Cart()
-        {
-            return View();
-        }
-
         // checkout
         [Authentication]
         public IActionResult Checkout()

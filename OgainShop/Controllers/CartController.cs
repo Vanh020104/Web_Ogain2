@@ -34,29 +34,7 @@ namespace OgainShop.Controllers
                 return data;
             }
         }
-        //public IActionResult AddToCart(int id)
-        //{
-        //    var myCart = Carts;
-        //    var item = myCart.SingleOrDefault(p => p.ProductId == id);
-        //    if (item == null)
-        //    {
-        //        var product = _context.Product.SingleOrDefault(p => p.ProductId == id);
-        //        item = new CartItem
-        //        {
-        //            ProductId = id,
-        //            ProductName = product.ProductName,
-        //            Qty = product.Qty,
-        //            Thumbnail = product.Thumbnail,
-        //            Price = product.Price
-        //        };
-        //    }
-        //    else
-        //    {
-        //        item.Qty++;
-        //    }
-        //    HttpContext.Session.Set("cart", myCart);
-        //    return RedirectToAction("Index");
-        //}
+       
         public IActionResult AddToCart(int id)
         {
             List<CartItem> myCart;
@@ -132,7 +110,8 @@ namespace OgainShop.Controllers
         {
             // Lấy danh sách sản phẩm từ Session hoặc từ bất kỳ nguồn dữ liệu nào khác
             List<CartItem> cartItems = HttpContext.Session.Get<List<CartItem>>("cart");
-
+         
+            ViewData["CartItemCount"] = cartItems != null ? cartItems.Count : 0;
             return View(cartItems);
         }
 
