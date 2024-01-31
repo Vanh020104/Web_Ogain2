@@ -112,10 +112,11 @@ namespace OgainShop.Controllers
 
         // Shop 
         [Authentication]
-        public ActionResult Shop(int? id, string searchString, int page = 1, int pageSize = 9)
+        public ActionResult Shop(int? id, string searchString, int? minPrice, int? maxPrice, int page = 1, int pageSize = 9)
         {
             var cartItems = HttpContext.Session.Get<List<CartItem>>("cart");
             ViewData["CartItemCount"] = cartItems != null ? cartItems.Count : 0;
+
             if (id == null)
             {
                 return NotFound();
@@ -128,7 +129,6 @@ namespace OgainShop.Controllers
                 return NotFound();
             }
 
-
             ViewBag.SearchString = searchString;
 
             var productsInCategory = db.Product
@@ -138,6 +138,17 @@ namespace OgainShop.Controllers
             if (!string.IsNullOrEmpty(searchString))
             {
                 productsInCategory = productsInCategory.Where(p => p.ProductName.Contains(searchString));
+            }
+
+            // Lọc theo giá
+            if (minPrice != null)
+            {
+                productsInCategory = productsInCategory.Where(p => p.Price >= minPrice);
+            }
+
+            if (maxPrice != null)
+            {
+                productsInCategory = productsInCategory.Where(p => p.Price <= maxPrice);
             }
 
             // Tính toán và chuyển thông tin phân trang vào ViewBag hoặc ViewModel
