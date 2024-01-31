@@ -170,20 +170,30 @@ namespace OgainShop.Controllers
             return View(paginatedProducts);
         }
         [Authentication]
-        public async Task<IActionResult> Category(int page = 1, int pageSize = 9)
+        public async Task<IActionResult> Category(int page = 1, int pageSize = 9, decimal? minPrice = null, decimal? maxPrice = null)
         {
             var cartItems = HttpContext.Session.Get<List<CartItem>>("cart");
             ViewData["CartItemCount"] = cartItems != null ? cartItems.Count : 0;
 
             // Lấy danh sách sản phẩm với phân trang
-            var productList = await db.Product
-                .OrderBy(p => p.ProductId)
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize)
-                .Include(p => p.Category) // Include the Category information
+            var query = db.Product
+    .Include(p => p.Category) // Include the Category information
+    .OrderBy(p => p.ProductId)
+    .Skip((page - 1) * pageSize)
+    .Take(pageSize);
 
-                .ToListAsync();
+            // Lọc theo giá
+            if (minPrice != null)
+            {
+                query = query.Where(p => p.Price >= minPrice);
+            }
 
+            if (maxPrice != null)
+            {
+                query = query.Where(p => p.Price <= maxPrice);
+            }
+
+            var productList = await query.ToListAsync();
             // Tính toán và chuyển thông tin phân trang vào ViewBag hoặc ViewModel
             ViewBag.TotalProductCount = await db.Product.CountAsync(); // Tổng số sản phẩm
             ViewBag.TotalPages = (int)Math.Ceiling((double)ViewBag.TotalProductCount / pageSize);

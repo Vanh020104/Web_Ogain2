@@ -49,23 +49,25 @@
                             </ul>
 
                         </div>
-                        <div class="sidebar__item">
-                            <h4>Price</h4>
-                            <div class="price-range-wrap">
-                                <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                                     data-min="10" data-max="540">
-                                    <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
-                                    <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
-                                    <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
-                                </div>
-                                <div class="range-slider">
-                                    <div class="price-input">
-                                        <input type="text" id="minamount">
-                                        <input type="text" id="maxamount">
+                        <form asp-controller="Page" asp-action="Category" method="get">
+                            <div class="sidebar__item">
+                                <h4>Price</h4>
+                                <div class="price-range-wrap">
+                                    <div class="range-slider">
+                                        <div class="price-input">
+                                            <label for="minamount" style="color:#4CAF50">Min Price:</label>
+                                            <input type="number" style="color:#4CAF50" id="minamount" name="minPrice" min="10" max="540">
+                                        </div>
+
+                                        <div class="price-input">
+                                            <label style="color:#4CAF50" for="maxamount">Max Price:</label>
+                                            <input style="color:#4CAF50" type="number" id="maxamount" name="maxPrice" min="10" max="540">
+                                        </div>
                                     </div>
                                 </div>
+                                <button type="submit">Filter</button>
                             </div>
-                        </div>
+                        </form>
                         <div class="sidebar__item sidebar__item__color--option">
                             <h4>Colors</h4>
                             <div class="sidebar__item__color sidebar__item__color--white">
@@ -298,6 +300,20 @@
                     background-color: #7fad39;
                     color: white;
                 }
+
+        button {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+            button:hover {
+                background-color: #45a049;
+            }
     </style>
     <!-- Product Section End -->
     <!-- Product Section End -->
