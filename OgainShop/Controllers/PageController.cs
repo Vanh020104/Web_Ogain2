@@ -12,12 +12,12 @@ using System.Threading.Tasks;
 
 namespace OgainShop.Controllers
 {
-    public class PageController : Controller
+    public class PageController :  BaseController
     {
         private readonly OgainShopContext db;
 
-        public PageController(OgainShopContext context)
-        {
+        public PageController(OgainShopContext context) : base(context)
+    {
             db = context;
         }
         //Home
@@ -26,8 +26,8 @@ namespace OgainShop.Controllers
         {
             // Retrieve distinct categories from the database
             var distinctCategories = await db.Category.ToListAsync();
-            var cartItems = HttpContext.Session.Get<List<CartItem>>("cart");
-            ViewData["CartItemCount"] = cartItems != null ? cartItems.Count : 0;
+            // kế thừa các logic chung từ BaseController
+            await SetCommonViewData();
 
             // Pass the distinct categories to the view
             ViewBag.Categories = distinctCategories;
@@ -49,8 +49,9 @@ namespace OgainShop.Controllers
             // Query all products
             var productsQuery = db.Product.Include(p => p.Category).AsQueryable();
             var distinctCategories = await db.Category.ToListAsync();
-            var cartItems = HttpContext.Session.Get<List<CartItem>>("cart");
-            ViewData["CartItemCount"] = cartItems != null ? cartItems.Count : 0;
+            // kế thừa các logic chung từ BaseController
+            await SetCommonViewData();
+
 
             // Filter by category, price, and product name
             if (!string.IsNullOrEmpty(searchString))
@@ -75,8 +76,8 @@ namespace OgainShop.Controllers
         [Authentication]
         public async Task<IActionResult> Details(int id)
         {
-            var cartItems = HttpContext.Session.Get<List<CartItem>>("cart");
-            ViewData["CartItemCount"] = cartItems != null ? cartItems.Count : 0;
+            // kế thừa các logic chung từ BaseController
+            await SetCommonViewData();
 
             // Retrieve the product details from the database based on the provided ID
             var product = await db.Product.Include(p => p.Category)
@@ -112,10 +113,11 @@ namespace OgainShop.Controllers
 
         // Shop 
         [Authentication]
-        public ActionResult Shop(int? id, string searchString, int? minPrice, int? maxPrice, int page = 1, int pageSize = 9)
+        public async Task<IActionResult> Shop(int? id, string searchString, int? minPrice, int? maxPrice, int page = 1, int pageSize = 9)
         {
-            var cartItems = HttpContext.Session.Get<List<CartItem>>("cart");
-            ViewData["CartItemCount"] = cartItems != null ? cartItems.Count : 0;
+
+            // kế thừa các logic chung từ BaseController
+            await SetCommonViewData();
 
             if (id == null)
             {
@@ -172,8 +174,8 @@ namespace OgainShop.Controllers
         [Authentication]
         public async Task<IActionResult> Category(int page = 1, int pageSize = 9, decimal? minPrice = null, decimal? maxPrice = null)
         {
-            var cartItems = HttpContext.Session.Get<List<CartItem>>("cart");
-            ViewData["CartItemCount"] = cartItems != null ? cartItems.Count : 0;
+            // kế thừa các logic chung từ BaseController
+            await SetCommonViewData();
 
             // Lấy danh sách sản phẩm với phân trang
             var query = db.Product
@@ -205,47 +207,38 @@ namespace OgainShop.Controllers
 
         // checkout
         [Authentication]
-        public IActionResult Checkout()
+        public async Task<IActionResult> Checkout()
 
         {
-            var cartItems = HttpContext.Session.Get<List<CartItem>>("cart");
-            ViewData["CartItemCount"] = cartItems != null ? cartItems.Count : 0;
+            // kế thừa các logic chung từ BaseController
+            await SetCommonViewData();
             return View();
         }
 
         // contact
         [Authentication]
-        public IActionResult Contact()
+        public async Task<IActionResult> Contact()
         {
-            var cartItems = HttpContext.Session.Get<List<CartItem>>("cart");
-            ViewData["CartItemCount"] = cartItems != null ? cartItems.Count : 0;
+            // kế thừa các logic chung từ BaseController
+            await SetCommonViewData();
             return View();
         }
 
 
         [Authentication]
-        public IActionResult Blog()
+        public async Task<IActionResult> Blog()
         {
-            var cartItems = HttpContext.Session.Get<List<CartItem>>("cart");
-            ViewData["CartItemCount"] = cartItems != null ? cartItems.Count : 0;
-            return View();
-        }
-
-        // favourite
-        [Authentication]
-        public IActionResult Favourite()
-        {
-            var cartItems = HttpContext.Session.Get<List<CartItem>>("cart");
-            ViewData["CartItemCount"] = cartItems != null ? cartItems.Count : 0;
+            // kế thừa các logic chung từ BaseController
+            await SetCommonViewData();
             return View();
         }
 
         // thank you
         [Authentication]
-        public IActionResult Thankyou()
+        public async Task<IActionResult> Thankyou()
         {
-            var cartItems = HttpContext.Session.Get<List<CartItem>>("cart");
-            ViewData["CartItemCount"] = cartItems != null ? cartItems.Count : 0;
+            // kế thừa các logic chung từ BaseController
+            await SetCommonViewData();
             return View();
         }
 

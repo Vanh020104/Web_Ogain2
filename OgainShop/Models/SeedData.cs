@@ -62,6 +62,7 @@ namespace OgainShop.Data
                 }
                 context.SaveChanges();
 
+
                 // Seed data for User
                 var users = new User[]
                 {
@@ -123,6 +124,22 @@ namespace OgainShop.Data
                 context.SaveChanges();
 
 
+                // Seed data for Favorite
+                for (int i = 1; i <= 10; i++)
+                {
+                    var favorite = new Favorite
+                    {
+                        ProductName = productNames[random.Next(productNames.Count)],
+                        Price = random.Next(1, 101),
+                        Thumbnail = thumbnailPaths[i % 10], // Lặp lại đường dẫn ảnh sau mỗi 10 sản phẩm
+
+                        // Thêm thông tin người dùng và sản phẩm
+                        User = users[random.Next(users.Length)],
+                        Product = context.Product.Find(random.Next(1, 101))
+                    };
+                    context.Favorite.Add(favorite);
+                }
+                context.SaveChanges();
 
 
                 // Seed data for OrderProduct

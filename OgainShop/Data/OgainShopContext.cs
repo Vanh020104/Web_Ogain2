@@ -16,6 +16,8 @@ namespace OgainShop.Data
 
         public DbSet<OgainShop.Models.Category> Category { get; set; } = default!;
 
+        public DbSet<OgainShop.Models.Favorite> Favorite { get; set; } = default!;
+
         public DbSet<OgainShop.Models.Order> Order { get; set; } = default!;
 
         public DbSet<OgainShop.Models.OrderProduct> OrderProduct { get; set; } = default!;

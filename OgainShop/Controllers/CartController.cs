@@ -10,12 +10,12 @@ using System.Text;
 
 namespace OgainShop.Controllers
 {
-    public class CartController : Controller
+    public class CartController : BaseController
     {
 
         private readonly OgainShopContext _context;
 
-        public CartController(OgainShopContext context)
+        public CartController(OgainShopContext context) : base(context)
         {
             _context = context;
         }
@@ -106,12 +106,21 @@ namespace OgainShop.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             // Lấy danh sách sản phẩm từ Session hoặc từ bất kỳ nguồn dữ liệu nào khác
             List<CartItem> cartItems = HttpContext.Session.Get<List<CartItem>>("cart");
          
             ViewData["CartItemCount"] = cartItems != null ? cartItems.Count : 0;
+            var usernameFromSession = HttpContext.Session.GetString("Username");
+            var currentUser = await _context.User.SingleOrDefaultAsync(u => u.Username == usernameFromSession);
+
+            if (currentUser == null)
+            {
+                RedirectToAction("login", "Page");
+            }
+
+            ViewBag.FavoriteCount = GetFavoriteCount(currentUser.UserId);
             return View(cartItems);
         }
 

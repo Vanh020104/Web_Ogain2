@@ -60,7 +60,7 @@
                                     {
                                         <tr>
                                             <td class="shoping__cart__item">
-                                                <img src="@item.Thumbnail" alt="">
+                                                <img src="@item.Thumbnail" alt="" style="width:150px; height:150px;">
                                                 <h5>@item.ProductName</h5>
                                             </td>
                                             <td class="shoping__cart__price">
@@ -101,9 +101,9 @@
                         <div class="shoping__cart__btns">
                             <a href="#" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
                             <form method="post" asp-action="ClearCart">
-                                <button type="submit" class="primary-btn cart-btn cart-btn-right">
+                                <button style="border: 1px solid white; margin-top: -48px;" type="submit" class="primary-btn cart-btn cart-btn-right">
                                     <span class="icon_loading"></span>
-                                    Update Cart
+                                    Clear Cart
                                 </button>
                             </form>
 
