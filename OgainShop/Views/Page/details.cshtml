@@ -83,14 +83,34 @@
                     <p>
                         @ViewBag.ProductDescription
                     </p>
-                    <div class="product__details__quantity">
-                        <div class="quantity">
-                            <div class="pro-qty">
-                                <input type="text" value="1">
+                    <div class="product__details__quantity" style="display:flex">
+                        @if (ViewBag.ProductAvailability > 0)
+                        {
+                            var remainingQuantity = ViewBag.ProductAvailability;
+                            <div class="quantity">
+                                <form method="post" asp-controller="Cart" asp-action="AddToCart" asp-route-id="@ViewBag.ProductId" style="display:flex">
+                                    <div class="pro-qty" style="display:flex">
+                                        <input style="width:95%; display:flex" type="number" class="product-quantity" min="1" max="@remainingQuantity" name="quantity" value="1"> <br />
+                                    </div>
+                                    <input style="width:150px;height: 48px;border:none; margin:0 10px" type="submit" class="primary-btn" value="ADD TO CART">
+                                </form>
                             </div>
-                        </div>
+                        }
+                        else
+                        {
+                            <div class="quantity" style="pointer-events: none;">
+                                <form method="post" asp-controller="Cart" asp-action="AddToCart" asp-route-id="@ViewBag.ProductId" style="display:flex">
+                                    <div class="pro-qty" style="display:flex">
+                                        <input style="width:95%; display:flex" type="number" class="product-quantity" min="1" name="quantity" value="1" disabled> <br />
+                                    </div>
+                                    <input style="width:150px;height: 48px;border:none; margin:0 10px; cursor: not-allowed;" type="submit" class="primary-btn" value="ADD TO CART" disabled>
+                                </form>
+                            </div>
+                        }
+                        <a style="height:48px" href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                     </div>
-                    <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@ViewBag.ProductId" class="primary-btn">ADD TO CART</a>
+
+               
                     <form method="post" asp-action="AddToFavorite" asp-controller="Favorite">
                         <input type="hidden" name="productId" value="@ViewBag.ProductId" />
                         <button type="submit" style="border:1px solid white;" class="heart-icon">

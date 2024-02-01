@@ -34,8 +34,8 @@ namespace OgainShop.Controllers
                 return data;
             }
         }
-       
-        public IActionResult AddToCart(int id)
+
+        public IActionResult AddToCart(int id, int quantity = 1)
         {
             List<CartItem> myCart;
 
@@ -60,7 +60,7 @@ namespace OgainShop.Controllers
                     {
                         ProductId = id,
                         ProductName = product.ProductName,
-                        Qty = 1,
+                        Qty = quantity, // Sử dụng số lượng được truyền từ trang chi tiết
                         Thumbnail = product.Thumbnail,
                         Price = product.Price
                     });
@@ -71,7 +71,7 @@ namespace OgainShop.Controllers
             }
             else
             {
-                item.Qty++;
+                item.Qty += quantity; // Tăng số lượng theo số lượng được truyền từ trang chi tiết
             }
 
             HttpContext.Session.Set("cart", Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(myCart)));
@@ -79,6 +79,7 @@ namespace OgainShop.Controllers
             // Chuyển hướng về trang chi tiết sản phẩm
             return RedirectToAction("Details", "Page", new { id = id });
         }
+
 
 
 
@@ -124,6 +125,7 @@ namespace OgainShop.Controllers
             return View(cartItems);
         }
 
+
         [HttpPost]
         public IActionResult UpdateQuantity(int productId, int quantity)
         {
@@ -132,13 +134,28 @@ namespace OgainShop.Controllers
 
             if (item != null)
             {
-                item.Qty = quantity;
+                var product = _context.Product.SingleOrDefault(p => p.ProductId == productId);
+                if (product != null)
+                {
+                    if (quantity <= product.Qty)
+                    {
+                        item.Qty = quantity;
+                    }
+                    else
+                    {
+                        // Số lượng yêu cầu vượt quá số lượng có sẵn
+                     
+                        TempData["ProductId"] = productId; // Thiết lập ProductId để hiển thị thông báo cho sản phẩm này
+                    }
+                }
             }
 
             HttpContext.Session.Set("cart", myCart);
 
             return RedirectToAction("Index");
         }
+
+
 
         [HttpPost]
         [HttpPost]

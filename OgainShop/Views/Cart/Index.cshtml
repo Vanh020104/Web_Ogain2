@@ -74,8 +74,15 @@
                                                         </div>
                                                         <button type="submit" class="btn btn-success">Update</button>
                                                     </form>
+                                                    @if (TempData["ProductId"] != null && Convert.ToInt32(TempData["ProductId"]) == item.ProductId)
+                                                    {
+                                                        <div class="alert alert-danger" role="alert">
+                                                            <span style="font-size:15px">Requested quantity exceeds available quantity!</span>
+                                                        </div>
+                                                    }
                                                 </div>
                                             </td>
+
 
                                             @{
                                                 decimal itemTotal = item.Price * item.Qty;
@@ -146,9 +153,6 @@
             </div>
         </div>
     }
-
-  
-
 </body>
 
 </html>
