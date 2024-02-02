@@ -39,6 +39,7 @@ namespace OgainShop.Controllers
         {
             List<CartItem> myCart;
 
+            // Lấy giỏ hàng từ session nếu tồn tại
             if (HttpContext.Session.TryGetValue("cart", out byte[] cartBytes))
             {
                 myCart = JsonConvert.DeserializeObject<List<CartItem>>(Encoding.UTF8.GetString(cartBytes));
@@ -48,19 +49,36 @@ namespace OgainShop.Controllers
                 myCart = new List<CartItem>();
             }
 
-            var item = myCart.SingleOrDefault(p => p.ProductId == id);
+            var existingItem = myCart.FirstOrDefault(p => p.ProductId == id);
 
-            if (item == null)
+            if (existingItem != null)
             {
-                var product = _context.Product.SingleOrDefault(p => p.ProductId == id);
+                // Tính tổng số lượng bao gồm số lượng đang thêm vào
+                int totalQuantity = existingItem.Qty + quantity;
 
+                // Kiểm tra nếu tổng số lượng vượt quá số lượng có sẵn trong kho
+                var product = _context.Product.FirstOrDefault(p => p.ProductId == id);
+                if (product != null && totalQuantity > product.Qty)
+                {
+                    // Số lượng vượt quá số lượng có sẵn, đặt TempData và chuyển hướng
+                    TempData["Message"] = "Requested quantity exceeds available quantity!";
+                    return RedirectToAction("Details", "Page", new { id = id });
+                }
+
+                // Cập nhật số lượng của mặt hàng hiện có
+                existingItem.Qty = totalQuantity;
+            }
+            else
+            {
+                // Mặt hàng không tồn tại trong giỏ hàng, thêm mặt hàng mới
+                var product = _context.Product.FirstOrDefault(p => p.ProductId == id);
                 if (product != null)
                 {
                     myCart.Add(new CartItem
                     {
                         ProductId = id,
                         ProductName = product.ProductName,
-                        Qty = quantity, // Sử dụng số lượng được truyền từ trang chi tiết
+                        Qty = quantity,
                         Thumbnail = product.Thumbnail,
                         Price = product.Price
                     });
@@ -69,16 +87,14 @@ namespace OgainShop.Controllers
                     TempData["Message"] = "Your product has been added to the cart!!";
                 }
             }
-            else
-            {
-                item.Qty += quantity; // Tăng số lượng theo số lượng được truyền từ trang chi tiết
-            }
 
+            // Lưu giỏ hàng mới vào session
             HttpContext.Session.Set("cart", Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(myCart)));
 
             // Chuyển hướng về trang chi tiết sản phẩm
             return RedirectToAction("Details", "Page", new { id = id });
         }
+
 
 
 

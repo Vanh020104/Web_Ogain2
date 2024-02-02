@@ -95,6 +95,12 @@
                                     <input style="width:150px;height: 48px;border:none; margin:0 10px" type="submit" class="primary-btn" value="ADD TO CART">
                                 </form>
                             </div>
+                            @if (TempData["ErrorMessage"] != null)
+                            {
+                                <div class="alert alert-danger" role="alert">
+                                    @TempData["ErrorMessage"]
+                                </div>
+                            }
                         }
                         else
                         {
