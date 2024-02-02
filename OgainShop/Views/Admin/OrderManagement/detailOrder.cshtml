@@ -11,147 +11,148 @@
         <div class="container">
             <div class="row order_d_inner">
                 @if (Model != null)
-{
-    <div class="col-lg-4">
-        <div class="details_item">
-            <h4>Order Info</h4>
-            <ul class="list">
-                <li><a href="#"><span>Order id</span>: @Model.OrderId</a></li>
-                <li><a href="#"><span>Date</span>: @Model.OrderDate.ToShortDateString()</a></li>
-                <li><a href="#"><span>Total</span>: $@Model.TotalAmount</a></li>
-                <li><a href="#"><span>Payment Method</span>: @Model.PaymentMethod</a></li>
-                <li><a href="#"><span>IsPaid</span>: @Model.IsPaid</a></li>
-                <li><a href="#"><span>Status</span>: @Model.Status</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="col-lg-4">
-        <div class="details_item">
-            <h4>Customer Information</h4>
-            <ul class="list">
-                <li><a href="#"><span>Full Name</span>: @Model.FullName</a></li>
-                <li><a href="#"><span>Telephone</span>: @Model.Telephone</a></li>
-                <li><a href="#"><span>Email</span>: @Model.User.Email</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="col-lg-4">
-        <div class="details_item">
-            <h4>Shipping</h4>
-            <ul class="list">
-                <li><a href="#"><span>Shipping method</span>: @Model.ShippingMethod</a></li>
-                <li><a href="#"><span>Address</span>: @Model.GetFullAddress()</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="order_details_table">
-        <h2>Order Details</h2>
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th style="width:100px;" scope="col">ID</th>
-                        <th style="width:200px;" scope="col">Thumbnail </th>
-                        <th style="width:300px;" scope="col">Name</th>
-                        <th style="width:200px;" scope="col">Price</th>
-                        <th style="width:200px;" scope="col">Quantity</th>
-                        <th style="width:200px;" scope="col">Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var orderProduct in Model.OrderProducts)
-                    {
-                        <tr>
-                            <td>@orderProduct.Product.ProductId</td>
-                            <td><img src="@orderProduct.Product.Thumbnail" width="120" /></td>
-                            <td>@orderProduct.Product.ProductName</td>
-                            <td>@orderProduct.Product.Price</td>
-                            <td>@orderProduct.Qty</td>
-                            <td>$@(orderProduct.Product.Price * orderProduct.Qty)</td>
-                        </tr>
-                    }
-                <tbody>
-            </table>
-        </div>
-    </div>
-    <div>
-                        <!-- Thêm input hidden để chứa giá trị returnUrl -->
-                        <input type="hidden" id="returnUrl" name="returnUrl" value="@Url.Action("order", "Admin")" />
-
-                        <div style="float:right; margin-top: 10px; display: flex; gap: 10px;">
-                            @if (Model.Status == "Huỷ" || Model.Status == "Hoàn thành" || Model.Status == "Đã giao hàng")
-                            {
-                                <div>
-                                    <a href="@Url.Action("order", "Admin")" class="btn btn-warning">Quay lại</a>
-                                </div>
-                            }
-                            else if (Model.Status == "Đang giao hàng")
-                            {
-                                <div>
-                                    <!-- Cập nhật form để bao gồm tham số returnUrl -->
-                                    <form method="post" action="@Url.Action("UpdateStatus", "Admin", new { id = Model.OrderId, status = "Đã giao hàng", returnUrl = Url.Action("order", "Admin") })">
-                                        @Html.AntiForgeryToken()
-                                        <button onclick="return confirm('Chắc chắn bạn muốn cập nhật trạng thái thành: Đã giao hàng')" type="submit" class="btn btn-warning">
-                                            Đã giao hàng
-                                        </button>
-                                    </form>
-                                </div>
-                            }
-                            else if (Model.Status == "Đã xác nhận")
-                            {
-                                <!-- Cập nhật form để bao gồm tham số returnUrl -->
-                                <div>
-                                    <form method="post" action="@Url.Action("UpdateStatus", "Admin", new { id = Model.OrderId, status = "Huỷ", returnUrl = Url.Action("order", "Admin") })">
-                                        @Html.AntiForgeryToken()
-                                        <button onclick="return confirm('Chắc chắn bạn muốn hủy đơn hàng')" type="submit" class="btn btn-danger">
-                                            Huỷ
-                                        </button>
-                                    </form>
-                                </div>
-
-                                <!-- Cập nhật form để bao gồm tham số returnUrl -->
-                                <div>
-                                    <form method="post" action="@Url.Action("UpdateStatus", "Admin", new { id = Model.OrderId, status = "Đang giao hàng", returnUrl = Url.Action("order", "Admin") })">
-                                        @Html.AntiForgeryToken()
-                                        <button onclick="return confirm('Chắc chắn bạn muốn cập nhật trạng thái thành: Đang giao hàng')" type="submit" class="btn btn-warning">
-                                            Đang giao hàng
-                                        </button>
-                                    </form>
-                                </div>
-                            }
-                            else if (Model.Status == "Chờ xác nhận")
-                            {
-                                <!-- Cập nhật form để bao gồm tham số returnUrl -->
-                                <div>
-                                    <form method="post" action="@Url.Action("UpdateStatus", "Admin", new { id = Model.OrderId, status = "Huỷ", returnUrl = Url.Action("order", "Admin") })">
-                                        @Html.AntiForgeryToken()
-                                        <button onclick="return confirm('Chắc chắn bạn muốn hủy đơn hàng')" type="submit" class="btn btn-danger">
-                                            Huỷ
-                                        </button>
-                                    </form>
-                                </div>
-
-                                <!-- Cập nhật form để bao gồm tham số returnUrl -->
-                                <div>
-                                    <form method="post" action="@Url.Action("UpdateStatus", "Admin", new { id = Model.OrderId, status = "Đã xác nhận", returnUrl = Url.Action("order", "Admin") })">
-                                        @Html.AntiForgeryToken()
-                                        <button onclick="return confirm('Chắc chắn bạn muốn cập nhật trạng thái thành: Đã xác nhận')" type="submit" class="btn btn-warning">
-                                            Đã xác nhận
-                                        </button>
-                                    </form>
-                                </div>
-                            }
+                {
+                    <div class="col-lg-4">
+                        <div class="details_item">
+                            <h4>Order Info</h4>
+                            <ul class="list">
+                                <li><a href="#"><span>Order id</span>: @Model.OrderId</a></li>
+                                <li><a href="#"><span>Date</span>: @Model.OrderDate.ToShortDateString()</a></li>
+                                <li><a href="#"><span>Total</span>: $@Model.TotalAmount</a></li>
+                                <li><a href="#"><span>Payment Method</span>: @Model.PaymentMethod</a></li>
+                                <li><a href="#"><span>IsPaid</span>: @Model.IsPaid</a></li>
+                                <li><a href="#"><span>Status</span>: @Model.Status</a></li>
+                            </ul>
                         </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="details_item">
+                            <h4>Customer Information</h4>
+                            <ul class="list">
+                                <li><a href="#"><span>Full Name</span>: @Model.FullName</a></li>
+                                <li><a href="#"><span>Telephone</span>: @Model.Telephone</a></li>
+                                <li><a href="#"><span>Email</span>: @Model.User.Email</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="details_item">
+                            <h4>Shipping</h4>
+                            <ul class="list">
+                                <li><a href="#"><span>Shipping method</span>: @Model.ShippingMethod</a></li>
+                                <li><a href="#"><span>Address</span>: @Model.GetFullAddress()</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="order_details_table">
+                        <h2>Order Details</h2>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th style="width:100px;" scope="col">ID</th>
+                                        <th style="width:200px;" scope="col">Thumbnail </th>
+                                        <th style="width:300px;" scope="col">Name</th>
+                                        <th style="width:200px;" scope="col">Price</th>
+                                        <th style="width:200px;" scope="col">Quantity</th>
+                                        <th style="width:200px;" scope="col">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var orderProduct in Model.OrderProducts)
+                                    {
+                                        <tr>
+                                            <td>@orderProduct.Product.ProductId</td>
+                                            <td><img src="@orderProduct.Product.Thumbnail" width="120" /></td>
+                                            <td>@orderProduct.Product.ProductName</td>
+                                            <td>@orderProduct.Product.Price</td>
+                                            <td>@orderProduct.Qty</td>
+                                            <td>$@(orderProduct.Product.Price * orderProduct.Qty)</td>
+                                        </tr>
+                                    }
+                                <tbody>
+                            </table>
+                        </div>
+                    </div>
 
-                       
-
-    </div>
-}
-else
-{
-    <p>Không có thông tin đơn hàng.</p>
-}
+                }
+                else
+                {
+                    <p>Không có thông tin đơn hàng.</p>
+                }
             </div>
         </div>
     </section>
+    <div>
+        <!-- Thêm input hidden để chứa giá trị returnUrl -->
+        <input type="hidden" id="returnUrl" name="returnUrl" value="@Url.Action("order", "Admin")" />
+
+        <div style="float:right; margin-top: 10px; display: flex; gap: 10px;">
+            @if (Model.Status == "Huỷ" || Model.Status == "Hoàn thành" || Model.Status == "Đã giao hàng")
+            {
+                <div>
+                    <a href="@Url.Action("order", "Admin")" class="btn btn-warning">Quay lại</a>
+                </div>
+            }
+            else if (Model.Status == "Đang giao hàng")
+            {
+                <div>
+                    <!-- Cập nhật form để bao gồm tham số returnUrl -->
+                    <form method="post" action="@Url.Action("UpdateStatus", "Admin", new { id = Model.OrderId, status = "Đã giao hàng", returnUrl = Url.Action("order", "Admin") })">
+                        @Html.AntiForgeryToken()
+                        <button onclick="return confirm('Chắc chắn bạn muốn cập nhật trạng thái thành: Đã giao hàng')" type="submit" class="btn btn-warning">
+                            Đã giao hàng
+                        </button>
+                    </form>
+                </div>
+            }
+            else if (Model.Status == "Đã xác nhận")
+            {
+                <!-- Cập nhật form để bao gồm tham số returnUrl -->
+                <div>
+                    <form method="post" action="@Url.Action("UpdateStatus", "Admin", new { id = Model.OrderId, status = "Huỷ", returnUrl = Url.Action("order", "Admin") })">
+                        @Html.AntiForgeryToken()
+                        <button onclick="return confirm('Chắc chắn bạn muốn hủy đơn hàng')" type="submit" class="btn btn-danger">
+                            Huỷ
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Cập nhật form để bao gồm tham số returnUrl -->
+                <div>
+                    <form method="post" action="@Url.Action("UpdateStatus", "Admin", new { id = Model.OrderId, status = "Đang giao hàng", returnUrl = Url.Action("order", "Admin") })">
+                        @Html.AntiForgeryToken()
+                        <button onclick="return confirm('Chắc chắn bạn muốn cập nhật trạng thái thành: Đang giao hàng')" type="submit" class="btn btn-warning">
+                            Đang giao hàng
+                        </button>
+                    </form>
+                </div>
+            }
+            else if (Model.Status == "Chờ xác nhận")
+            {
+                <!-- Cập nhật form để bao gồm tham số returnUrl -->
+                <div>
+                    <form method="post" action="@Url.Action("UpdateStatus", "Admin", new { id = Model.OrderId, status = "Huỷ", returnUrl = Url.Action("order", "Admin") })">
+                        @Html.AntiForgeryToken()
+                        <button onclick="return confirm('Chắc chắn bạn muốn hủy đơn hàng')" type="submit" class="btn btn-danger">
+                            Huỷ
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Cập nhật form để bao gồm tham số returnUrl -->
+                <div>
+                    <form method="post" action="@Url.Action("UpdateStatus", "Admin", new { id = Model.OrderId, status = "Đã xác nhận", returnUrl = Url.Action("order", "Admin") })">
+                        @Html.AntiForgeryToken()
+                        <button onclick="return confirm('Chắc chắn bạn muốn cập nhật trạng thái thành: Đã xác nhận')" type="submit" class="btn btn-warning">
+                            Đã xác nhận
+                        </button>
+                    </form>
+                </div>
+            }
+        </div>
+
+
+
+    </div>
 </main>

@@ -12,12 +12,12 @@ using System.Threading.Tasks;
 
 namespace OgainShop.Controllers
 {
-    public class PageController :  BaseController
+    public class PageController : BaseController
     {
         private readonly OgainShopContext db;
 
         public PageController(OgainShopContext context) : base(context)
-    {
+        {
             db = context;
         }
         //Home
@@ -264,9 +264,9 @@ namespace OgainShop.Controllers
             if (HttpContext.Session.GetString("Username") == null)
             {
                 User u = db.User.FirstOrDefault(
-                    x => x.Email.Equals(user.Email)); 
+                    x => x.Email.Equals(user.Email));
 
-                if (u != null && BCrypt.Net.BCrypt.Verify(user.Password, u.Password)) 
+                if (u != null && BCrypt.Net.BCrypt.Verify(user.Password, u.Password))
                 {
                     HttpContext.Session.SetString("Username", u.Username.ToString());
                     HttpContext.Session.SetString("Role", u.Role);
@@ -330,6 +330,6 @@ namespace OgainShop.Controllers
             return RedirectToAction("login", "Page");
         }
 
-       
+
     }
 }

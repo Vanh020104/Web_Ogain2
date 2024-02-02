@@ -9,16 +9,15 @@
         margin: 20px auto;
         width: 100%; /* Điều chỉnh độ rộng của thông báo tùy theo nhu cầu */
     }
- 
 
-        /* Định dạng SVG bên trong nút */
-        button svg {
-            width: 64px; /* Đặt chiều rộng của SVG */
-            height: 64px; /* Đặt chiều cao của SVG */
-            display: block; /* Đảm bảo SVG được hiển thị là một khối block */
-            margin: auto; /* Căn giữa SVG trong nút */
-        }
 
+    /* Định dạng SVG bên trong nút */
+    button svg {
+        width: 64px; /* Đặt chiều rộng của SVG */
+        height: 64px; /* Đặt chiều cao của SVG */
+        display: block; /* Đảm bảo SVG được hiển thị là một khối block */
+        margin: auto; /* Căn giữa SVG trong nút */
+    }
 </style>
 
 
@@ -113,10 +112,10 @@
                                 </form>
                             </div>
                         }
-                      
+
                     </div>
 
-               
+
                     <form method="post" asp-action="AddToFavorite" asp-controller="Favorite">
                         <input type="hidden" name="productId" value="@ViewBag.ProductId" />
                         <button type="submit" style="border:1px solid white;" class="heart-icon">
