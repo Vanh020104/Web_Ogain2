@@ -1786,6 +1786,7 @@ ol {
 }
 
 .pro-qty .qtybtn {
+	margin-top: 10px;
 	width: 35px;
 	font-size: 16px;
 	color: #6f6f6f;
