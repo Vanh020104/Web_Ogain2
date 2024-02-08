@@ -7,7 +7,7 @@
 <main class="app-content">
     <div class="app-title">
         <ul class="app-breadcrumb breadcrumb side">
-            <li class="breadcrumb-item active"><a href="#"><b>Danh sách sản phẩm</b></a></li>
+            <li class="breadcrumb-item active"><a href="#"><b>List of products</b></a></li>
         </ul>
         <div id="clock"></div>
     </div>
@@ -23,37 +23,41 @@
                                 Tạo mới sản phẩm
                             </a>
                         </div>
-                        <div class="col-sm-2">
-                            <a class="btn btn-delete btn-sm nhap-tu-file" type="button" title="Nhập" onclick="myFunction(this)">
-                                <i class="fas fa-file-upload"></i> Tải từ file
-                            </a>
-                        </div>
+
 
                         <div class="col-sm-2">
                             <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="myApp.printTable()">
                                 <i class="fas fa-print"></i> In dữ liệu
                             </a>
                         </div>
-                        <div class="col-sm-2">
-                            <a class="btn btn-delete btn-sm print-file js-textareacopybtn" type="button" title="Sao chép">
-                                <i class="fas fa-copy"></i> Sao chép
-                            </a>
+                    </div>
+                    <form style="display: flex" asp-action="Product" asp-controller="Admin" method="get">
+                        <div class="input-group input-group-sm mr-2" style="width: 150px; margin-left: 5px;">
+                            <select value="" style="height: 45px;" name="CategoryId" class="form-control">
+                                <option value="">Filter by category</option>
+                                @foreach (var category in ViewBag.Categories)
+                                {
+                                    <option value="@category.CategoryId">@category.CategoryName</option>
+                                }
+                            </select>
                         </div>
 
-                        <div class="col-sm-2">
-                            <a class="btn btn-excel btn-sm" href="" title="In"><i class="fas fa-file-excel"></i> Xuất Excel</a>
+                        <div class="input-group input-group-sm mr-2" style="width: 100px; float:left">
+                            <input value="" class="form-control" type="number" name="Price_from" placeholder="Price from" />
                         </div>
-                        <div class="col-sm-2">
-                            <a class="btn btn-delete btn-sm pdf-file" type="button" title="In" onclick="myFunction(this)">
-                                <i class="fas fa-file-pdf"></i> Xuất PDF
-                            </a>
+                        <div class="input-group input-group-sm mr-2" style="width: 100px; float:left">
+                            <input value="" class="form-control" type="number" name="Price_to" placeholder="Price to" />
                         </div>
-                        <div class="col-sm-2">
-                            <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)">
-                                <i class="fas fa-trash-alt"></i> Xóa tất cả
-                            </a>
+
+                        <div class="input-group input-group-sm" style="width: 150px;">
+                            <input value="" type="text" name="search" class="form-control float-right" placeholder="Search">
+
+                            <button style="height: 45px; margin-left: 3px;" type="submit" class="btn btn-default">
+                                <i class="fas fa-search"></i>
+                            </button>
+
                         </div>
-                    </div>
+                    </form>
                     <table class="table table-hover table-bordered" id="sampleTable">
                         <thead>
                             <tr>
@@ -80,39 +84,40 @@
                                 </th>
                                 <th>
 
-                                    @Html.DisplayNameFor(model => model.Category)
+                                    @Html.DisplayNameFor(model => model.Category.CategoryName)
                                 </th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var item in Model) {
-                            <tr>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.ProductId)
                                     </td>
-                                
+
                                     <td>
-                                        <img src="@item.Thumbnail"  width="100" height="100" />
+                                        <img src="@item.Thumbnail" width="100" height="100" />
                                     </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ProductName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Description)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Price)
-                                </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ProductName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Description)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Price)
+                                    </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Qty)
                                     </td>
                                     <td class="status-column @(item.Status == "Hết hàng" ? "HetHang" : "ConHang")">
                                         @Html.DisplayFor(modelItem => item.Status)
                                     </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Category.CategoryId)
-                                </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                                    </td>
                                     <td>
                                         <a class="btn btn-primary" asp-controller="Admin" asp-action="editProduct" asp-route-id="@item.ProductId">
                                             <i class="fas fa-edit"></i> Edit
@@ -123,9 +128,9 @@
                                             </button>
                                         </form>
                                     </td>
-                            </tr>
+                                </tr>
                             }
-                          
+
                         </tbody>
                     </table>
                 </div>

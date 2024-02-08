@@ -6,8 +6,6 @@ using OgainShop.Models;
 using OgainShop.Models.Authentication;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Net.NetworkInformation;
-
-
 namespace OgainShop.Controllers
 {
 
@@ -183,17 +181,52 @@ namespace OgainShop.Controllers
 
 
 
-
-
-
-
         [Authentication]
         // Product Management
-        public async Task<IActionResult> Product()
+        public async Task<IActionResult> Product(int? CategoryId, string ProductName, decimal? Price_from, decimal? Price_to, string search)
         {
-            var ogainShopContext = _context.Product.Include(p => p.Category);
-            return View("ProductManagement/Product", await ogainShopContext.ToListAsync());
+            var categories = await _context.Category.ToListAsync();
+            var products = _context.Product.AsQueryable();
+
+
+            // Áp dụng các tiêu chí lọc nếu chúng được cung cấp
+            if (CategoryId.HasValue)
+            {
+                // Lọc theo category_id
+                products = products.Where(o => o.CategoryId == CategoryId.Value);
+            }
+
+            if (!string.IsNullOrEmpty(ProductName))
+            {
+                // Lọc theo productName
+                products = products.Where(o => o.ProductName.Contains(ProductName));
+            }
+
+            if (Price_from.HasValue)
+            {
+                // Lọc theo giá từ Price_from
+                products = products.Where(o => o.Price >= Price_from.Value);
+            }
+
+            if (Price_to.HasValue)
+            {
+                // Lọc theo giá đến Price_to
+                products = products.Where(o => o.Price <= Price_to.Value);
+            }
+
+            if (!string.IsNullOrEmpty(search))
+            {
+                // Lọc theo từ khóa tìm kiếm trong tên sản phẩm hoặc mô tả
+                products = products.Where(o => o.ProductName.Contains(search)
+                                            || o.Description.Contains(search));
+                                       
+            }
+            ViewBag.Categories = categories;
+            // Trả về view với danh sách sản phẩm đã lọc
+            return View("ProductManagement/Product", await products.ToListAsync());
         }
+
+
         [Authentication]
 
         public IActionResult addProduct()
