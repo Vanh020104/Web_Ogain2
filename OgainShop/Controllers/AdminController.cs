@@ -4,11 +4,13 @@ using Microsoft.EntityFrameworkCore;
 using OgainShop.Data;
 using OgainShop.Models;
 using OgainShop.Models.Authentication;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Net.NetworkInformation;
 
 
 namespace OgainShop.Controllers
 {
-   
+
 
 
     public class AdminController : Controller
@@ -24,28 +26,80 @@ namespace OgainShop.Controllers
             _context = context;
         }
         [Authentication]
-        public async Task<IActionResult> order()
+        public async Task<IActionResult> order(string TotalAmount, string ShippingMethod, string PaymentMethod, string IsPaid, string Status, string search)
         {
-            var ogainShopContext = _context.Order.Include(o => o.User);
+            // Lấy danh sách đơn hàng từ cơ sở dữ liệu
+            var orders = _context.Order.AsQueryable();
 
-            return View("OrderManagement/order", await ogainShopContext.ToListAsync());
+            // Áp dụng các tiêu chí lọc nếu chúng được cung cấp
+            if (!string.IsNullOrEmpty(TotalAmount))
+            {
+                decimal totalAmountValue;
+                if (decimal.TryParse(TotalAmount, out totalAmountValue))
+                {
+                    // Lọc theo TotalAmount
+                    orders = orders.Where(o => o.TotalAmount == totalAmountValue);
+                }
+            }
+
+            if (!string.IsNullOrEmpty(ShippingMethod))
+            {
+                // Lọc theo ShippingMethod
+                orders = orders.Where(o => o.ShippingMethod == ShippingMethod);
+            }
+
+            if (!string.IsNullOrEmpty(PaymentMethod))
+            {
+                // Lọc theo PaymentMethod
+                orders = orders.Where(o => o.PaymentMethod == PaymentMethod);
+            }
+
+            if (!string.IsNullOrEmpty(IsPaid))
+            {
+                // Lọc theo trạng thái đã thanh toán (Paid/Unpaid)
+                bool isPaid = IsPaid == "1";
+                orders = orders.Where(o => o.IsPaid == (isPaid ? "paid" : "unpaid"));
+            }
+
+            if (!string.IsNullOrEmpty(Status))
+            {
+                // Lọc theo Status
+                orders = orders.Where(o => o.Status == Status);
+            }
+
+            if (!string.IsNullOrEmpty(search))
+            {
+                // Lọc theo từ khóa tìm kiếm trong tên người đặt hàng, email hoặc các trường khác
+                orders = orders.Where(o => o.FullName.Contains(search)
+                                        || o.Email.Contains(search)
+                                        || o.TotalAmount.ToString().Contains(search)
+                                        || o.ShippingMethod.Contains(search)
+                                        || o.PaymentMethod.Contains(search)
+                                        || o.IsPaid.Contains(search)
+                                        || o.Status.Contains(search));
+            }
+
+            // Trả về view với danh sách đơn hàng đã lọc
+            return View("OrderManagement/order", await orders.ToListAsync());
         }
+
+
         [Authentication]
         public async Task<IActionResult> detailOrder(int? id)
         {
             if (id == null)
             {
-                return NotFound(); 
+                return NotFound();
             }
             var order = _context.Order
                 .Include(o => o.User)
                 .Include(o => o.OrderProducts)
-                    .ThenInclude(op => op.Product) 
+                    .ThenInclude(op => op.Product)
                 .FirstOrDefault(o => o.OrderId == id);
 
             if (order == null)
             {
-                return NotFound(); 
+                return NotFound();
             }
 
             return View("OrderManagement/detailOrder", order);
@@ -236,7 +290,7 @@ namespace OgainShop.Controllers
                     {
                         model.Thumbnail = existingProduct.Thumbnail;
                     }
-                }    
+                }
 
                 _context.Update(model);
                 await _context.SaveChangesAsync();

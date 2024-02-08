@@ -30,8 +30,12 @@
         public string PaymentMethod { get; set; }
         public string ShippingMethod { get; set; }
 
+
         // Navigation properties
         public User User { get; set; }
         public ICollection<OrderProduct> OrderProducts { get; set; }
+
+      
     }
 }
+

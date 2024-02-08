@@ -76,9 +76,9 @@ namespace OgainShop.Data
                 }
                 context.SaveChanges();
 
-                // Seed data for Order
-                var orderStatuses = new string[] { "Chờ xác nhận", "Đã xác nhận", "Đang giao hàng", "Đã giao hàng", "Hoàn thành", "Huỷ" };
-                var isPaidOptions = new string[] { "Chưa thanh toán", "Đã thanh toán" };
+                // Seed data for Order 
+                var orderStatuses = new string[] { "pending", "confirmed", "shipping", "shipped", "complete", "cancel" };
+                var isPaidOptions = new string[] { "unpaid", "paid" };
           
 
                 var provinces = new string[] { "Hồ Chí Minh", "Hà Nội", "Đà Nẵng", "Cần Thơ", "Hải Phòng", "An Giang" };
