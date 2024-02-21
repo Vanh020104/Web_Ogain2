@@ -9,16 +9,20 @@ using System;
 using System.Text;
 using OgainShop.Heplers;
 using System.Threading.Tasks;
+using System.Net;
+using System.Net.Mail;
 
 namespace OgainShop.Controllers
 {
     public class PageController : BaseController
     {
         private readonly OgainShopContext db;
+        private readonly IConfiguration _configuration;
 
-        public PageController(OgainShopContext context) : base(context)
+        public PageController(OgainShopContext context, IConfiguration configuration) : base(context)
         {
             db = context;
+            _configuration = configuration;
         }
         //Home
         [Authentication]
@@ -216,14 +220,55 @@ namespace OgainShop.Controllers
         }
 
         // contact
-        [Authentication]
+
         public async Task<IActionResult> Contact()
         {
             // kế thừa các logic chung từ BaseController
             await SetCommonViewData();
             return View();
         }
+        [Authentication]
+        [HttpPost]
+        public async Task<IActionResult> Contact(string name, string email, string message)
+        {
+         
+            string smtpServer = _configuration["EmailSettings:SmtpServer"];
+            int port = _configuration.GetValue<int>("EmailSettings:Port");
+            string username = _configuration["EmailSettings:Username"];
+            string password = _configuration["EmailSettings:Password"];
 
+            var smtpClient = new SmtpClient(smtpServer)
+            {
+                Port = port,
+                Credentials = new NetworkCredential(username, password),
+                EnableSsl = true
+            };
+
+            var mailMessage = new MailMessage
+            {
+                From = new MailAddress(email),
+                Subject = "New Message from Your Website",
+                Body = $"Name: {name}\nEmail: {email}\nMessage: {message}"
+            };
+
+            mailMessage.To.Add("dungprohn1409@gmail.com"); // Thay đổi địa chỉ email của người nhận
+
+            try
+            {
+                await smtpClient.SendMailAsync(mailMessage);
+
+                // Thông báo gửi email thành công
+                TempData["Message"] = "Information has been sent successfully!!";
+            }
+            catch (Exception ex)
+            {
+                // Xử lý lỗi nếu gửi email thất bại
+                ViewBag.ErrorMessage = $"Failed to send message: {ex.Message}";
+            }
+
+            // Chuyển hướng về trang Contact
+            return View();
+        }
 
         [Authentication]
         public async Task<IActionResult> Blog()
