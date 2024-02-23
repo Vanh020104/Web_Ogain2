@@ -419,6 +419,30 @@ namespace OgainShop.Controllers
             return View(user);
         }
 
+        [Authentication]
+        public async Task<IActionResult> ChangePassword()
+        {
+            // kế thừa các logic chung từ BaseController
+            await SetCommonViewData();
+            return View();
+        }
+
+        [Authentication]
+        public async Task<IActionResult> Profile()
+        {
+            // kế thừa các logic chung từ BaseController
+            await SetCommonViewData();
+            return View();
+        }
+
+        [Authentication]
+        public async Task<IActionResult> EditProfile()
+        {
+            // kế thừa các logic chung từ BaseController
+            await SetCommonViewData();
+            return View();
+        }
+
 
 
         // login , logout , Register

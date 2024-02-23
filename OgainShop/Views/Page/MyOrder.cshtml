@@ -5,7 +5,7 @@
             <p>Home / Account</p>
         </div>
         <div class="title-bottom">
-            <h3 style="color:#ff5722;">Account </h3>
+            <h3 style="color:#7fad39;">Account </h3>
         </div>
     </div>
     <div class="sidebar">
@@ -16,30 +16,25 @@
 
         <div class="username">aaaaaaa</div>
 
-        <button class="logout-button" onclick="$('#form-logout').submit();"> Log out</button>
+        <button class="logout-button" onclick="$('#form-logout').submit();" style="background-color:#7fad39;"> Log out</button>
 
         <ul>
             <div class="menu">
-                <i style="color: #ff5722;" class="fa-solid fa-file-circle-check"></i>
-                <a href="{{url(" my-order")}}">
-            <li style="color: #ff5722;" class="li1">My order</li>
+                <i style="color:#7fad39;" class="fa-solid fa-file-circle-check"></i>
+                <a href="/Page/MyOrder">
+            <li style="color:#7fad39;" class="li1">My order</li>
             </a>
     </div>
     <div class="menu">
         <i class="fa-solid fa-lock"></i>
-        <a href="{{url(" change-password")}}">
+        <a href="/Page/ChangePassword">
             <li>Change password</li>
         </a>
     </div>
-    <div class="menu">
-        <i class="fa-solid fa-heart"></i>
-        <a href="{{url(" favorite-order")}}">
-            <li>favorite product</li>
-        </a>
-    </div>
+    
     <div class="menu">
         <i class="fa-solid fa-user"></i>
-        <a href="{{ url(" profile") }}">
+        <a href="/Page/Profile">
             <li>Profile</li>
         </a>
     </div>
@@ -52,7 +47,7 @@
             <p style="color: black">My order </p>
         </div>
         <div class="content-top-title">
-            <p style="color: black"> order </p>
+            <p style="color: black"> 0order </p>
         </div>
     </div>
     <style>
@@ -61,7 +56,7 @@
 
     </style>
     <div class="content-top1 d-flex">
-        <a style="color: #ff5722;font-weight: bold" href="" class="btn">All</a>
+        <a style="color:#7fad39 ;font-weight: bold" href="" class="btn">All</a>
         <a href="" class="btn">Pending</a>
         <a href="" class="btn">Confirmed</a>
         <a href="" class="btn">Shipping</a>
@@ -105,7 +100,7 @@
                     <td>
 
                         <button asp-controller="Page" asp-action="OrderDetail" asp-route-id="@order.OrderId" style="padding: 7px 7px;" class="site-btn" type="submit">
-                            <a style="color: white" asp-controller="Page" asp-action="OrderDetail" asp-route-id="@order.OrderId">Detail</a>
+                            <a style="color: white;" asp-controller="Page" asp-action="OrderDetail" asp-route-id="@order.OrderId">Detail</a>
                         </button>
                     </td>
 
@@ -142,8 +137,8 @@
 
     .site-btn {
         font-size: 13px;
-        background: #ff5732;
-        border: 2px solid #ff5732;
+        background: #7fad39;
+        border: 2px solid #7fad39;
         border-radius: 5px;
         display: inline-block;
         padding: 3px 3px;
@@ -193,7 +188,7 @@
     }
 
     .logout-button {
-        background-color: #ff5722;
+        background-color: #7fad39;
         color: #fff;
         border: none;
         padding: 10px 20px;
@@ -267,6 +262,6 @@
             border-bottom: 1px solid #DDE1EF;
             border-top: 1px solid #DDE1EF;
             font-weight: 1000;
-            color: #ff5722;
+            color: #7fad39;
         }
 </style>
