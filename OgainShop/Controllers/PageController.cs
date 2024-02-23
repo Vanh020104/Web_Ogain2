@@ -398,52 +398,6 @@ namespace OgainShop.Controllers
             return View();
         }
 
-        [Authentication]
-        public IActionResult MyOrder()
-        {
-            // Lấy userId từ session
-            int userId = Convert.ToInt32(HttpContext.Session.GetString("UserId"));
-
-            // Truy vấn database để lấy thông tin người dùng có đơn hàng
-            var user = db.User
-             .Include(u => u.Orders)
-             .ThenInclude(o => o.OrderProducts)
-             .FirstOrDefault(u => u.UserId == userId);
-
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            // Trả dữ liệu người dùng có đơn hàng cho view
-            return View(user);
-        }
-
-        [Authentication]
-        public async Task<IActionResult> ChangePassword()
-        {
-            // kế thừa các logic chung từ BaseController
-            await SetCommonViewData();
-            return View();
-        }
-
-        [Authentication]
-        public async Task<IActionResult> Profile()
-        {
-            // kế thừa các logic chung từ BaseController
-            await SetCommonViewData();
-            return View();
-        }
-
-        [Authentication]
-        public async Task<IActionResult> EditProfile()
-        {
-            // kế thừa các logic chung từ BaseController
-            await SetCommonViewData();
-            return View();
-        }
-
-
 
         // login , logout , Register
         [HttpGet]

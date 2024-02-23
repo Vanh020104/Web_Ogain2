@@ -123,7 +123,7 @@
                             <div class="header__top__right__auth">
                                 @if (@Context.Session.GetString("Username") != null)
                                 {
-                                    <span><a href="/Page/MyOrder"><i class="fa fa-user"></i> @Context.Session.GetString("Username")</a></span>
+                                    <span><a href="/MyAccount/MyOrder"><i class="fa fa-user"></i> @Context.Session.GetString("Username")</a></span>
                                     <a asp-controller="Page" asp-action="logout"><i class="fa fa-sign-out"></i> Logout</a>
                                 }
                                 else
