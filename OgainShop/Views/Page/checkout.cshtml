@@ -1,6 +1,6 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Check Out";
 }
 <!DOCTYPE html>
 <html lang="zxx">
@@ -71,15 +71,15 @@
                             <!-- Các trường địa chỉ giao hàng -->
                             <div class="checkout__input">
                                 <p>Province<span>*</span></p>
-                                <input type="text" name="Province" required>
+                                <select id="provinceSelect" name="Province" required></select>
                             </div>
                             <div class="checkout__input">
                                 <p>District<span>*</span></p>
-                                <input type="text" name="District" required>
+                                <select id="districtSelect" name="District" required></select>
                             </div>
                             <div class="checkout__input">
                                 <p>Ward<span>*</span></p>
-                                <input type="text" name="Ward" required>
+                                <select id="wardSelect" name="Ward" required></select>
                             </div>
                             <div class="checkout__input">
                                 <p>AddressDetail<span>*</span></p>
@@ -87,13 +87,24 @@
                             </div>
 
                             <!-- Phương thức vận chuyển -->
-                            <div class="checkout__input">
-                                <p>Shipping Method<span>*</span></p>
-                                <select id="ShippingMethod" name="ShippingMethod" required onchange="updateShippingFee()">
-                                    <option value="FreeShipping" data-shipping-fee="0.00">Free Shipping</option>
-                                    <option value="Express" data-shipping-fee="10.00">Express</option>
-                                </select>
+
+                            <div class="checkout__input__checkbox">
+                                <p style="font-weight:900; font-size: 18px ; font-family: Roboto,sans-serif;">Shipping method<span>*</span></p>
+                                <label>
+                                    <input type="checkbox" id="FreeShipping" name="SelectedShippingMethods" value="FreeShipping" data-shipping-fee="0.00" onchange="updateShippingFee()">
+                                    Free Shipping
+                                    <span class="checkmark"></span>
+                                </label>
                             </div>
+                            <div class="checkout__input__checkbox">
+                                <label>
+                                    <input type="checkbox" id="Express" name="SelectedShippingMethods" value="Express" data-shipping-fee="10.00" onchange="updateShippingFee()">
+                                    Express
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+
+
                         </div>
 
                         <div class="col-lg-4 col-md-6">
@@ -136,6 +147,23 @@
         </div>
     </section>
     <!-- Checkout Section End -->
+    <script>
+        // Gửi yêu cầu GET đến API để lấy dữ liệu tỉnh/thành phố
+        fetch('https://thongtindoanhnghiep.co/api/city')
+            .then(response => response.json())
+            .then(data => {
+                // Sau khi nhận được dữ liệu, cập nhật dropdown tỉnh/thành phố
+                const provinceSelect = document.getElementById('provinceSelect');
+                data.LtsItem.forEach(province => {
+                    const option = document.createElement('option');
+                    option.value = province.ID;
+                    option.text = province.Title;
+                    provinceSelect.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error fetching provinces:', error));
+
+    </script>
     <script>
         function updateShippingFee() {
             var selectedOption = document.getElementById("ShippingMethod");
