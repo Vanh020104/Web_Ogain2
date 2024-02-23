@@ -78,7 +78,7 @@
                 }
                 else
                 {
-                    <p>Không có thông tin đơn hàng.</p>
+                  <p>No order information available.</p>
                 }
             </div>
         </div>
@@ -88,31 +88,31 @@
         <input type="hidden" id="returnUrl" name="returnUrl" value="@Url.Action("order", "Admin")" />
 
         <div style="float:right; margin-top: 10px; display: flex; gap: 10px;">
-            @if (Model.Status == "Huỷ" || Model.Status == "Hoàn thành" || Model.Status == "Đã giao hàng")
+            @if (Model.Status == "cancel" || Model.Status == "complete" || Model.Status == "shipped")
             {
                 <div>
-                    <a href="@Url.Action("order", "Admin")" class="btn btn-warning">Quay lại</a>
+                    <a href="@Url.Action("order", "Admin")" class="btn btn-warning">back</a>
                 </div>
             }
-            else if (Model.Status == "Đang giao hàng")
+            else if (Model.Status == "shipping")
             {
                 <div>
                     <!-- Cập nhật form để bao gồm tham số returnUrl -->
-                    <form method="post" action="@Url.Action("UpdateStatus", "Admin", new { id = Model.OrderId, status = "Đã giao hàng", returnUrl = Url.Action("order", "Admin") })">
+                    <form method="post" action="@Url.Action("UpdateStatus", "Admin", new { id = Model.OrderId, status = "shipped", returnUrl = Url.Action("order", "Admin") })">
                         @Html.AntiForgeryToken()
-                        <button onclick="return confirm('Chắc chắn bạn muốn cập nhật trạng thái thành: Đã giao hàng')" type="submit" class="btn btn-warning">
+                        <button onclick="return confirm('You definitely want to update the status to: Shipped')" type="submit" class="btn btn-warning">
                             Đã giao hàng
                         </button>
                     </form>
                 </div>
             }
-            else if (Model.Status == "Đã xác nhận")
+            else if (Model.Status == "confirmed")
             {
                 <!-- Cập nhật form để bao gồm tham số returnUrl -->
                 <div>
-                    <form method="post" action="@Url.Action("UpdateStatus", "Admin", new { id = Model.OrderId, status = "Huỷ", returnUrl = Url.Action("order", "Admin") })">
+                    <form method="post" action="@Url.Action("UpdateStatus", "Admin", new { id = Model.OrderId, status = "cancel", returnUrl = Url.Action("order", "Admin") })">
                         @Html.AntiForgeryToken()
-                        <button onclick="return confirm('Chắc chắn bạn muốn hủy đơn hàng')" type="submit" class="btn btn-danger">
+                        <button onclick="return confirm('Surely you want to cancel your order')" type="submit" class="btn btn-danger">
                             Huỷ
                         </button>
                     </form>
@@ -120,32 +120,32 @@
 
                 <!-- Cập nhật form để bao gồm tham số returnUrl -->
                 <div>
-                    <form method="post" action="@Url.Action("UpdateStatus", "Admin", new { id = Model.OrderId, status = "Đang giao hàng", returnUrl = Url.Action("order", "Admin") })">
+                    <form method="post" action="@Url.Action("UpdateStatus", "Admin", new { id = Model.OrderId, status = "shipping", returnUrl = Url.Action("order", "Admin") })">
                         @Html.AntiForgeryToken()
-                        <button onclick="return confirm('Chắc chắn bạn muốn cập nhật trạng thái thành: Đang giao hàng')" type="submit" class="btn btn-warning">
-                            Đang giao hàng
+                        <button onclick="return confirm('You definitely want to update the status to: Shipping')" type="submit" class="btn btn-warning">
+                            Shipping
                         </button>
                     </form>
                 </div>
             }
-            else if (Model.Status == "Chờ xác nhận")
+            else if (Model.Status == "pending")
             {
                 <!-- Cập nhật form để bao gồm tham số returnUrl -->
                 <div>
-                    <form method="post" action="@Url.Action("UpdateStatus", "Admin", new { id = Model.OrderId, status = "Huỷ", returnUrl = Url.Action("order", "Admin") })">
+                    <form method="post" action="@Url.Action("UpdateStatus", "Admin", new { id = Model.OrderId, status = "cancel", returnUrl = Url.Action("order", "Admin") })">
                         @Html.AntiForgeryToken()
-                        <button onclick="return confirm('Chắc chắn bạn muốn hủy đơn hàng')" type="submit" class="btn btn-danger">
-                            Huỷ
+                        <button onclick="return confirm('Surely you want to cancel your order')" type="submit" class="btn btn-danger">
+                            cancel
                         </button>
                     </form>
                 </div>
 
                 <!-- Cập nhật form để bao gồm tham số returnUrl -->
                 <div>
-                    <form method="post" action="@Url.Action("UpdateStatus", "Admin", new { id = Model.OrderId, status = "Đã xác nhận", returnUrl = Url.Action("order", "Admin") })">
+                    <form method="post" action="@Url.Action("UpdateStatus", "Admin", new { id = Model.OrderId, status = "confirmed", returnUrl = Url.Action("order", "Admin") })">
                         @Html.AntiForgeryToken()
-                        <button onclick="return confirm('Chắc chắn bạn muốn cập nhật trạng thái thành: Đã xác nhận')" type="submit" class="btn btn-warning">
-                            Đã xác nhận
+                        <button onclick="return confirm('Surely you want to update the status to: Confirmed')" type="submit" class="btn btn-warning">
+                            Confirmed
                         </button>
                     </form>
                 </div>
