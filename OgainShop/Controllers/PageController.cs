@@ -287,6 +287,27 @@ namespace OgainShop.Controllers
             return View();
         }
 
+        [Authentication]
+        public IActionResult MyOrder()
+        {
+            // Lấy userId từ session
+            int userId = Convert.ToInt32(HttpContext.Session.GetString("UserId"));
+
+            // Truy vấn database để lấy thông tin người dùng có đơn hàng
+            var user = db.User
+             .Include(u => u.Orders)
+             .ThenInclude(o => o.OrderProducts)
+             .FirstOrDefault(u => u.UserId == userId);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            // Trả dữ liệu người dùng có đơn hàng cho view
+            return View(user);
+        }
+
 
 
         // login , logout , Register
@@ -315,6 +336,7 @@ namespace OgainShop.Controllers
                 {
                     HttpContext.Session.SetString("Username", u.Username.ToString());
                     HttpContext.Session.SetString("Role", u.Role);
+                    HttpContext.Session.SetString("UserId", u.UserId.ToString());
 
                     if (u.Role == "Admin")
                     {
