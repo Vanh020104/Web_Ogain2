@@ -210,7 +210,7 @@ namespace OgainShop.Controllers
         }
 
         // checkout
-   
+
         [Authentication]
         public async Task<IActionResult> Checkout()
         {
@@ -313,11 +313,11 @@ namespace OgainShop.Controllers
             // Nếu dữ liệu không hợp lệ hoặc không có phương thức vận chuyển nào được chọn, quay lại trang checkout với các lỗi
             return View("Checkout", model);
         }
-    
 
 
-    // Hàm lấy phí vận chuyển dựa trên phương thức vận chuyển
-    private decimal GetShippingFee(string shippingMethod)
+
+        // Hàm lấy phí vận chuyển dựa trên phương thức vận chuyển
+        private decimal GetShippingFee(string shippingMethod)
         {
             switch (shippingMethod)
             {
@@ -329,7 +329,7 @@ namespace OgainShop.Controllers
                     return 0.00M;
             }
         }
-        
+
 
         // contact
 
@@ -343,7 +343,7 @@ namespace OgainShop.Controllers
         [HttpPost]
         public async Task<IActionResult> Contact(string name, string email, string message)
         {
-         
+
             string smtpServer = _configuration["EmailSettings:SmtpServer"];
             int port = _configuration.GetValue<int>("EmailSettings:Port");
             string username = _configuration["EmailSettings:Username"];
