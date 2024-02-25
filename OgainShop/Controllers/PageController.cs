@@ -210,7 +210,6 @@ namespace OgainShop.Controllers
         }
 
         // checkout
-
         [Authentication]
         public async Task<IActionResult> Checkout()
         {
@@ -242,79 +241,78 @@ namespace OgainShop.Controllers
 
         [HttpPost]
         [Authentication]
-        public IActionResult Checkout(Order model, string[] selectedShippingMethods)
+        public IActionResult Checkout(Order model)
         {
             if (true)
             {
-                // Kiểm tra xem đã chọn phương thức vận chuyển hay chưa
-                if (selectedShippingMethods != null && selectedShippingMethods.Length > 0)
+                // Lấy UserId từ Session
+                if (HttpContext.Session.TryGetValue("UserId", out byte[] userIdBytes) &&
+                    int.TryParse(Encoding.UTF8.GetString(userIdBytes), out int userId))
                 {
-                    // Lấy UserId từ Session
-                    if (HttpContext.Session.TryGetValue("UserId", out byte[] userIdBytes) &&
-                        int.TryParse(Encoding.UTF8.GetString(userIdBytes), out int userId))
+                    // Tạo một đối tượng Order từ dữ liệu trong form
+                    var order = new Order
                     {
-                        // Tạo một đối tượng Order từ dữ liệu trong form
-                        var order = new Order
-                        {
-                            UserId = userId,
-                            OrderDate = DateTime.Now,
-                            Status = "Pending",
-                            IsPaid = "unpaid",
-                            Province = model.Province,
-                            District = model.District,
-                            Ward = model.Ward,
-                            AddressDetail = model.AddressDetail,
-                            FullName = model.FullName,
-                            Email = model.Email,
-                            Telephone = model.Telephone,
-                            PaymentMethod = model.PaymentMethod
-                        };
+                        UserId = userId,
+                        OrderDate = DateTime.Now,
+                        Status = "Pending",
+                        IsPaid = "Chua thanh toan",
+                        Province = model.Province,
+                        District = model.District,
+                        Ward = model.Ward,
+                        AddressDetail = model.AddressDetail,
+                        FullName = model.FullName,
+                        Email = model.Email,
+                        Telephone = model.Telephone,
+                        PaymentMethod = model.PaymentMethod,
+                        ShippingMethod = model.ShippingMethod
+                    };
 
-                        // Lưu các phương thức vận chuyển được chọn vào đối tượng Order
-                        foreach (var method in selectedShippingMethods)
-                        {
-                            order.ShippingMethod += method + " "; // hoặc phù hợp với định dạng bạn cần
-                        }
+                    // Lấy giỏ hàng từ Session
+                    List<CartItem> cartItems = HttpContext.Session.Get<List<CartItem>>("cart");
+
+                    // Kiểm tra xem giỏ hàng có dữ liệu không
+                    if (cartItems != null && cartItems.Count > 0)
+                    {
+                        // Tính tổng TotalAmount từ giỏ hàng và phí vận chuyển
+                        decimal subtotal = cartItems.Sum(cartItem => cartItem.Total);
+                        decimal shippingFee = GetShippingFee(model.ShippingMethod); // Lấy phí vận chuyển từ hàm GetShippingFee
+
+                        // Gán giá trị TotalAmount cho đối tượng Order
+                        order.TotalAmount = subtotal + shippingFee;
 
                         // Lưu đơn đặt hàng vào cơ sở dữ liệu
                         _context.Order.Add(order);
                         _context.SaveChanges();
 
                         // Lưu thông tin sản phẩm trong đơn hàng vào bảng OrderProducts
-                        List<CartItem> cartItems = HttpContext.Session.Get<List<CartItem>>("cart");
-                        if (cartItems != null && cartItems.Count > 0)
+                        foreach (var cartItem in cartItems)
                         {
-                            foreach (var cartItem in cartItems)
+                            var orderProduct = new OrderProduct
                             {
-                                var orderProduct = new OrderProduct
-                                {
-                                    OrderId = order.OrderId,
-                                    ProductId = cartItem.ProductId,
-                                    Qty = cartItem.Qty,
-                                    Price = cartItem.Price
-                                };
+                                OrderId = order.OrderId,
+                                ProductId = cartItem.ProductId,
+                                Qty = cartItem.Qty,
+                                Price = cartItem.Price
+                            };
 
-                                _context.OrderProduct.Add(orderProduct);
-                            }
-
-                            _context.SaveChanges();
+                            _context.OrderProduct.Add(orderProduct);
                         }
+
+                        _context.SaveChanges();
 
                         // Xóa giỏ hàng sau khi đã đặt hàng thành công
                         HttpContext.Session.Remove("cart");
 
                         // Thực hiện các bước xử lý thanh toán khác (nếu cần)
 
-                        return RedirectToAction("Index", "Page");
+                        return RedirectToAction("Thankyou", "Page");
                     }
                 }
             }
 
-            // Nếu dữ liệu không hợp lệ hoặc không có phương thức vận chuyển nào được chọn, quay lại trang checkout với các lỗi
+            // Nếu dữ liệu không hợp lệ hoặc giỏ hàng trống, quay lại trang checkout với các lỗi
             return View("Checkout", model);
         }
-
-
 
         // Hàm lấy phí vận chuyển dựa trên phương thức vận chuyển
         private decimal GetShippingFee(string shippingMethod)
@@ -329,6 +327,16 @@ namespace OgainShop.Controllers
                     return 0.00M;
             }
         }
+
+        // thank you
+        [Authentication]
+        public async Task<IActionResult> Thankyou()
+        {
+            // kế thừa các logic chung từ BaseController
+            await SetCommonViewData();
+            return View();
+        }
+
 
 
         // contact
@@ -390,14 +398,6 @@ namespace OgainShop.Controllers
             return View();
         }
 
-        // thank you
-        [Authentication]
-        public async Task<IActionResult> Thankyou()
-        {
-            // kế thừa các logic chung từ BaseController
-            await SetCommonViewData();
-            return View();
-        }
 
 
         // login , logout , Register

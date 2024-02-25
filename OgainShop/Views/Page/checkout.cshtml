@@ -1,6 +1,6 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewData["Title"] = "Check Out";
+    ViewData["Title"] = "Home Page";
 }
 <!DOCTYPE html>
 <html lang="zxx">
@@ -68,6 +68,7 @@
                                 </div>
                             </div>
 
+                            <!-- Các trường địa chỉ giao hàng -->
                             <div class="checkout__input">
                                 <p>Province<span>*</span></p>
                                 <input type="text" name="Province" required>
@@ -86,24 +87,13 @@
                             </div>
 
                             <!-- Phương thức vận chuyển -->
-
-                            <div class="checkout__input__checkbox">
-                                <p style="font-weight:900; font-size: 18px ; font-family: Roboto,sans-serif;">Shipping method<span>*</span></p>
-                                <label>
-                                    <input type="checkbox" id="FreeShipping" name="SelectedShippingMethods" value="FreeShipping" data-shipping-fee="0.00" onchange="updateShippingFee()">
-                                    Free Shipping
-                                    <span class="checkmark"></span>
-                                </label>
+                            <div class="checkout__input">
+                                <p>Shipping Method<span>*</span></p>
+                                <select id="ShippingMethod" name="ShippingMethod" required onchange="updateShippingFee()">
+                                    <option value="FreeShipping" data-shipping-fee="0.00">Free Shipping</option>
+                                    <option value="Express" data-shipping-fee="10.00">Express</option>
+                                </select>
                             </div>
-                            <div class="checkout__input__checkbox">
-                                <label>
-                                    <input type="checkbox" id="Express" name="SelectedShippingMethods" value="Express" data-shipping-fee="10.00" onchange="updateShippingFee()">
-                                    Express
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-
-
                         </div>
 
                         <div class="col-lg-4 col-md-6">
