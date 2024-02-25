@@ -1,7 +1,11 @@
-﻿@{
+﻿@model List<OgainShop.Models.Order>
+@{
     ViewData["Title"] = "Dashboard";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+
+
+
 <main class="app-content">
     <div class="row">
         <div class="col-md-12">
@@ -23,7 +27,7 @@
                         <i class='icon bx bxs-user-account fa-3x'></i>
                         <div class="info">
                             <h4>Tổng khách hàng</h4>
-                            <p><b>56 khách hàng</b></p>
+                            <p><b>@ViewBag.totalUsers khách hàng</b></p>
                             <p class="info-tong">Tổng số khách hàng được quản lý.</p>
                         </div>
                     </div>
@@ -34,7 +38,7 @@
                         <i class='icon bx bxs-data fa-3x'></i>
                         <div class="info">
                             <h4>Tổng sản phẩm</h4>
-                            <p><b>1850 sản phẩm</b></p>
+                            <p><b>@ViewBag.TotalProducts sản phẩm</b></p>
                             <p class="info-tong">Tổng số sản phẩm được quản lý.</p>
                         </div>
                     </div>
@@ -45,7 +49,7 @@
                         <i class='icon bx bxs-shopping-bags fa-3x'></i>
                         <div class="info">
                             <h4>Tổng đơn hàng</h4>
-                            <p><b>247 đơn hàng</b></p>
+                            <p><b>@ViewBag.TotalOrders đơn hàng</b></p>
                             <p class="info-tong">Tổng số hóa đơn bán hàng trong tháng.</p>
                         </div>
                     </div>
@@ -56,7 +60,7 @@
                         <i class='icon bx bxs-error-alt fa-3x'></i>
                         <div class="info">
                             <h4>Sắp hết hàng</h4>
-                            <p><b>4 sản phẩm</b></p>
+                            <p><b>@ViewBag.ProductsRunningOutOfStock sản phẩm</b></p>
                             <p class="info-tong">Số sản phẩm cảnh báo hết cần nhập thêm.</p>
                         </div>
                     </div>
@@ -76,38 +80,35 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>AL3947</td>
-                                        <td>Phạm Thị Ngọc</td>
-                                        <td>
-                                            19.770.000 đ
-                                        </td>
-                                        <td><span class="badge bg-info">Chờ xử lý</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>ER3835</td>
-                                        <td>Nguyễn Thị Mỹ Yến</td>
-                                        <td>
-                                            16.770.000 đ
-                                        </td>
-                                        <td><span class="badge bg-warning">Đang vận chuyển</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>MD0837</td>
-                                        <td>Triệu Thanh Phú</td>
-                                        <td>
-                                            9.400.000 đ
-                                        </td>
-                                        <td><span class="badge bg-success">Đã hoàn thành</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>MT9835</td>
-                                        <td>Đặng Hoàng Phúc	</td>
-                                        <td>
-                                            40.650.000 đ
-                                        </td>
-                                        <td><span class="badge bg-danger">Đã hủy	</span></td>
-                                    </tr>
+                                    @foreach (var order in ViewBag.Orders) // Lặp qua danh sách đơn hàng đã được truyền từ controller
+                                    {
+                                        <tr>
+                                            <td>@order.OrderId</td>
+                                            <td>@order.FullName</td>
+                                            <td>@order.TotalAmount</td>
+                                            <td>
+                                                @if (order.Status == "Chờ xử lý")
+                                                {
+                                                    <span class="badge bg-info">@order.Status</span>
+                                                }
+                                                else if (order.Status == "Đang vận chuyển")
+                                                {
+                                                    <span class="badge bg-warning">@order.Status</span>
+                                                }
+                                                else if (order.Status == "Đã hoàn thành")
+                                                {
+                                                    <span class="badge bg-success">@order.Status</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-danger">@order.Status</span>
+                                                }
+                                          
+                                            </td>
+
+
+                                        </tr>
+                                    }
                                 </tbody>
                             </table>
                         </div>
@@ -125,35 +126,20 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Tên khách hàng</th>
-                                        <th>Ngày sinh</th>
-                                        <th>Số điện thoại</th>
+                                        <th>Email</th>
+                                       
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>#183</td>
-                                        <td>Hột vịt muối</td>
-                                        <td>21/7/1992</td>
-                                        <td><span class="tag tag-success">0921387221</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>#219</td>
-                                        <td>Bánh tráng trộn</td>
-                                        <td>30/4/1975</td>
-                                        <td><span class="tag tag-warning">0912376352</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>#627</td>
-                                        <td>Cút rang bơ</td>
-                                        <td>12/3/1999</td>
-                                        <td><span class="tag tag-primary">01287326654</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>#175</td>
-                                        <td>Hủ tiếu nam vang</td>
-                                        <td>4/12/20000</td>
-                                        <td><span class="tag tag-danger">0912376763</span></td>
-                                    </tr>
+                                    @foreach (var user in ViewBag.LatestCustomers)
+                                    {
+                                        <tr>
+                                            <td>@user.UserId</td>
+                                            <td>@user.Username</td>
+                                            <td>@user.Email</td>
+                                         
+                                        </tr>
+                                    }
                                 </tbody>
                             </table>
                         </div>
@@ -199,6 +185,7 @@
         </p>
     </div>
 </main>
+
 <script src="js/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
 <script src="js/popper.min.js"></script>
