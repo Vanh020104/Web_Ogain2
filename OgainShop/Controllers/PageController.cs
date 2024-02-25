@@ -18,11 +18,14 @@ namespace OgainShop.Controllers
     {
         private readonly OgainShopContext db;
         private readonly IConfiguration _configuration;
+        private readonly IWebHostEnvironment _env;
 
-        public PageController(OgainShopContext context, IConfiguration configuration) : base(context)
+
+        public PageController(OgainShopContext context, IConfiguration configuration, IWebHostEnvironment env) : base(context)
         {
             db = context;
             _configuration = configuration;
+            _env = env;
         }
         //Home
         [Authentication]
@@ -310,6 +313,10 @@ namespace OgainShop.Controllers
                         // Xóa giỏ hàng sau khi đã đặt hàng thành công
                         HttpContext.Session.Remove("cart");
 
+                        // Gửi email hóa đơn
+                        SendInvoiceEmail(model.Email, order);
+
+
                         // Thực hiện các bước xử lý thanh toán khác (nếu cần)
 
                         return RedirectToAction("Thankyou", "Page", new { orderId = order.OrderId, totalAmount = order.TotalAmount });
@@ -332,6 +339,43 @@ namespace OgainShop.Controllers
                     return 10.00M; // Phí vận chuyển cho Express
                 default:
                     return 0.00M;
+            }
+        }
+
+        private async Task SendInvoiceEmail(string recipientEmail, Order order)
+        {
+            // Tạo nội dung email từ mẫu Razor
+            string emailTemplatePath = _env.ContentRootPath + "/Views/Email/SendEmail.cshtml";
+            string emailContent = await System.IO.File.ReadAllTextAsync(emailTemplatePath);
+
+            string smtpServer = _configuration["EmailSettings:SmtpServer"];
+            int port = _configuration.GetValue<int>("EmailSettings:Port");
+            string username = _configuration["EmailSettings:Username"];
+            string password = _configuration["EmailSettings:Password"];
+
+            using (var client = new SmtpClient(smtpServer))
+            {
+                client.Port = port;
+                client.Credentials = new System.Net.NetworkCredential(username, password);
+                client.EnableSsl = true;
+
+                var message = new MailMessage(username, recipientEmail)
+                {
+                    Subject = "Your Order Invoice",
+                    Body = emailContent, // Nội dung email từ mẫu Razor
+                    IsBodyHtml = true
+                };
+
+
+                try
+                {
+                    await client.SendMailAsync(message);
+                    ViewBag.Message = "Email sent successfully";
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Error = $"Failed to send email: {ex.Message}";
+                }
             }
         }
 
