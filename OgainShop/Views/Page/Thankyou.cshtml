@@ -48,7 +48,7 @@
                         <th>Name</th>
                         <th>Price</th>
                         <th>Qty</th>
-                        <th>Total</th>
+                        <th>Subtotal</th>
                         </thead>
                         <tbody>
                             @foreach (var orderProduct in ViewBag.OrderProducts)
@@ -59,12 +59,21 @@
                                     <td>@orderProduct.Product.ProductName</td>
                                     <td>@orderProduct.Product.Price</td>
                                     <td>@orderProduct.Qty</td>
-                                    <td>@(orderProduct.Product.Price * orderProduct.Qty)</td>
+                                    <td>$@ViewBag.Subtotal</td>
                                 </tr>
                             }
                         </tbody>
                     </table>
-                    <p class="total-amount">Total Amount: $@ViewBag.TotalAmount</p>
+                    <!-- Hiển thị thông tin địa chỉ và phí ship nếu là Express -->
+                    @if (ViewBag.IsExpressShipping)
+                    {
+                        <div>
+                            <h3>Shipping Information:</h3>
+                            <p>Shipping Address: @ViewBag.Order.GetFullAddress()</p>
+                            <p>Shipping Fee: $10</p>
+                        </div>
+                    }
+                    <p class="total-amount">Total Amount: @ViewBag.TotalAmount</p>
                 </div>
             </div>
         </div>

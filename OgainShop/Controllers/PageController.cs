@@ -296,6 +296,13 @@ namespace OgainShop.Controllers
                             };
 
                             _context.OrderProduct.Add(orderProduct);
+                            // Giảm số lượng sản phẩm trong bảng Product
+                            var product = _context.Product.Find(cartItem.ProductId);
+                            if (product != null)
+                            {
+                                product.Qty -= cartItem.Qty;
+                                // Kiểm tra nếu muốn xử lý các điều kiện khác khi số lượng dưới 0, thì thêm điều kiện ở đây
+                            }
                         }
 
                         _context.SaveChanges();
@@ -345,12 +352,20 @@ namespace OgainShop.Controllers
             }
 
             // Tính tổng số tiền đơn hàng
-            decimal totalAmount = order.OrderProducts.Sum(op => op.Product.Price * op.Qty);
+            decimal Subtotal = order.OrderProducts.Sum(op => op.Product.Price * op.Qty);
+            decimal totalAmount = order.TotalAmount;
 
+            // Kiểm tra trạng thái Shipping Method từ SQL
+            bool isExpressShipping = _context.Order.Any(o => o.OrderId == orderId && o.ShippingMethod == "Express");
+            // Lấy địa chỉ từ đối tượng Order
+            string fullAddress = order.GetFullAddress();
             // Truyền thông tin đơn hàng và các thông tin cần thiết vào ViewBag
             ViewBag.Order = order;
             ViewBag.OrderProducts = order.OrderProducts;
+            ViewBag.Subtotal = Subtotal;
             ViewBag.TotalAmount = totalAmount;
+            ViewBag.IsExpressShipping = isExpressShipping;
+            ViewBag.FullAddress = fullAddress;
             ViewBag.OrderId = orderId;
             return View();
         }
