@@ -305,7 +305,7 @@ namespace OgainShop.Controllers
 
                         // Thực hiện các bước xử lý thanh toán khác (nếu cần)
 
-                        return RedirectToAction("Thankyou", "Page");
+                        return RedirectToAction("Thankyou", "Page", new { orderId = order.OrderId, totalAmount = order.TotalAmount });
                     }
                 }
             }
@@ -330,10 +330,28 @@ namespace OgainShop.Controllers
 
         // thank you
         [Authentication]
-        public async Task<IActionResult> Thankyou()
+        public IActionResult Thankyou(int orderId)
         {
-            // kế thừa các logic chung từ BaseController
-            await SetCommonViewData();
+            // Lấy thông tin đơn hàng từ cơ sở dữ liệu
+            var order = _context.Order
+                .Include(o => o.OrderProducts) // Nạp thông tin về các sản phẩm trong đơn hàng
+                    .ThenInclude(op => op.Product) // Nạp thông tin sản phẩm từ bảng Product
+                .FirstOrDefault(o => o.OrderId == orderId);
+
+            if (order == null)
+            {
+                // Xử lý trường hợp không tìm thấy đơn hàng
+                return NotFound();
+            }
+
+            // Tính tổng số tiền đơn hàng
+            decimal totalAmount = order.OrderProducts.Sum(op => op.Product.Price * op.Qty);
+
+            // Truyền thông tin đơn hàng và các thông tin cần thiết vào ViewBag
+            ViewBag.Order = order;
+            ViewBag.OrderProducts = order.OrderProducts;
+            ViewBag.TotalAmount = totalAmount;
+            ViewBag.OrderId = orderId;
             return View();
         }
 
