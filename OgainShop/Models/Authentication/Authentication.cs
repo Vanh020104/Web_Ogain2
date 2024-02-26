@@ -34,16 +34,16 @@ namespace OgainShop.Models.Authentication
                     // Nếu người dùng có vai trò là "User" cố gắng truy cập phần "Admin", trả về mã lỗi 404
                     context.Result = new NotFoundResult();
                 }
-                else if (userRole == "User" && context.RouteData.Values["Controller"].ToString() != "Page" && context.RouteData.Values["Action"].ToString() != "home")
-                {
-                    context.Result = new RedirectToRouteResult(
-                        new RouteValueDictionary
-                        {
-                            {"Controller","Page"},
-                            {"Action","home" }
-                        });
+                //else if (userRole == "User" && context.RouteData.Values["Controller"].ToString() != "Page" && context.RouteData.Values["Action"].ToString() != "home")
+                //{
+                //    context.Result = new RedirectToRouteResult(
+                //        new RouteValueDictionary
+                //        {
+                //            {"Controller","Page"},
+                //            {"Action","home" }
+                //        });
                 }
             }
         }
     }
-}
+

@@ -1,4 +1,6 @@
-﻿using OgainShop.Data;
+﻿using Microsoft.AspNetCore.Mvc;
+using OgainShop.Models;
+using OgainShop.Data;
 using Microsoft.AspNetCore.Http;
 using OgainShop.Models.Authentication;
 using Microsoft.EntityFrameworkCore;
@@ -9,7 +11,6 @@ using OgainShop.Heplers;
 using System.Threading.Tasks;
 using System.Net;
 using System.Net.Mail;
-using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
