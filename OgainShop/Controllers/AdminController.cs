@@ -6,6 +6,8 @@ using OgainShop.Models;
 using OgainShop.Models.Authentication;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Net.NetworkInformation;
+using System.Globalization;
+using OgainShop.Models;
 namespace OgainShop.Controllers
 {
 
@@ -219,7 +221,7 @@ namespace OgainShop.Controllers
                 // Lọc theo từ khóa tìm kiếm trong tên sản phẩm hoặc mô tả
                 products = products.Where(o => o.ProductName.Contains(search)
                                             || o.Description.Contains(search));
-                                       
+
             }
             ViewBag.Categories = categories;
             // Trả về view với danh sách sản phẩm đã lọc
@@ -365,28 +367,80 @@ namespace OgainShop.Controllers
             return RedirectToAction("Product", "Admin");
         }
 
+        [Authentication]
+        public async Task<IActionResult> revenue()
+        {
+            // Lấy danh sách sản phẩm
+            var productList = await _context.Product.ToListAsync();
 
+            // Lấy danh sách người dùng
+            var userList = await _context.User.ToListAsync();
 
+            // Lấy danh sách đơn hàng từ cơ sở dữ liệu
+            var orders = await _context.Order.ToListAsync();
 
+            // Gán danh sách sản phẩm và danh sách người dùng vào ViewBag
+            ViewBag.UserList = userList;
+            ViewBag.OrderList = orders;
+
+            // Trả về View RevenueManagement/revenue với danh sách sản phẩm và đơn hàng đã được gán vào ViewBag
+            return View("RevenueManagement/revenue", productList);
+        }
 
 
         [Authentication]
-        // Dashboard
+        public async Task<IActionResult> ProductOutOfStock()
+        {
+            // Lấy danh sách các sản phẩm có số lượng bằng 0
+            var outOfStockProducts = await _context.Product.Where(p => p.Qty == 0).ToListAsync();
+
+            // Lấy danh sách các người dùng
+            var userList = await _context.User.ToListAsync();
+
+            // Truyền danh sách sản phẩm và danh sách người dùng vào view thông qua ViewData
+            ViewData["OutOfStockProducts"] = outOfStockProducts;
+            ViewData["UserList"] = userList;
+
+            // Trả về View ProductOutOfStock với dữ liệu đã được truyền
+            return View("ProductManagement/ProductOutOfStock");
+        }
+
+
+
         public IActionResult dashboard()
         {
+            var latestCustomers = _context.User.OrderByDescending(u => u.UserId).Take(3).ToList();
+
+            // Truyền thông tin của 3 người dùng mới nhất sang view
+            ViewBag.LatestCustomers = latestCustomers;
+
+
+            var orders = _context.Order.ToList(); // Truy vấn dữ liệu từ bảng Order
+
+            ViewBag.Orders = orders;
+
+            // tong user
+            int totalUsers = _context.User.Count();
+            // Tính tổng số sản phẩm
+            int totalProducts = _context.Product.Count();
+
+            // Tính tổng số đơn hàng
+            int totalOrders = _context.Order.Count();
+
+            // Tính số sản phẩm sắp hết hàng (số lượng dưới 3)
+            int productsRunningOutOfStock = _context.Product.Where(p => p.Qty < 3).Count();
+
+            ViewBag.TotalUsers = totalUsers;
+            ViewBag.TotalProducts = totalProducts;
+            ViewBag.TotalOrders = totalOrders;
+            ViewBag.ProductsRunningOutOfStock = productsRunningOutOfStock;
+
             return View("DashboardAdmin/dashboard");
         }
 
 
 
 
-
-        [Authentication]
-        // Revenue
-        public IActionResult revenue()
-        {
-            return View("RevenueManagement/revenue");
-        }
 
     }
 }
