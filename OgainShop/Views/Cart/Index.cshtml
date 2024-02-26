@@ -93,7 +93,9 @@
                                             </td>
                                             <td class="shoping__cart__item__close">
                                                 <form asp-action="RemoveFromCart" asp-route-id="@item.ProductId">
-                                                    <button type="submit" class="btn btn-danger">Remove</button>
+                                                    <button type="submit" class="btn btn-danger">
+                                                        <i class="fa-solid fa-trash-can"></i>
+                                                    </button>
                                                 </form>
                                             </td>
                                         </tr>

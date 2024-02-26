@@ -62,7 +62,9 @@
                                             </td>
                                             <td class="shoping__cart__item__close">
                                                 <form method="post" asp-controller="Favorite" asp-action="RemoveFromFavorites" asp-route-favoriteId="@favorite.FavoriteId">
-                                                    <button type="submit" class="btn btn-danger">Remove</button>
+                                                    <button type="submit" class="btn btn-danger">
+                                                        <i class="fa-solid fa-trash-can"></i>
+                                                    </button>
                                                 </form>
                                             </td>
                                         </tr>
