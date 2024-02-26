@@ -200,11 +200,11 @@
         <div class="header">
             <h1>Thank You!</h1>
             <p>
-                Your order #<strong>123456</strong> has been successfully placed.<br>
-                We sent an email to <strong>example@example.com</strong> with your order confirmation and receipt. If the email hasn't arrived<br>
+                Your order #<strong>{OrderNumber}</strong> has been successfully placed.<br>
+                We sent an email to <strong>{CustomerEmail}</strong> with your order confirmation and receipt. If the email hasn't arrived<br>
                 within two minutes, please check your spam folder to see if the email was routed there.
             </p>
-            <p><span style="margin-right: 5px;"><i class="fa-regular fa-clock"></i></span><strong>Time Placed</strong>: 16/10/2023 16:12 CEST</p>
+            <p><span style="margin-right: 5px;"><i class="fa-regular fa-clock"></i></span><strong>Time Placed</strong>: {OrderDate}</p>
         </div>
         <div class="row-container">
             <div class="col-md-4 mb-4">
@@ -212,10 +212,10 @@
                     <i class="fas fa-map-marked-alt fa-3x mx-auto mt-3"></i>
                     <div class="card-body text-center">
                         <strong style="font-size: 23px;" class="card-title">Order Info</strong>
-                        <p class="card-text">Order number: 123456</p>
-                        <p class="card-text">Date: 01/01/2024</p>
-                        <p class="card-text">Payment method: Credit Card</p>
-                        <p class="card-text">Status: <span>Delivered</span></p>
+                        <p class="card-text">Order number:{OrderNumber}</p>
+                        <p class="card-text">Date: {OrderDate}</p>
+                        <p class="card-text">Payment method: {PaymentMethod}</p>
+                        <p class="card-text">Status: <span>{Status}</span></p>
                     </div>
                 </div>
             </div>
@@ -225,9 +225,9 @@
                     <i class="fa-regular fa-credit-card fa-3x mx-auto mt-3"></i>
                     <div class="card-body text-center">
                         <strong style="font-size: 23px;" class="card-title">Customer Information</strong>
-                        <p class="card-text">Full Name: John Doe</p>
-                        <p class="card-text">Telephone: 1234567890</p>
-                        <p class="card-text">Email: example@example.com</p>
+                        <p class="card-text">Full Name: {CustomerName}</p>
+                        <p class="card-text">Telephone: {Telephone}</p>
+                        <p class="card-text">Email: {CustomerEmail}</p>
                     </div>
                 </div>
             </div>
@@ -237,8 +237,8 @@
                     <i class="fa-solid fa-truck-moving fa-3x mx-auto mt-3"></i>
                     <div class="card-body text-center">
                         <strong style="font-size: 23px;" class="card-title">Shipping</strong>
-                        <p class="card-text">Shipping method: Express</p>
-                        <p class="card-text">Address: 123 Main St, City, State, Zip</p>
+                        <p class="card-text">Shipping method: {ShippingMethod}</p>
+                        <p class="card-text">Address:{ShippingAddress}</p>
                     </div>
                 </div>
             </div>
@@ -247,36 +247,15 @@
         <div class="Order">
             <div class="Order_list">
                 <h4>Order List</h4>
-                <div class="Order_list_product">
-                    <div class="Order_list_product1">
-                        <h5>Product Name 1</h5>
-                    </div>
-                    <div class="quantity">
-                        <p>Qty: 2</p>
-                    </div>
-                    <div class="total">
-                        <p>$50.00</p>
-                    </div>
-                </div>
-                <div class="Order_list_product">
-                    <div class="Order_list_product1">
-                        <h5>Product Name 2</h5>
-                    </div>
-                    <div class="quantity">
-                        <p>Qty: 1</p>
-                    </div>
-                    <div class="total">
-                        <p>$25.00</p>
-                    </div>
-                </div>
+                {OrderProducts}
             </div>
 
             <div class="cart__total">
                 <h4>Order Summary</h4>
                 <ul>
-                    <li>Subtotal <span>$75.00</span></li>
-                    <li class="vat">Tax <span>10%</span></li>
-                    <li>Total <span>$82.50</span></li>
+                    <li>Subtotal <span>${Subtotal}</span></li>
+                    <li class="vat">Shipping fee <span>${ShippingFee}</span></li>
+                    <li>Total <span>${TotalAmount}</span></li>
                 </ul>
             </div>
         </div>

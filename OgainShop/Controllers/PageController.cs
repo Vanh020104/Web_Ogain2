@@ -272,6 +272,9 @@ namespace OgainShop.Controllers
 
                     // Lấy giỏ hàng từ Session
                     List<CartItem> cartItems = HttpContext.Session.Get<List<CartItem>>("cart");
+                    List<OrderProduct> orderProducts = new List<OrderProduct>();
+
+
 
                     // Kiểm tra xem giỏ hàng có dữ liệu không
                     if (cartItems != null && cartItems.Count > 0)
@@ -306,15 +309,18 @@ namespace OgainShop.Controllers
                                 product.Qty -= cartItem.Qty;
                                 // Kiểm tra nếu muốn xử lý các điều kiện khác khi số lượng dưới 0, thì thêm điều kiện ở đây
                             }
+                            // Thêm thông tin sản phẩm vào danh sách để gửi qua email
+                            orderProducts.Add(orderProduct);
                         }
-
+                       
                         _context.SaveChanges();
 
                         // Xóa giỏ hàng sau khi đã đặt hàng thành công
                         HttpContext.Session.Remove("cart");
 
-                        // Gửi email hóa đơn
-                        SendInvoiceEmail(model.Email, order);
+                        SendInvoiceEmail(model.Email, order, orderProducts);
+
+
 
 
                         // Thực hiện các bước xử lý thanh toán khác (nếu cần)
@@ -341,15 +347,50 @@ namespace OgainShop.Controllers
                     return 0.00M;
             }
         }
-
-        private async Task SendInvoiceEmail(string recipientEmail, Order order)
+        private string GenerateEmailContent(Order order, List<OrderProduct> orderProducts)
         {
-            // Tạo nội dung email từ mẫu Razor
+            // Đọc nội dung mẫu email từ file
             string emailTemplatePath = _env.ContentRootPath + "/Views/Email/SendEmail.cshtml";
-            string emailContent = await System.IO.File.ReadAllTextAsync(emailTemplatePath);
+            string emailContent = System.IO.File.ReadAllText(emailTemplatePath);
+
+            // Thay thế các placeholder trong mẫu email bằng thông tin đơn hàng
+            emailContent = emailContent.Replace("{OrderNumber}", order.OrderId.ToString());
+            emailContent = emailContent.Replace("{OrderDate}", order.OrderDate.ToString("dd/MM/yyyy HH:mm"));
+            emailContent = emailContent.Replace("{CustomerName}", order.FullName);
+            emailContent = emailContent.Replace("{CustomerEmail}", order.Email);
+            emailContent = emailContent.Replace("{ShippingMethod}", order.ShippingMethod);
+            emailContent = emailContent.Replace("{PaymentMethod}", order.PaymentMethod);
+            emailContent = emailContent.Replace("{Status}", order.Status);
+            emailContent = emailContent.Replace("{Telephone}", order.Telephone);
+            emailContent = emailContent.Replace("{ShippingAddress}", order.GetFullAddress());
+
+            // Thêm thông tin sản phẩm vào email content
+            string productList = "";
+    foreach (var ordProduct in order.OrderProducts) // Đặt tên biến khác đây
+    {
+        productList += $"<div class='Order_list_product'><div class='Order_list_product1'><h5>{ordProduct.Product.ProductName}</h5></div><div class='quantity'><p>Qty: {ordProduct.Qty}</p></div><div class='total'><p>${ordProduct.Price}</p></div></div>";
+    }
+    emailContent = emailContent.Replace("{OrderProducts}", productList);
+
+            // Thêm tổng đơn hàng vào email content
+            decimal subtotal = order.OrderProducts.Sum(op => op.Price * op.Qty);
+            decimal shippingFee = order.ShippingMethod == "Express" ? 10.00m : 20.00m; // Assume shipping fee is $10 for Express, $20 for other methods
+            decimal totalAmount = subtotal + shippingFee;
+            emailContent = emailContent.Replace("{Subtotal}", subtotal.ToString("0.00"));
+            emailContent = emailContent.Replace("{ShippingFee}", shippingFee.ToString("0.00"));
+            emailContent = emailContent.Replace("{TotalAmount}", totalAmount.ToString("0.00"));
+
+            return emailContent;
+        }
+
+
+            private async Task SendInvoiceEmail(string recipientEmail, Order order, List<OrderProduct> orderProducts)
+        {
+            string emailContent = GenerateEmailContent(order, orderProducts);
 
             string smtpServer = _configuration["EmailSettings:SmtpServer"];
-            int port = _configuration.GetValue<int>("EmailSettings:Port");
+            int port = _configuration.GetValue<int>
+           ("EmailSettings:Port");
             string username = _configuration["EmailSettings:Username"];
             string password = _configuration["EmailSettings:Password"];
 
@@ -378,6 +419,9 @@ namespace OgainShop.Controllers
                 }
             }
         }
+
+
+
         //thankyou
         [Authentication]
         public IActionResult Thankyou(int orderId)
