@@ -69,8 +69,8 @@
                     {
                         <div>
                             <h3>Shipping Information:</h3>
-                            <p>Shipping Address: @ViewBag.Order.GetFullAddress()</p>
-                            <p>Shipping Fee: $10</p>
+                            <p>Shipping Address: @ViewBag.FullAddress</p>
+                            <p>Shipping Fee: $@(ViewBag.Order.ShippingMethod == "Express" ? 10.00 : 20.00)</p>
                         </div>
                     }
                     <p class="total-amount">Total Amount: @ViewBag.TotalAmount</p>

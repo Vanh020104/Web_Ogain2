@@ -333,8 +333,8 @@ namespace OgainShop.Controllers
         {
             switch (shippingMethod)
             {
-                case "FreeShipping":
-                    return 0.00M; // Phí vận chuyển cho Free Shipping
+                case "FastExpress":
+                    return 20.00M; // Phí vận chuyển cho FastExpress 
                 case "Express":
                     return 10.00M; // Phí vận chuyển cho Express
                 default:
@@ -378,15 +378,14 @@ namespace OgainShop.Controllers
                 }
             }
         }
-
-        // thank you
+        //thankyou
         [Authentication]
         public IActionResult Thankyou(int orderId)
         {
             // Lấy thông tin đơn hàng từ cơ sở dữ liệu
             var order = _context.Order
-                .Include(o => o.OrderProducts) // Nạp thông tin về các sản phẩm trong đơn hàng
-                    .ThenInclude(op => op.Product) // Nạp thông tin sản phẩm từ bảng Product
+                .Include(o => o.OrderProducts)
+                .ThenInclude(op => op.Product)
                 .FirstOrDefault(o => o.OrderId == orderId);
 
             if (order == null)
@@ -396,21 +395,24 @@ namespace OgainShop.Controllers
             }
 
             // Tính tổng số tiền đơn hàng
-            decimal Subtotal = order.OrderProducts.Sum(op => op.Product.Price * op.Qty);
+            decimal subtotal = order.OrderProducts.Sum(op => op.Product.Price * op.Qty);
             decimal totalAmount = order.TotalAmount;
 
             // Kiểm tra trạng thái Shipping Method từ SQL
-            bool isExpressShipping = _context.Order.Any(o => o.OrderId == orderId && o.ShippingMethod == "Express");
+            bool isExpressShipping = _context.Order.Any(o => o.OrderId == orderId && (o.ShippingMethod == "Express" || o.ShippingMethod == "FastExpress"));
+
             // Lấy địa chỉ từ đối tượng Order
             string fullAddress = order.GetFullAddress();
+
             // Truyền thông tin đơn hàng và các thông tin cần thiết vào ViewBag
             ViewBag.Order = order;
             ViewBag.OrderProducts = order.OrderProducts;
-            ViewBag.Subtotal = Subtotal;
-            ViewBag.TotalAmount = totalAmount;
+            ViewBag.Subtotal = subtotal;
+            ViewBag.TotalAmount = order.TotalAmount;
             ViewBag.IsExpressShipping = isExpressShipping;
             ViewBag.FullAddress = fullAddress;
             ViewBag.OrderId = orderId;
+
             return View();
         }
 
