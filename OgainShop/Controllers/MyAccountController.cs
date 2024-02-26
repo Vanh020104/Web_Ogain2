@@ -49,6 +49,30 @@ namespace OgainShop.Controllers
             return View(user);
         }
 
+        public IActionResult OrderDetail(int? id)
+        {
+
+            if (id == null)
+            {
+                return NotFound(); // Trả về lỗi 404 nếu không có ID đơn hàng
+            }
+
+            // Lấy thông tin đơn hàng từ cơ sở dữ liệu dựa trên id và nạp thông tin User và OrderProducts
+            var order = db.Order
+                .Include(o => o.User)
+                .Include(o => o.OrderProducts)
+                    .ThenInclude(op => op.Product) // Nạp thông tin sản phẩm cho từng OrderProduct
+                .FirstOrDefault(o => o.OrderId == id);
+
+            if (order == null)
+            {
+                return NotFound(); // Trả về lỗi 404 nếu không tìm thấy đơn hàng
+            }
+
+            return View(order);
+        }
+
+
         [Authentication]
         public async Task<IActionResult> ChangePassword()
         {
