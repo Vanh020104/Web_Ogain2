@@ -257,7 +257,7 @@ namespace OgainShop.Controllers
                     {
                         UserId = userId,
                         OrderDate = DateTime.Now,
-                        Status = "Pending",
+                        Status = "pending",
                         IsPaid = "Chua thanh toan",
                         Province = model.Province,
                         District = model.District,

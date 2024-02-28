@@ -150,10 +150,10 @@ namespace OgainShop.Controllers
                 return NotFound();
             }
             // Logic phân trang ở đây
-            var totalOrders = user.Orders.Count(o => o.Status == "Pending");
+            var totalOrders = user.Orders.Count(o => o.Status == "pending");
             var totalPages = (int)Math.Ceiling((double)totalOrders / pageSize);
             user.Orders = user.Orders
-                  .Where(o => o.Status == "Pending")
+                  .Where(o => o.Status == "pending")
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
               .ToList();
