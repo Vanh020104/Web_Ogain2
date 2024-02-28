@@ -56,12 +56,12 @@
     <style>
     </style>
     <div class="content-top1 d-flex">
-        <a style="color:#7fad39 ;font-weight: bold" href="/MyAccount/MyOrder" class="btn">All</a>
+        <a href="/MyAccount/MyOrder" class="btn">All</a>
         <a href="/MyAccount/OrderPending" class="btn">Pending</a>
         <a href="/MyAccount/OrderConfirmed" class="btn">Confirmed</a>
         <a href="/MyAccount/OrderShipping" class="btn">Shipping</a>
         <a href="/MyAccount/OrderShipped" class="btn">Shipped</a>
-        <a href="/MyAccount/OrderComplete" class="btn">Complete</a>
+        <a style="color:#7fad39 ;font-weight: bold" href="/MyAccount/OrderComplete" class="btn">Complete</a>
         <a type="button" href="/MyAccount/OrderCancel" class="btn cancel-btn">Cancel</a>
     </div>
 
@@ -107,10 +107,10 @@
                 </tr>
                 }
         </tbody>
-
     </table>
-    <div>
-    </div>
+
+
+
 
 </div>
 <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px; margin-bottom: 20px;">
@@ -118,12 +118,12 @@
             @for (int i = 1; i <= ViewBag.TotalPages; i++)
             {
             <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
-                <a class="page-link" href="@Url.Action("MyOrder", new { page = i })">@i</a>
+                <a class="page-link" href="@Url.Action("OrderComplete", new { page = i })">@i</a>
             </li>
             }
     </ul>
 </div>
-
+    </div>
 <style>
 
     .content-top1 {

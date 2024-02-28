@@ -27,28 +27,41 @@ namespace OgainShop.Controllers
             _configuration = configuration;
         }
         [Authentication]
-        public async Task<IActionResult> MyOrder()
+        public async Task<IActionResult> MyOrder(int page = 1, int pageSize = 5)
         {
-            // kế thừa các logic chung từ BaseController
+            // Kế thừa các logic chung từ BaseController
             await SetCommonViewData();
+
             // Lấy userId từ session
             int userId = Convert.ToInt32(HttpContext.Session.GetString("UserId"));
 
             // Truy vấn database để lấy thông tin người dùng có đơn hàng
             var user = db.User
-             .Include(u => u.Orders)
-             .ThenInclude(o => o.OrderProducts)
-             .FirstOrDefault(u => u.UserId == userId);
+                .Include(u => u.Orders)
+                .ThenInclude(o => o.OrderProducts)
+                .FirstOrDefault(u => u.UserId == userId);
 
             if (user == null)
             {
                 return NotFound();
             }
 
-            // Trả dữ liệu người dùng có đơn hàng cho view
+            // Logic phân trang ở đây
+            var totalOrders = user.Orders.Count;
+            var totalPages = (int)Math.Ceiling((double)totalOrders / pageSize);
+
+            user.Orders = user.Orders
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            ViewBag.TotalPages = totalPages;
+            ViewBag.CurrentPage = page;
+
+
+            // Trả dữ liệu danh sách đơn hàng cho view
             return View(user);
         }
-
         public IActionResult OrderDetail(int? id)
         {
 
@@ -71,6 +84,271 @@ namespace OgainShop.Controllers
 
             return View(order);
         }
+
+
+
+        [Authentication]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdateStatus(int id, string status, string returnUrl)
+        {
+            var order = await _context.Order
+                .Include(o => o.OrderProducts)
+                    .ThenInclude(op => op.Product)
+                .FirstOrDefaultAsync(o => o.OrderId == id);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            if (status.ToLower() == "cancel" && order.Status.ToLower() == "pending")
+            {
+                // Cập nhật trạng thái cho đơn hàng
+                order.Status = status;
+
+                // Trả lại số lượng sản phẩm đã mua
+                foreach (var orderProduct in order.OrderProducts)
+                {
+                    // Kiểm tra xem số lượng trả lại có vượt quá số lượng đã mua không
+                    int quantityToReturn = Math.Min(orderProduct.Qty, orderProduct.Product.Qty);
+
+                    // Cập nhật số lượng trong kho
+                    orderProduct.Product.Qty += quantityToReturn;
+
+                }
+
+                _context.Update(order);
+                await _context.SaveChangesAsync();
+            }
+            // Cập nhật trạng thái cho đơn hàng
+            order.Status = status;
+            _context.Update(order);
+            await _context.SaveChangesAsync();
+
+
+            // Chuyển hướng đến returnUrl
+            return Redirect(returnUrl);
+        }
+        [Authentication]
+        public async Task<IActionResult> OrderPending(int page = 1, int pageSize = 5)
+        {
+            // Kế thừa các logic chung từ BaseController
+            await SetCommonViewData();
+
+            // Lấy userId từ session
+            int userId = Convert.ToInt32(HttpContext.Session.GetString("UserId"));
+
+            // Truy vấn database để lấy thông tin người dùng có đơn hàng có trạng thái là "Pending"
+            var user = db.User
+                .Include(u => u.Orders)
+                    .ThenInclude(o => o.OrderProducts)
+                .FirstOrDefault(u => u.UserId == userId);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+            // Logic phân trang ở đây
+            var totalOrders = user.Orders.Count(o => o.Status == "Pending");
+            var totalPages = (int)Math.Ceiling((double)totalOrders / pageSize);
+            user.Orders = user.Orders
+                  .Where(o => o.Status == "Pending")
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+              .ToList();
+
+            ViewBag.TotalPages = totalPages;
+            ViewBag.CurrentPage = page;
+
+
+
+            // Trả dữ liệu người dùng có đơn hàng Pending cho view
+            return View(user);
+        }
+
+        [Authentication]
+        public async Task<IActionResult> OrderConfirmed(int page = 1, int pageSize = 5)
+        {
+            // Kế thừa các logic chung từ BaseController
+            await SetCommonViewData();
+
+            // Lấy userId từ session
+            int userId = Convert.ToInt32(HttpContext.Session.GetString("UserId"));
+
+            // Truy vấn database để lấy thông tin người dùng có đơn hàng có trạng thái là "Pending"
+            var user = db.User
+                .Include(u => u.Orders)
+                    .ThenInclude(o => o.OrderProducts)
+                .FirstOrDefault(u => u.UserId == userId);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+            // Logic phân trang ở đây
+            var totalOrders = user.Orders.Count(o => o.Status == "confirmed");
+            var totalPages = (int)Math.Ceiling((double)totalOrders / pageSize);
+            user.Orders = user.Orders
+                  .Where(o => o.Status == "confirmed")
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+              .ToList();
+
+            ViewBag.TotalPages = totalPages;
+            ViewBag.CurrentPage = page;
+            // Lọc chỉ những đơn hàng có trạng thái là "Pending"
+
+
+            // Trả dữ liệu người dùng có đơn hàng Pending cho view
+            return View(user);
+        }
+
+        [Authentication]
+        public async Task<IActionResult> OrderShipping(int page = 1, int pageSize = 5)
+        {
+            // Kế thừa các logic chung từ BaseController
+            await SetCommonViewData();
+
+            // Lấy userId từ session
+            int userId = Convert.ToInt32(HttpContext.Session.GetString("UserId"));
+
+            // Truy vấn database để lấy thông tin người dùng có đơn hàng có trạng thái là "Pending"
+            var user = db.User
+                .Include(u => u.Orders)
+                    .ThenInclude(o => o.OrderProducts)
+                .FirstOrDefault(u => u.UserId == userId);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+            // Logic phân trang ở đây
+            var totalOrders = user.Orders.Count(o => o.Status == "shipping");
+            var totalPages = (int)Math.Ceiling((double)totalOrders / pageSize);
+            user.Orders = user.Orders
+                  .Where(o => o.Status == "shipping")
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+              .ToList();
+
+            ViewBag.TotalPages = totalPages;
+            ViewBag.CurrentPage = page;
+
+
+
+            // Trả dữ liệu người dùng có đơn hàng Pending cho view
+            return View(user);
+        }
+
+        [Authentication]
+        public async Task<IActionResult> OrderShipped(int page = 1, int pageSize = 5)
+        {
+            // Kế thừa các logic chung từ BaseController
+            await SetCommonViewData();
+
+            // Lấy userId từ session
+            int userId = Convert.ToInt32(HttpContext.Session.GetString("UserId"));
+
+            // Truy vấn database để lấy thông tin người dùng có đơn hàng có trạng thái là "Pending"
+            var user = db.User
+                .Include(u => u.Orders)
+                    .ThenInclude(o => o.OrderProducts)
+                .FirstOrDefault(u => u.UserId == userId);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+            // Logic phân trang ở đây
+            var totalOrders = user.Orders.Count(o => o.Status == "shipped");
+            var totalPages = (int)Math.Ceiling((double)totalOrders / pageSize);
+            user.Orders = user.Orders
+                  .Where(o => o.Status == "shipped")
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+              .ToList();
+
+            ViewBag.TotalPages = totalPages;
+            ViewBag.CurrentPage = page;
+
+
+            // Trả dữ liệu người dùng có đơn hàng Pending cho view
+            return View(user);
+        }
+
+        [Authentication]
+        public async Task<IActionResult> OrderComplete(int page = 1, int pageSize = 5)
+        {
+            // Kế thừa các logic chung từ BaseController
+            await SetCommonViewData();
+
+            // Lấy userId từ session
+            int userId = Convert.ToInt32(HttpContext.Session.GetString("UserId"));
+
+            // Truy vấn database để lấy thông tin người dùng có đơn hàng có trạng thái là "Pending"
+            var user = db.User
+                .Include(u => u.Orders)
+                    .ThenInclude(o => o.OrderProducts)
+                .FirstOrDefault(u => u.UserId == userId);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+            // Logic phân trang ở đây
+            var totalOrders = user.Orders.Count(o => o.Status == "complete");
+            var totalPages = (int)Math.Ceiling((double)totalOrders / pageSize);
+            user.Orders = user.Orders
+                  .Where(o => o.Status == "complete")
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+              .ToList();
+
+            ViewBag.TotalPages = totalPages;
+            ViewBag.CurrentPage = page;
+
+
+            // Trả dữ liệu người dùng có đơn hàng Pending cho view
+            return View(user);
+        }
+
+        [Authentication]
+        public async Task<IActionResult> OrderCancel(int page = 1, int pageSize = 5)
+        {
+            // Kế thừa các logic chung từ BaseController
+            await SetCommonViewData();
+
+            // Lấy userId từ session
+            int userId = Convert.ToInt32(HttpContext.Session.GetString("UserId"));
+
+            // Truy vấn database để lấy thông tin người dùng có đơn hàng có trạng thái là "Pending"
+            var user = db.User
+                .Include(u => u.Orders)
+                    .ThenInclude(o => o.OrderProducts)
+                .FirstOrDefault(u => u.UserId == userId);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+            // Logic phân trang ở đây
+            var totalOrders = user.Orders.Count(o => o.Status == "cancel");
+            var totalPages = (int)Math.Ceiling((double)totalOrders / pageSize);
+            user.Orders = user.Orders
+                  .Where(o => o.Status == "cancel")
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+              .ToList();
+
+            ViewBag.TotalPages = totalPages;
+            ViewBag.CurrentPage = page;
+
+
+            // Trả dữ liệu người dùng có đơn hàng Pending cho view
+            return View(user);
+        }
+
 
 
         [Authentication]

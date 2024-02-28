@@ -45,66 +45,99 @@
         </ul>
     </div>
 
-<div class="content">
+    <div class="content">
         <section>
-    <div class="content-top">
-        <div class="content-top-title">
-            <p style="color: black">My order </p>
-        </div>
-        <div class="content-top-title">
-            <p style="color: black"> order </p>
-        </div>
-    </div>
-    
-    <div class="content-top1 d-flex">
-                <a style="color:#7fad39 ;font-weight: bold" href="" class="btn">All</a>
-                <a href="" class="btn">Pending</a>
-        <a href="" class="btn">Confirmed</a>
-        <a href="" class="btn">Shipping</a>
-        <a href="" class="btn">Shipped</a>
-        <a href="" class="btn">Complete</a>
-        <a type="button" href="" class="btn cancel-btn">Cancel</a>
-    </div>
+            <div class="content-top">
+                <div class="content-top-title">
+                    <p style="color: black">My order </p>
+                </div>
+                <div class="content-top-title">
+                    <p style="color: black"> order </p>
+                </div>
+            </div>
 
 
 
-    <table class="order-table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Thumbnail </th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Total</th>
-            </tr>
-        </thead>
-        <tbody>
-                @foreach (var orderProduct in Model.OrderProducts)
-                {
-                <tr>
-                    <td>@orderProduct.Product.ProductId</td>
-                    <td><img src="@orderProduct.Product.Thumbnail" width="120" /></td>
-                    <td>@orderProduct.Product.ProductName</td>
-                    <td>@orderProduct.Product.Price</td>
-                    <td>@orderProduct.Qty</td>
-                    <td>$@(orderProduct.Product.Price * orderProduct.Qty)</td>
-                </tr>
-                }
-        </tbody>
-    </table>
+
+
+            <table class="order-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Thumbnail </th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        @foreach (var orderProduct in Model.OrderProducts)
+                        {
+                        <tr>
+                            <td>@orderProduct.Product.ProductId</td>
+                            <td><img src="@orderProduct.Product.Thumbnail" width="120" /></td>
+                            <td>@orderProduct.Product.ProductName</td>
+                            <td>@orderProduct.Product.Price</td>
+                            <td>@orderProduct.Qty</td>
+                            <td>$@(orderProduct.Product.Price * orderProduct.Qty)</td>
+                        </tr>
+                        }
+                </tbody>
+            </table>
         </section>
-            
-       
-</div>
-</div>
+
+
+    </div>
+    </div>
     <div>
-       
+
+        <!-- Thêm input hidden để chứa giá trị returnUrl -->
+        <input type="hidden" id="returnUrl" name="returnUrl" value="@Url.Action("order", "Admin")" />
+
+        <div style="float:right; margin-top: 10px; display: flex; gap: 10px;">
+            @if (Model.Status == "cancel" || Model.Status == "complete" || Model.Status == "shipping" || Model.Status == "pending")
+            {
+                <div>
+                    <a href="@Url.Action("MyOrder", "MyAccount")" class="btn btn-warning">back</a>
+                </div>
+            }
+            else if (Model.Status == "shipped")
+            {
+                <div>
+                    <!-- Cập nhật form để bao gồm tham số returnUrl -->
+                    <form method="post" action="@Url.Action("UpdateStatus", "MyAccount", new { id = Model.OrderId, status = "complete", returnUrl = Url.Action("MyOrder", "MyAccount") })">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-warning">
+                            complete
+                        </button>
+                    </form>
+                </div>
+            }
+            else if (Model.Status == "Pending")
+            {
+                <!-- Cập nhật form để bao gồm tham số returnUrl -->
+                <div>
+                    <form method="post" action="@Url.Action("UpdateStatus", "MyAccount", new { id = Model.OrderId, status = "cancel", returnUrl = Url.Action("MyOrder", "MyAccount") })">
+                        @Html.AntiForgeryToken()
+                        <button onclick="return confirm('Surely you want to cancel your order')" type="submit" class="btn btn-danger">
+                            Cancel
+                        </button>
+                    </form>
+                </div>
+            }
+
+
+
+        </div>
 
 
 </main>
 <style>
-  
+    main {
+        padding: 0 0 50px 0
+    }
+
 
     .content-top1 {
         border-top: 1px solid #DDE1EF;
