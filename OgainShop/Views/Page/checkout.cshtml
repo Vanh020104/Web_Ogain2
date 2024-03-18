@@ -121,13 +121,53 @@
                                 <!-- Phương thức thanh toán -->
                                 <div class="checkout__input__checkbox">
                                     <label>
-                                        <input type="checkbox" name="PaymentMethod" value="cod" required>
+                                        <input type="radio" name="PaymentMethod" value="COD" checked onchange="togglePaypalButton()">
                                         COD
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="PaymentMethod" value="PayPal" onchange="togglePaypalButton()">
+                                        PayPal
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
 
-                                <button type="submit" class="site-btn">PLACE ORDER</button>
+
+                                <!-- Container để render nút PayPal -->
+                                <div id="paypal-button-container" style="display: none;"></div>
+
+                                <!-- Nút submit -->
+                                <button type="button" onclick="validateFormDataAndRenderPayPal()" class="site-btn">PLACE ORDER</button>
+                              
+                                <script>
+                                    // Hàm để ẩn/mở nút PayPal dựa trên lựa chọn của người dùng
+                                    function togglePaypalButton() {
+                                        var paymentMethod = document.querySelector('input[name="PaymentMethod"]:checked').value;
+                                        var paypalButtonContainer = document.getElementById('paypal-button-container');
+
+                                        // Nếu người dùng chọn PayPal, hiển thị nút PayPal, ngược lại ẩn nút PayPal
+                                        if (paymentMethod === 'PayPal') {
+                                            paypalButtonContainer.style.display = 'block';
+                                        } else {
+                                            paypalButtonContainer.style.display = 'none';
+                                        }
+                                    }
+
+                                    // Hàm kiểm tra dữ liệu và hiển thị nút PayPal (được gọi khi người dùng nhấn nút PLACE ORDER)
+                                    function validateFormDataAndRenderPayPal() {
+                                        var paymentMethod = document.querySelector('input[name="PaymentMethod"]:checked').value;
+
+                                        // Kiểm tra nếu người dùng chọn PayPal, hiển thị nút PayPal
+                                        if (paymentMethod === 'PayPal') {
+                                            togglePaypalButton();
+                                        } else {
+                                            // Xử lý logic khác (ví dụ: submit form cho COD)
+                                            document.querySelector('form').submit();
+                                        }
+                                    }
+                                </script>
+
+                               
                             </div>
                         </div>
                     </div>
@@ -136,6 +176,7 @@
         </div>
     </section>
     <!-- Checkout Section End -->
+    <script src="https://www.paypal.com/sdk/js?client-id=@ViewBag.PaypalClientdId"></script>
     <script>
         function updateShippingFee() {
             var selectedOption = document.getElementById("ShippingMethod");
@@ -162,7 +203,53 @@
             // Cập nhật giá trị tổng số tiền trong DOM
             document.getElementById("displayTotalAmount").innerText = "$" + totalAmount.toFixed(2);
         }
+
     </script>
+
+
+    <script src="https://www.paypal.com/sdk/js?client-id=AY82FkJTFSnyyYVrXSxhBydwu9_JGpfabFOHrSKfeDFVaMAHsGCWLwLbB6fiHFbmKDx6gSPoc2_StcYd"></script>
+    <script>
+        paypal.Buttons({
+            createOrder: function (data, actions) {
+                // Hàm này sẽ được gọi khi người dùng nhấn vào nút PayPal
+                // Đặt logic tạo đơn đặt hàng PayPal ở đây
+
+                // Lấy giá trị tổng tiền từ span có id là "displayTotalAmount"
+                var totalAmount = document.getElementById("displayTotalAmount").innerText.replace("$", "");
+
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: totalAmount // Sử dụng giá trị tổng tiền của đơn hàng
+                        }
+                    }]
+                });
+            },
+            onApprove: function (data, actions) {
+                // Hàm này sẽ được gọi khi người dùng hoàn tất thanh toán trên trang PayPal
+                // Đặt logic xử lý đơn đặt hàng đã được xác nhận ở đây
+                return actions.order.capture().then(function (details) {
+                    // Thực hiện xử lý khi đơn hàng được xác nhận thành công
+                    alert('Transaction completed by ' + details.payer.name.given_name);
+                    // Lấy orderId từ đối tượng data
+                    var orderId = data.orderID;
+                    // Redirect đến trang "Thank You" với thông tin orderId
+                    window.location.href = "/Page/ThankyouPaypal?orderId=" + orderId;
+                });
+
+            },
+            onError: function (err) {
+                // Hàm này sẽ được gọi khi có lỗi xảy ra trong quá trình thanh toán PayPal
+                // Đặt logic xử lý lỗi ở đây
+                alert('Có lỗi xảy ra trong quá trình thanh toán PayPal: ' + err);
+            }
+        }).render('#paypal-button-container');
+    </script>
+
+
+
+
+
 
 </body>
 
